@@ -1,3 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ConectaTec</string>
+    <string name="app_name">TecConnect</string>
+    <string name="app_subtitle">Plataforma Académica</string>
+
+    <!-- Hints -->
+    <string name="hint_correo">Correo institucional</string>
+    <string name="hint_contrasena">Contraseña</string>
+    <string name="hint_confirmar_contrasena">Confirmar contraseña</string>
+    <string name="hint_nombre_completo">Nombre completo</string>
+    <string name="hint_mensaje">Escribe un mensaje…</string>
+    <string name="hint_descripcion">Instrucciones de la tarea…</string>
+    <string name="hint_comentario">Agregar una nota…</string>
+    <string name="hint_retroalimentacion">Retroalimentación…</string>
+    <string name="hint_buscar">Buscar usuario…</string>
+    <string name="hint_titulo_tarea">Título de la tarea</string>
+    <string name="hint_nombre_grupo">Nombre del grupo</string>
+    <string name="hint_materia">Materia</string>
+    <string name="hint_descripcion_grupo">Descripción del grupo (opcional)</string>
+    <string name="hint_fecha_limite">Fecha límite</string>
+    <string name="hint_calificacion_max">Calificación máx.</string>
+    <string name="hint_calificacion">Calificación</string>
+
+    <!-- Botones -->
+    <string name="btn_login">Iniciar sesión</string>
+    <string name="btn_registro">Crear cuenta</string>
+    <string name="btn_publicar_tarea">Publicar Tarea</string>
+    <string name="btn_entregar">Entregar tarea</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="btn_ver_entrega">Ver entrega</string>
+    <string name="btn_entregar_ahora">Entregar ahora</string>
+    <string name="btn_cambiar_foto">Cambiar foto</string>
+    <string name="btn_tomar_foto">Tomar foto</string>
+    <string name="btn_galeria">Elegir de galería</string>
+    <string name="btn_cerrar_sesion">Cerrar sesión</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_confirmar">Confirmar</string>
+    <string name="btn_subir_archivo">Subir archivo</string>
+    <string name="btn_crear_grupo">Crear grupo</string>
+    <string name="btn_unirse">Unirse al grupo</string>
+    <string name="btn_publicar_aviso">Publicar aviso</string>
+    <string name="btn_calificar">Calificar</string>
+
+    <!-- Labels -->
+    <string name="label_sin_calificar">Sin calificar</string>
+    <string name="label_pendiente">Pendiente</string>
+    <string name="label_vence_hoy">Vence Hoy</string>
+    <string name="label_entregada">Entregada</string>
+    <string name="label_calificada">Calificada</string>
+    <string name="label_sin_entregar">Sin entregar</string>
+    <string name="label_activo">Activo</string>
+    <string name="label_inactivo">Inactivo</string>
+    <string name="label_archivo_adjunto">Archivo adjunto (opcional)</string>
+    <string name="label_docente">DOCENTE</string>
+    <string name="label_estudiante">ESTUDIANTE</string>
+    <string name="label_administrador">ADMINISTRADOR</string>
+    <string name="label_rol_pendiente">PENDIENTE</string>
+
+    <!-- Mensajes del sistema -->
+    <string name="msg_eliminado">Este mensaje fue eliminado</string>
+    <string name="msg_no_hay_tareas">No hay tareas en este bloque</string>
+    <string name="msg_no_hay_grupos">Aún no perteneces a ningún grupo</string>
+    <string name="msg_no_hay_mensajes">Sé el primero en escribir</string>
+    <string name="msg_cargando">Cargando…</string>
+    <string name="msg_error_red">Error de conexión. Verifica tu internet.</string>
+    <string name="msg_error_credenciales">Correo o contraseña incorrectos</string>
+    <string name="msg_foto_rechazada">La foto no contiene un rostro humano. Intenta con otra imagen.</string>
+    <string name="msg_foto_aprobada">Foto de perfil verificada ✓</string>
+    <string name="msg_registro_exitoso">Cuenta creada. Espera que el administrador asigne tu rol.</string>
+    <string name="msg_qr_apunta">Apunta al código QR del grupo</string>
+    <string name="msg_confirmar_cerrar_sesion">¿Deseas cerrar sesión?</string>
+    <string name="msg_confirmar_eliminar">¿Estás seguro de eliminar este elemento?</string>
+    <string name="msg_cuenta_pendiente">Tu cuenta está pendiente de activación</string>
+    <string name="msg_cuenta_desactivada">Tu cuenta fue desactivada. Contacta al administrador.</string>
+
+    <!-- Tabs -->
+    <string name="tab_pendientes">Pendientes</string>
+    <string name="tab_entregas">Entregas</string>
+    <string name="tab_calificaciones">Calificaciones</string>
+
+    <!-- Títulos de pantalla -->
+    <string name="title_mis_grupos">Mis Grupos</string>
+    <string name="title_mis_tareas">Mis Tareas</string>
+    <string name="title_mensajes">Mensajes</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_usuarios">Gestión de Usuarios</string>
+    <string name="title_grupos_admin">Gestión de Grupos</string>
+    <string name="title_nueva_tarea">Nueva Tarea</string>
+    <string name="title_entrega_tarea">Entrega de tarea</string>
+    <string name="title_calificar">Calificar entregas</string>
+    <string name="title_alumnos">Alumnos del grupo</string>
+    <string name="title_info_entregada">Información de la tarea entregada</string>
+    <string name="title_escaner_qr">Escanear QR</string>
+
+    <!-- Navegación inferior -->
+    <string name="nav_grupos">Grupos</string>
+    <string name="nav_tareas">Tareas</string>
+    <string name="nav_mensajes">Mensajes</string>
+    <string name="nav_perfil">Perfil</string>
+    <string name="nav_usuarios">Usuarios</string>
+
+    <!-- Filtros admin -->
+    <string name="filtro_todos">Todos</string>
+    <string name="filtro_docente">Docente</string>
+    <string name="filtro_estudiante">Estudiante</string>
+    <string name="filtro_pendiente">Pendiente</string>
+
+    <!-- Links de navegación -->
+    <string name="tv_ir_registro">¿No tienes cuenta? Regístrate</string>
+    <string name="tv_ir_login">¿Ya tienes cuenta? Inicia sesión</string>
+
+    <!-- Accesibilidad -->
+    <string name="cd_foto_perfil">Foto de perfil</string>
+    <string name="cd_enviar_mensaje">Enviar mensaje</string>
+    <string name="cd_adjuntar">Adjuntar archivo</string>
+    <string name="cd_volver">Volver</string>
 </resources>

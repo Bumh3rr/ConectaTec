@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primario -->
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorPrimaryLight">#42A5F5</color>
+
+    <!-- Fondos -->
+    <color name="colorBackground">#121212</color>
+    <color name="colorSurface">#1E1E1E</color>
+    <color name="colorSurfaceVariant">#2C2C2C</color>
+
+    <!-- Texto -->
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOnSurfaceVariant">#AAAAAA</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Estado -->
+    <color name="colorError">#CF6679</color>
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorWarning">#F57C00</color>
+
+    <!-- Chips de rol -->
+    <color name="colorChipDocente">#1976D2</color>
+    <color name="colorChipEstudiante">#388E3C</color>
+    <color name="colorChipPendiente">#F57C00</color>
+    <color name="colorChipAdmin">#7B1FA2</color>
+
+    <!-- Chat -->
+    <color name="colorMensajeEnviado">#2C2C2C</color>
+    <color name="colorMensajeRecibido">#1E1E1E</color>
+
+    <!-- Tareas -->
+    <color name="colorTareaUrgente">#1976D2</color>
+    <color name="colorCalificacion">#4CAF50</color>
+
+    <!-- Divisores -->
+    <color name="colorDivider">#2C2C2C</color>
+    <color name="colorBorder">#333333</color>
+
+    <!-- Básicos -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
 </resources>
