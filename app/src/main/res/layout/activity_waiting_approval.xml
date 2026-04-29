@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="28dp"
+        android:paddingTop="80dp"
+        android:paddingBottom="40dp">
+
+        <!-- Ícono pendiente -->
+        <ImageView
+            android:id="@+id/ivPendiente"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="Cuenta pendiente"
+            app:tint="@color/colorPrimary"
+            android:scaleType="fitCenter" />
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cuenta en revisión"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:layout_marginTop="24dp" />
+
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tu cuenta fue creada exitosamente. Un administrador revisará tu solicitud y te asignará un rol para que puedas acceder a la plataforma."
+            android:textColor="@color/colorOnSurfaceVariant"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="36dp" />
+
+        <!-- Card datos del usuario -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorSurface"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Datos de tu solicitud"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Nombre -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:textSize="13sp"
+                        android:minWidth="80dp" />
+
+                    <TextView
+                        android:id="@+id/tvNombre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="—"
+                        android:textColor="@color/colorOnSurface"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="12dp" />
+
+                </LinearLayout>
+
+                <!-- Correo -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Correo"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:textSize="13sp"
+                        android:minWidth="80dp" />
+
+                    <TextView
+                        android:id="@+id/tvCorreo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="—"
+                        android:textColor="@color/colorOnSurface"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="12dp" />
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDivider"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Estado -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estado"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:textSize="13sp"
+                        android:minWidth="80dp" />
+
+                    <!-- Chip PENDIENTE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="PENDIENTE"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:background="@drawable/bg_chip_pendiente" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Espaciador flexible -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
+        <!-- Botón cerrar sesión -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Cerrar sesión"
+            android:textSize="15sp"
+            android:textColor="@color/colorError"
+            android:letterSpacing="0.05"
+            app:strokeColor="@color/colorError"
+            app:cornerRadius="10dp"
+            android:stateListAnimator="@null" />
+
+    </LinearLayout>
+</ScrollView>

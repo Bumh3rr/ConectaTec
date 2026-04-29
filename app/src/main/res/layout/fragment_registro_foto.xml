@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="28dp"
+        android:paddingTop="64dp"
+        android:paddingBottom="32dp">
+
+        <!-- Indicador de paso -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="36dp">
+
+            <!-- Paso 1 completado -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/colorPrimary"
+                android:layout_marginEnd="4dp" />
+
+            <!-- Paso 2 activo -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/colorPrimary"
+                android:layout_marginEnd="4dp" />
+
+            <!-- Paso 3 inactivo -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/colorDivider" />
+        </LinearLayout>
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Foto de perfil"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium" />
+
+        <!-- Subtítulo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tu foto será verificada por inteligencia artificial para confirmar que eres una persona real."
+            android:textColor="@color/colorOnSurfaceVariant"
+            android:textSize="13sp"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="40dp" />
+
+        <!-- Preview circular de la foto -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivFotoPreview"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_camera"
+            app:civ_border_width="3dp"
+            app:civ_border_color="@color/colorBorder" />
+
+        <!-- Texto debajo del preview -->
+        <TextView
+            android:id="@+id/tvEstadoFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sin foto seleccionada"
+            android:textColor="@color/colorOnSurfaceVariant"
+            android:textSize="12sp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="36dp" />
+
+        <!-- Botones cámara y galería -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="48dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTomarFoto"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/btn_tomar_foto"
+                android:textSize="13sp"
+                android:textColor="@color/colorPrimary"
+                app:strokeColor="@color/colorPrimary"
+                app:cornerRadius="10dp"
+                app:icon="@android:drawable/ic_menu_camera"
+                app:iconTint="@color/colorPrimary"
+                app:iconSize="18dp"
+                app:iconGravity="textStart"
+                android:stateListAnimator="@null" />
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGaleria"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/btn_galeria"
+                android:textSize="13sp"
+                android:textColor="@color/colorPrimary"
+                app:strokeColor="@color/colorPrimary"
+                app:cornerRadius="10dp"
+                app:icon="@android:drawable/ic_menu_gallery"
+                app:iconTint="@color/colorPrimary"
+                app:iconSize="18dp"
+                app:iconGravity="textStart"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Nota informativa -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_card"
+            android:padding="14dp"
+            android:layout_marginBottom="36dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Usa una foto clara de tu rostro. No se aceptan avatares, caricaturas ni imágenes sin rostro."
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="12sp"
+                android:lineSpacingExtra="2dp" />
+
+        </LinearLayout>
+
+        <!-- Botón continuar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContinuar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Continuar"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:letterSpacing="0.05"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="10dp"
+            android:enabled="false"
+            android:alpha="0.5"
+            android:stateListAnimator="@null" />
+
+    </LinearLayout>
+
+</ScrollView>
