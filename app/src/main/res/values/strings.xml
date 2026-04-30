@@ -185,4 +185,18 @@
     <string name="label_vence">Vence:</string>
     <string name="label_entregas">entregas</string>
     <string name="msg_no_hay_actividades">No se encontraron actividades</string>
+
+    <!-- ───────────────────────── Modulo Docente ───────────────────────── -->
+    <!-- Tabs de la pill nav -->
+    <string name="title_docente_dashboard">Inicio</string>
+    <string name="title_docente_grupos">Grupos</string>
+    <string name="title_docente_tareas">Tareas</string>
+    <string name="title_docente_chat">Chat</string>
+    <string name="title_docente_perfil">Mi perfil</string>
+    <!-- Content descriptions de los iconos de la pill nav -->
+    <string name="cd_nav_docente_dashboard">Inicio</string>
+    <string name="cd_nav_docente_grupos">Grupos</string>
+    <string name="cd_nav_docente_tareas">Tareas</string>
+    <string name="cd_nav_docente_chat">Chat</string>
+    <string name="cd_nav_docente_perfil">Perfil</string>
 </resources>
