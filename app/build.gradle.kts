@@ -104,9 +104,13 @@ dependencies {
 
     implementation(libs.lottie)
 
+    // MPAndroidChart
+    implementation(libs.mpandroidchart)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
+    testImplementation(libs.arch.core.testing)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
