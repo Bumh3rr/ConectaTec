@@ -53,4 +53,18 @@
     <color name="nav_icon_active">#FFFFFF</color>
     <color name="nav_label">#F5F5F5</color>
 
+    <!-- Dashboard Activity (modo claro) -->
+    <color name="colorDashBg">#F4F6FA</color>
+    <color name="colorDashCard">#FFFFFF</color>
+    <color name="colorDashPrimary">#6C63FF</color>
+    <color name="colorDashText">#1A1A2E</color>
+    <color name="colorDashTextSecondary">#6B7280</color>
+    <color name="colorDashTextTertiary">#9CA3AF</color>
+    <color name="colorDashGreen">#10B981</color>
+    <color name="colorDashAmber">#F59E0B</color>
+    <color name="colorDashRed">#EF4444</color>
+    <color name="colorDashBlue">#3B82F6</color>
+    <color name="colorDashViolet">#8B5CF6</color>
+    <color name="colorDashDivider">#E5E7EB</color>
+
 </resources>
