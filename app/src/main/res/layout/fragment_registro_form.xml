@@ -15,38 +15,51 @@
         android:paddingTop="64dp"
         android:paddingBottom="32dp">
 
-        <!-- Indicador de paso -->
+        <!-- ══ STEP INDICATOR ════════════════════════════════════════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="36dp">
+            android:layout_marginBottom="28dp">
 
-            <!-- Paso 1 activo -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="4dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/colorPrimary"
-                android:layout_marginEnd="4dp" />
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
-            <!-- Paso 2 inactivo -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="4dp"
                 android:layout_weight="1"
+                android:layout_marginStart="5dp"
                 app:cardBackgroundColor="@color/colorDivider"
-                android:layout_marginEnd="4dp" />
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
-            <!-- Paso 3 inactivo -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="4dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/colorDivider" />
+                android:layout_marginStart="5dp"
+                app:cardBackgroundColor="@color/colorDivider"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PASO 1 DE 3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.15"
+            android:layout_marginBottom="6dp" />
 
         <!-- Título -->
         <TextView

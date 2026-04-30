@@ -134,17 +134,45 @@ com.conectatec
 └── ui
     ├── splash
     │   └── SplashActivity.java
-    └── auth
-        ├── LoginActivity.java
-        ├── RegistroActivity.java
-        ├── WaitingApprovalActivity.java
-        └── registro
-            ├── RegistroFormFragment.java
-            ├── RegistroFotoFragment.java
-            ├── RegistroVerificandoFragment.java
-            ├── RegistroExitosoFragment.java
-            ├── RegistroFallidoFragment.java
-            └── RegistroViewModel.java
+    ├── auth
+    │   ├── LoginActivity.java
+    │   ├── RegistroActivity.java
+    │   ├── WaitingApprovalActivity.java
+    │   └── registro
+    │       ├── RegistroFormFragment.java
+    │       ├── RegistroFotoFragment.java
+    │       ├── RegistroVerificandoFragment.java
+    │       ├── RegistroExitosoFragment.java
+    │       ├── RegistroFallidoFragment.java
+    │       └── RegistroViewModel.java
+    └── admin
+        ├── MainAdminActivity.java
+        ├── dashboard
+        │   └── AdminDashboardFragment.java
+        ├── usuarios
+        │   ├── AdminUsuariosFragment.java
+        │   ├── AdminPendientesFragment.java
+        │   ├── AdminUsuarioDetalleFragment.java
+        │   ├── AsignarRolBottomSheet.java
+        │   └── adapter
+        │       ├── UsuarioAdminAdapter.java
+        │       └── UsuarioPendienteAdapter.java
+        ├── grupos
+        │   ├── AdminGruposFragment.java
+        │   ├── AdminGrupoDetalleFragment.java
+        │   ├── AdminMiembrosGrupoFragment.java
+        │   └── adapter
+        │       ├── GrupoAdminAdapter.java
+        │       └── MiembrosGrupoAdapter.java
+        ├── actividades
+        │   ├── AdminActividadesFragment.java
+        │   ├── AdminActividadDetalleFragment.java
+        │   └── adapter
+        │       └── ActividadAdminAdapter.java
+        ├── alumno
+        │   └── AdminAlumnoDetalleFragment.java
+        └── perfil
+            └── AdminPerfilFragment.java
 ```
 
 > Nota: aún no existen paquetes `data/`, `domain/`, `di/` ni clases de Retrofit, repositorios o módulos Hilt — están planeados pero no implementados (varios `TODO` lo indican).
@@ -250,6 +278,8 @@ Animaciones declaradas en `res/anim/`: `fade_in`, `fade_out`, `slide_in_left`, `
 ## 7. Recursos UI
 
 ### 7.1 Layouts (`res/layout/`)
+
+**Auth / Splash**
 - `activity_splash.xml`
 - `activity_login.xml`
 - `activity_registro.xml`
@@ -259,6 +289,29 @@ Animaciones declaradas en `res/anim/`: `fade_in`, `fade_out`, `slide_in_left`, `
 - `fragment_registro_verificando.xml`
 - `fragment_registro_exitoso.xml`
 - `fragment_registro_fallido.xml`
+
+**Admin**
+- `fragment_admin_dashboard.xml`
+- `fragment_admin_usuarios.xml`
+- `fragment_admin_usuario_detalle.xml`
+- `fragment_admin_grupos.xml`
+- `fragment_admin_grupo_detalle.xml`
+- `fragment_admin_miembros_grupo.xml`
+- `fragment_admin_actividades.xml`
+- `fragment_admin_actividad_detalle.xml`
+- `fragment_admin_perfil.xml`
+- `fragment_alumno_detalle.xml`
+
+**Items (RecyclerView)**
+- `item_usuario_admin.xml`
+- `item_usuario_pendiente.xml`
+- `item_grupo_admin.xml`
+- `item_miembro_grupo.xml`
+- `item_actividad_admin.xml`
+- `item_dashboard_card.xml`
+
+**Compartidos**
+- `layout_empty_state.xml`
 
 ### 7.2 Drawables
 Backgrounds custom (XML): `bg_message_sent`, `bg_message_received`, `bg_upload_zone`, `bg_avatar`, `bg_circle_success`, `bg_circle_error`, `bg_input`, `bg_dot_error`, `bg_badge_unread`, `bg_card`, `bg_button_primary`, `bg_chip_pendiente`. Iconos: `ic_info`, `ic_launcher_*`. Color selector para bottom nav: `color/selector_bottom_nav.xml`.
@@ -328,13 +381,303 @@ A partir de `res/values/strings.xml` se infiere el alcance funcional (no impleme
 
 ---
 
-## 11. Estado del trabajo y siguientes pasos lógicos
+## 11. Módulo Admin — Vistas y atributos
+
+### 11.1 Actividad contenedora — `MainAdminActivity`
+
+- Layout: `activity_main_admin.xml`
+- Contiene un `NavHostFragment` con grafo `nav_admin.xml`.
+- Implementa una **pill nav bar** personalizada (no usa `BottomNavigationView` estándar).
+- Usa `addOnDestinationChangedListener` para sincronizar la pestaña activa.
+- La navegación entre pestañas usa `NavOptions` con `setLaunchSingleTop(true)`, `setRestoreState(true)` y `setPopUpTo(startDest, false, true)` — evita duplicar destinos en el back stack.
+- Pestañas raíz declaradas en `DESTINATIONS[]`: `adminDashboardFragment`, `adminUsuariosFragment`, `adminGruposFragment`, `adminActividadesFragment`, `adminPerfilFragment`.
+- Sub-destinos (`adminUsuarioDetalleFragment`, `adminGrupoDetalleFragment`, `adminMiembrosGrupoFragment`, `adminActividadDetalleFragment`, `adminAlumnoDetalleFragment`) no cambian la pestaña activa.
+
+### 11.2 Grafo de navegación — `nav_admin.xml`
+
+| ID destino | Fragmento | Tipo |
+|---|---|---|
+| `adminDashboardFragment` *(start)* | `AdminDashboardFragment` | Pestaña raíz |
+| `adminUsuariosFragment` | `AdminUsuariosFragment` | Pestaña raíz |
+| `adminUsuarioDetalleFragment` | `AdminUsuarioDetalleFragment` | Sub-destino |
+| `adminGruposFragment` | `AdminGruposFragment` | Pestaña raíz |
+| `adminGrupoDetalleFragment` | `AdminGrupoDetalleFragment` | Sub-destino |
+| `adminMiembrosGrupoFragment` | `AdminMiembrosGrupoFragment` | Sub-destino |
+| `adminAlumnoDetalleFragment` | `AdminAlumnoDetalleFragment` | Sub-destino |
+| `adminActividadesFragment` | `AdminActividadesFragment` | Pestaña raíz |
+| `adminActividadDetalleFragment` | `AdminActividadDetalleFragment` | Sub-destino |
+| `adminPerfilFragment` | `AdminPerfilFragment` | Pestaña raíz |
+
+**Acciones declaradas:**
+
+| Acción | Origen → Destino | Args pasados |
+|---|---|---|
+| `action_usuarios_to_detalle` | Usuarios → UsuarioDetalle | `usuarioId: int` |
+| `action_usuario_detalle_to_grupos`*(eliminada)* | *(reemplazada por tab NavOptions)* | — |
+| `action_grupos_to_detalle` | Grupos → GrupoDetalle | `grupoId: int` |
+| `action_grupo_detalle_to_miembros` | GrupoDetalle → Miembros | `grupoId: int`, `actividadId: int` |
+| `action_actividades_to_detalle` | Actividades → ActividadDetalle | `actividadId: int` |
+| `action_actividad_detalle_to_miembros` | ActividadDetalle → Miembros | `grupoId: int`, `actividadId: int` |
+| `action_miembros_to_alumno_detalle` | Miembros → AlumnoDetalle | `usuarioId: int` |
+
+Todas las acciones usan animaciones `slide_in_right / slide_out_left` (avance) y `slide_in_left / slide_out_right` (retroceso).
+
+---
+
+### 11.3 Dashboard — `AdminDashboardFragment`
+
+- Layout: `fragment_admin_dashboard.xml`
+- **Header**: label `@string/app_name` (azul), saludo "Bienvenido Pedro", título "Panel de control", avatar 48dp con iniciales "LR" (`bg_chip_admin`).
+- **Sección RESUMEN** (fecha "Hoy, 29 abr"): 4 tarjetas `MaterialCardView` en grid 2×2.
+
+| ID | Contenido | Destino al pulsar |
+|---|---|---|
+| `cardUsuarios` | `tvTotalUsuarios` "24" + "↑ +2 este mes" | `adminUsuariosFragment` |
+| `cardPendientes` | `tvTotalPendientes` "3" en warning + "Requieren acción" | `adminUsuariosFragment` |
+| `cardGrupos` | `tvTotalGrupos` "8" + "↑ +1 este mes" | `adminGruposFragment` |
+| `cardTareas` | `tvTotalTareas` "41" + "↑ +5 esta semana" | `adminActividadesFragment` |
+
+- **Sección TRABAJOS Y TAREAS RECIENTES**: 3 ítems dentro de una `MaterialCardView`.
+  - Ítem 1 — `TRABAJO`: "Proyecto Final de Software" · Ing. de Software 6A · vence 05/05/2025 · hace 1h (`bg_chip_docente`)
+  - Ítem 2 — `TAREA`: "Tarea 3: Normalización BD" · Bases de Datos 4B · vence 02/05/2025 · hace 4h (`bg_chip_estudiante`)
+  - Ítem 3 — `EXAMEN`: "Examen Parcial 2" · Cálculo Integral 2A · vence 30/04/2025 · hace 1d (`bg_chip_admin`)
+- `tvVerTodoActividad` navega a `adminActividadesFragment` con tab NavOptions.
+
+---
+
+### 11.4 Usuarios — `AdminUsuariosFragment`
+
+- Layout: `fragment_admin_usuarios.xml`
+- **Header**: título "Usuarios", subtítulo "Gestión de accesos y roles", badge `tvHeaderTotalUsuarios`.
+- **Búsqueda**: `tilBuscarUsuario` / `etBuscarUsuario` (TextInputLayout OutlinedBox).
+- **Chips de filtro de rol** (HorizontalScrollView):
+  - `chipTodos` (checked por defecto), `chipDocentes`, `chipEstudiantes`, `chipPendientes`
+- **TabLayout** (`tabUsuarios`) con 2 pestañas: "Activos" / "Pendientes" → `ViewPager2` (`vpUsuarios`).
+  - Pestaña Activos → `AdminUsuariosFragment` (tab host)
+  - Pestaña Pendientes → `AdminPendientesFragment`
+- `rvUsuarios` / `rvPendientes` — RecyclerViews con `LinearLayoutManager`.
+- Estado vacío: `include layout_empty_state`.
+- Adapter: `UsuarioAdminAdapter` con modelo `UsuarioDummy` (id, nombre, iniciales, correo, rol, activo, fechaRegistro).
+  - Chips de rol coloreados: DOCENTE→`bg_chip_docente`, ESTUDIANTE→`bg_chip_estudiante`, ADMIN→`bg_chip_admin`, PENDIENTE→`bg_chip_pendiente`.
+  - Navegación al detalle: `action_usuarios_to_detalle` con `usuarioId`.
+
+---
+
+### 11.5 Detalle de usuario — `AdminUsuarioDetalleFragment`
+
+- Layout: `fragment_admin_usuario_detalle.xml`
+- **Header con back**: `btnVolver` (ImageView, `ic_arrow_left`) + label `@string/app_name` + título "Detalle de usuario". Línea de acento 3dp primary.
+- **Hero**: avatar 88dp (`bg_avatar_placeholder`) + `tvInicialesDetalle` centrado ("CB") + `ivAvatarDetalle` (`CircleImageView`, hidden si no hay foto).
+- `tvNombreDetalle` (22sp bold), `tvCorreoDetalle` (14sp muted), `tvChipRolDetalle` (chip coloreado por rol).
+- **Card INFORMACIÓN DE CUENTA**:
+  - `tvFechaRegistro`, `tvEstadoCuenta` (coloreado: verde=activa, rojo=desactivada), `tvFotoVerificada`.
+- **Card GRUPOS**:
+  - `containerGrupos` (LinearLayout dinámico con TextViews por cada grupo).
+  - `tvSinGrupos` (visible si no hay grupos).
+  - `tvVerTodosGrupos` — navega a `adminGruposFragment` con tab NavOptions pasando `docenteNombre` como argumento de Bundle (activa filtro automático en Grupos).
+- **Botones de acción**:
+  - `btnCambiarRol` → abre `AsignarRolBottomSheet` (BottomSheetDialogFragment con chips de rol).
+  - `btnToggleActivo` → alterna estado cuenta (texto y color cambian: warning=desactivar, success=activar).
+  - `btnEliminarUsuario` → `MaterialAlertDialogBuilder` de confirmación.
+- Datos: actualmente hardcodeados (dummy: "Carlos Bautista", DOCENTE).
+
+---
+
+### 11.6 Grupos — `AdminGruposFragment`
+
+- Layout: `fragment_admin_grupos.xml`
+- **Header**: título "Grupos", subtítulo "Grupos académicos activos", badge `tvHeaderTotalGrupos` (se actualiza con el conteo filtrado).
+- **Búsqueda**: `tilBuscarGrupo` / `etBuscarGrupo`.
+- **Chips de filtro de estado** (HorizontalScrollView):
+  - `chipGruposTodos` (checked), `chipGruposActivos`, `chipGruposDesactivados`.
+- **Banner de filtro por docente** (`bannerFiltroUsuario`, `visibility=gone`): aparece al navegar desde detalle de usuario. Contiene `chipFiltroDocente` con `app:closeIconEnabled="true"` para limpiar el filtro.
+- `rvGrupos` + estado vacío `emptyStateGrupos`.
+- **3 filtros combinados** en el Fragment: `docenteFiltro` (String|null), `activoFiltro` (Boolean|null), `queryFiltro` (String). Se aplican simultáneamente vía `adapter.setFiltros(docente, activo, query)`.
+- Adapter: `GrupoAdminAdapter` con modelo `GrupoDummy` (id, nombre, materia, docente, miembros, fechaCreacion, activo).
+  - Filtrado en `listaCompleta` con `setFiltros()` — combinación de los 3 criterios.
+  - Badge activo/inactivo: ACTIVO→`bg_chip_estudiante`, INACTIVO→`bg_chip_pendiente`.
+  - Item alpha 0.6 si inactivo.
+  - Navegación al detalle: `action_grupos_to_detalle` con `grupoId`.
+
+---
+
+### 11.7 Detalle de grupo — `AdminGrupoDetalleFragment`
+
+- Layout: `fragment_admin_grupo_detalle.xml`
+- **Header con back**: `btnVolverGrupo` + label `@string/app_name` + "Detalle de grupo". Línea 3dp primary.
+- **ScrollView** con:
+  - Card **INFORMACIÓN DEL GRUPO**: `tvNombreGrupoDetalle`, `tvMateriaGrupoDetalle`, `tvDocenteGrupoDetalle`, `tvEstadoGrupoDetalle` (chip), `tvFechaCreacionDetalle`.
+  - Card **MIEMBROS** (preview 3): `containerMiembrosDetalle` (LinearLayout dinámico) + `tvVerTodosMiembros` → navega vía `action_grupo_detalle_to_miembros` con `{grupoId, actividadId=0}`.
+  - Card **ACTIVIDADES** (preview 3): `containerActividadesDetalle` + `tvVerTodasActividades`.
+- Recibe argumento `grupoId: int` (defaultValue=0).
+- Datos dummy con 6 grupos (IDs 1-6) mapeados en arrays estáticos.
+
+---
+
+### 11.8 Miembros del grupo — `AdminMiembrosGrupoFragment`
+
+- Layout: `fragment_admin_miembros_grupo.xml`
+- **Header con back**: `btnVolverMiembros` + label `@string/app_name` + "Miembros del grupo". Línea 3dp primary.
+- `tvSubtituloMiembros` — nombre del grupo (dinámico según `grupoId`).
+- `tvTotalMiembrosHeader` — badge con conteo.
+- `rvMiembros` (paddingBottom=88dp) + `emptyStateMiembros`.
+- Recibe args: `grupoId: int`, `actividadId: int`.
+- Si `actividadId > 0` → muestra columna de estado de entrega por alumno (chip ENTREGADO/PENDIENTE).
+- **Datos dummy**: array estático `MIEMBROS_POR_GRUPO[6][~8]` con IDs 1-8, 11-16, 21-26, 31-37, 41-46, 51-56. Array `ENTREGAS_POR_ACTIVIDAD[8]` = {18,22,8,0,15,12,30,0}.
+- Adapter: `MiembrosGrupoAdapter` con modelo `MiembroDummy` (id, nombre, iniciales, correo, rol, `@Nullable Boolean entregado`).
+  - `tvEstadoEntregaMiembro` visible solo si `entregado != null`.
+  - Navegación al perfil de alumno: `action_miembros_to_alumno_detalle` con `usuarioId`.
+
+**Item layout** `item_miembro_grupo.xml`:
+| Vista | ID | Descripción |
+|---|---|---|
+| FrameLayout 44dp | — | Avatar con `bg_avatar_placeholder` |
+| TextView | `tvInicialesMiembro` | Iniciales centradas (14sp bold) |
+| TextView | `tvNombreMiembro` | Nombre (14sp bold) |
+| TextView | `tvChipRolMiembro` | Chip de rol coloreado |
+| TextView | `tvCorreoMiembro` | Correo (12sp muted) |
+| TextView | `tvEstadoEntregaMiembro` | Estado entrega (visibility=gone por defecto) |
+
+---
+
+### 11.9 Perfil de alumno — `AdminAlumnoDetalleFragment`
+
+- Layout: `fragment_alumno_detalle.xml`
+- **Header con back**: `btnVolverAlumno` + label `@string/app_name` + "Perfil del alumno". Línea 3dp primary.
+- **ScrollView** (paddingBottom=88dp) con:
+  - **Hero centrado**: FrameLayout 96dp (`bg_avatar_placeholder`) + `tvInicialesAlumno` (32sp bold) + `CircleImageView ivFotoAlumno` (oculta). `tvNombreAlumno` (22sp bold), `tvCorreoAlumno` (muted), `tvCarreraAlumno` (muted), `tvChipRolAlumno` (`bg_chip_estudiante`).
+  - Card **INFORMACIÓN ACADÉMICA**: `tvMatricula`, `tvSemestre`, `tvFechaInscripcion`, `tvEstadoCuentaAlumno` (coloreado).
+  - Card **GRUPOS INSCRITOS**: `containerGruposAlumno` (LinearLayout dinámico).
+  - Card **ENTREGAS RECIENTES**: `containerEntregasAlumno` (filas dinámicas: título+fecha a la izquierda, chip de estado a la derecha).
+- Recibe argumento `usuarioId: int`.
+- **36 entradas dummy** (`DATOS[]`) cubriendo todos los IDs de miembros posibles.
+- Carreras: ISC, IRT, IS (constantes estáticas).
+- Chips de estado de entrega: COMPLETADA→`bg_chip_estudiante`, VENCIDA→`bg_chip_admin`, PENDIENTE→`bg_chip_pendiente`, EN CURSO→`bg_chip_docente`.
+- Vista de solo lectura — sin botones de acción admin.
+
+---
+
+### 11.10 Actividades — `AdminActividadesFragment`
+
+- Layout: `fragment_admin_actividades.xml`
+- **Header**: título `@string/title_admin_actividades`, subtítulo "Tareas académicas por grupo", badge `tvHeaderTotalActividades`.
+- **Búsqueda**: `tilBuscarActividad` / `etBuscarActividad`.
+- **Chips de filtro de estado** (5 chips):
+  - `chipActividadesTodas` (checked), `chipActividadesEnCurso`, `chipActividadesPendiente`, `chipActividadesCompletada`, `chipActividadesVencida`.
+- `rvActividades` + `emptyStateActividades`.
+- Adapter: `ActividadAdminAdapter` con modelo `ActividadDummy` (id, titulo, tipo, grupo, docente, fechaPublicacion, fechaVence, estado, grupoId, totalAlumnos, entregadas).
+  - Tipos: TRABAJO, TAREA, EXAMEN, PROYECTO.
+  - Estados: EN CURSO, PENDIENTE, COMPLETADA, VENCIDA.
+  - 8 registros dummy (actividadId 1-8).
+  - Chip de estado coloreado según tipo/estado.
+  - Navegación al detalle: `action_actividades_to_detalle` con `actividadId`.
+
+**Item layout** `item_actividad_admin.xml`:
+| Vista | ID | Descripción |
+|---|---|---|
+| TextView | `tvTipoActividad` | Badge tipo (TRABAJO/TAREA/etc.) |
+| TextView | `tvTituloActividad` | Título (15sp bold) |
+| TextView | `tvGrupoActividad` | Nombre del grupo (12sp muted) |
+| TextView | `tvDocenteActividad` | Nombre del docente (12sp muted) |
+| TextView | `tvFechaVenceActividad` | Fecha de vencimiento |
+| TextView | `tvEstadoActividad` | Chip estado coloreado |
+| TextView | `tvEntregasActividad` | "X/Y entregas" |
+
+---
+
+### 11.11 Detalle de actividad — `AdminActividadDetalleFragment`
+
+- Layout: `fragment_admin_actividad_detalle.xml`
+- **Header con back**: `btnVolverActividad` + label `@string/app_name` + "Detalle de actividad". Línea 3dp primary.
+- **ScrollView** con 4 cards:
+
+**Card INFORMACIÓN GENERAL:**
+| Vista ID | Contenido |
+|---|---|
+| `tvTituloDetActiv` | Título de la actividad (20sp bold) |
+| `tvChipEstadoDetActiv` | Chip estado (`bg_chip_docente` / `bg_chip_pendiente` / etc.) |
+| `tvGrupoDetActiv` | Nombre del grupo (14sp muted) |
+| `tvTipoDetActiv` | "Tipo: Proyecto" (12sp muted) |
+| `tvDocenteDetActiv` | Nombre del docente (13sp bold) |
+| `tvFechaPublicacion` | Fecha de publicación (13sp bold) |
+| `tvFechaVenceDetActiv` | Fecha de vencimiento (13sp bold) |
+
+**Card PROGRESO DE ENTREGAS:**
+| Vista ID | Contenido |
+|---|---|
+| `progressEntregas` | `LinearProgressIndicator` (max=100, color success, track=divider) |
+| `tvStatTotal` | Total de alumnos (26sp bold) |
+| `tvStatEntregadas` | Cantidad entregadas (26sp, colorSuccess) |
+| `tvStatPendientes` | Cantidad pendientes (26sp, colorWarning) |
+
+**Card DESCRIPCIÓN:**
+| Vista ID | Contenido |
+|---|---|
+| `tvDescripcionDetActiv` | Texto libre de la actividad (14sp, lineSpacing=4dp) |
+
+**Card MIEMBROS:**
+| Vista ID | Contenido |
+|---|---|
+| `tvVerTodosMiembrosDetActiv` | Link "Ver todos" → navega vía `action_actividad_detalle_to_miembros` con `{grupoId, actividadId}` |
+| `containerMiembrosDetActiv` | LinearLayout dinámico con preview de miembros |
+
+- Recibe argumento `actividadId: int` (defaultValue=0).
+- 8 entradas dummy con `grupoId` asignado (1,2,3,4,5 según grupo).
+- Inner class `DetalleActividad`: id, titulo, tipo, grupo, docente, fechaPublicacion, fechaVence, descripcion, estado, totalAlumnos, entregadas, grupoId.
+
+---
+
+### 11.12 Perfil del administrador — `AdminPerfilFragment`
+
+- Layout: `fragment_admin_perfil.xml`
+- **Header de marca**: barra de acento vertical 4dp (`bg_accent_bar`), label `@string/app_name` (10sp bold primary), título "Mi perfil", subtítulo con cargo.
+- **Card hero de usuario**: avatar 88dp (`bg_avatar_placeholder`) + iniciales + nombre + correo + `tvChipRolPerfil` (`bg_chip_admin`).
+- **Card INFORMACIÓN DE CUENTA**: matrícula/ID de empleado, fecha de registro, estado de cuenta.
+- **Card CONFIGURACIÓN**: opciones de ajustes y preferencias.
+- **Botón Cerrar sesión**: `btnCerrarSesion` → vuelve a `LoginActivity` con `FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK`.
+
+---
+
+### 11.13 Drawables añadidos para el módulo Admin
+
+| Archivo | Descripción |
+|---|---|
+| `bg_accent_bar.xml` | Barra vertical 4dp con gradiente primary (decoración de headers) |
+| `bg_chip_admin.xml` | Fondo oval morado `#7B1FA2` (rol Administrador) |
+| `bg_chip_docente.xml` | Fondo oval azul `#1976D2` (rol Docente) |
+| `bg_chip_estudiante.xml` | Fondo oval verde `#388E3C` (rol Estudiante) |
+| `bg_chip_pendiente.xml` | Fondo oval naranja `#F57C00` (rol Pendiente) |
+| `bg_avatar_placeholder.xml` | Oval gris oscuro `colorSurfaceVariant` (placeholder avatar) |
+| `bg_icon_circle_active.xml` | Círculo activo para nav pill |
+| `bg_icon_circle_inactive.xml` | Círculo inactivo para nav pill |
+| `bg_nav_container.xml` | Contenedor pill nav bar |
+| `bg_nav_item_active.xml` | Item activo de pill nav |
+| `ic_home.xml`, `ic_users.xml`, `ic_school.xml`, `ic_markets.xml`, `ic_perfil.xml` | Íconos de la pill nav |
+| `ic_scan_frame.xml` | Vector con 4 esquinas tipo escáner (registro foto) |
+| `bg_scan_area.xml` | Fondo oscuro redondeado del área de escaneo |
+| `bg_scan_line.xml` | Gradiente horizontal para línea animada de escaneo |
+
+---
+
+## 12. Estado del trabajo y siguientes pasos lógicos
 
 Implementado:
-- Flujo completo de **UI** del registro (form → foto → verificando → éxito/fallo).
+- Flujo completo de **UI del registro** (form → foto → verificando → éxito/fallo) con step indicator en todas las vistas.
+- Animación de escaneo en `RegistroFotoFragment` (scan line + corner pulse + flash de éxito).
 - UI de **login** y **splash**.
 - UI de **espera de aprobación**.
 - Navigation graph `nav_registro` con animaciones.
+- Módulo **Admin completo** (UI + navegación + datos dummy):
+  - Dashboard con resumen y actividades recientes.
+  - Usuarios con filtro por rol, TabLayout Activos/Pendientes, detalle con acciones.
+  - Grupos con 3 filtros combinados (docente, estado, texto), filtro contextual desde detalle de usuario.
+  - Detalle de grupo con preview de miembros y actividades.
+  - Lista de miembros con estado de entrega por actividad.
+  - Perfil de alumno (solo lectura).
+  - Actividades con 5 filtros de estado.
+  - Detalle de actividad con progreso de entregas.
+  - Perfil del administrador.
+- Pill nav bar custom con sincronización correcta para sub-destinos.
 - Tema Material 3 oscuro y catálogo de strings/colores extenso.
 - Hilt cableado a nivel `Application`.
 
@@ -344,5 +687,6 @@ Pendiente (TODOs presentes en el código):
 - Capa de red: cliente Retrofit + OkHttp logging + módulos Hilt (`@Module`/`@InstallIn`).
 - Subida de foto y observación de `LiveData` en `RegistroVerificandoFragment`.
 - `WaitingApprovalActivity`: cargar nombre/correo reales desde sesión.
-- Pantallas de Tareas, Grupos, Mensajes, Perfil y Admin (strings ya redactados).
+- Conectar datos reales del backend en todas las vistas admin (sustituir datos dummy).
+- Pantallas Docente y Estudiante (pendientes de implementar).
 - Escáner QR con CameraX + ML Kit (deps ya añadidas).

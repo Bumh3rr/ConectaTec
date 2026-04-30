@@ -1,12 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/colorBackground"
-    android:paddingHorizontal="36dp">
+    android:background="@color/colorBackground">
+
+    <!-- ══ STEP INDICATOR ════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="52dp"
+        android:paddingHorizontal="36dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                app:cardBackgroundColor="@color/colorError"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ERROR EN VERIFICACIÓN"
+            android:textColor="@color/colorError"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.15" />
+
+    </LinearLayout>
+
+    <!-- Contenido centrado verticalmente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="36dp">
 
     <!-- Ícono de error circular -->
     <LinearLayout
@@ -58,8 +120,7 @@
         app:cardBackgroundColor="@color/colorSurface"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
-        app:strokeWidth="0dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        app:strokeWidth="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -162,8 +223,7 @@
         android:letterSpacing="0.05"
         app:backgroundTint="@color/colorPrimary"
         app:cornerRadius="10dp"
-        android:stateListAnimator="@null"
-        xmlns:app="http://schemas.android.com/apk/res-auto" />
+        android:stateListAnimator="@null" />
 
     <!-- Botón volver al login -->
     <com.google.android.material.button.MaterialButton
@@ -178,7 +238,8 @@
         android:letterSpacing="0.05"
         app:strokeColor="@color/colorBorder"
         app:cornerRadius="10dp"
-        android:stateListAnimator="@null"
-        xmlns:app="http://schemas.android.com/apk/res-auto" />
+        android:stateListAnimator="@null" />
+
+    </LinearLayout>
 
 </LinearLayout>

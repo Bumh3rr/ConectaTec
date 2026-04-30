@@ -1,10 +1,17 @@
 package com.conectatec.ui.auth.registro;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -23,18 +30,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Paso 2 del flujo de registro.
- * El usuario toma o selecciona su foto de perfil.
- * Guarda la URI en RegistroViewModel y navega al paso 3.
- */
 public class RegistroFotoFragment extends Fragment {
 
     private FragmentRegistroFotoBinding binding;
     private RegistroViewModel viewModel;
     private Uri fotoUri;
 
-    // Launcher galería
     private final ActivityResultLauncher<String> galeriaLauncher =
             registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                 if (uri != null) {
@@ -43,7 +44,6 @@ public class RegistroFotoFragment extends Fragment {
                 }
             });
 
-    // Launcher cámara
     private final ActivityResultLauncher<Uri> camaraLauncher =
             registerForActivityResult(new ActivityResultContracts.TakePicture(), success -> {
                 if (success && fotoUri != null) {
@@ -66,7 +66,6 @@ public class RegistroFotoFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(RegistroViewModel.class);
 
-        // Si ya había una foto seleccionada (por si regresa al paso)
         if (viewModel.getFotoUri() != null) {
             fotoUri = viewModel.getFotoUri();
             mostrarFotoSeleccionada(fotoUri);
@@ -89,26 +88,83 @@ public class RegistroFotoFragment extends Fragment {
 
         binding.btnContinuar.setOnClickListener(v -> {
             viewModel.setFotoUri(fotoUri);
-            Navigation.findNavController(v)
-                    .navigate(R.id.action_foto_to_verificando);
+            iniciarAnimacionEscaneo();
         });
     }
 
-    /**
-     * Muestra la foto en el preview y habilita el botón continuar.
-     */
     private void mostrarFotoSeleccionada(Uri uri) {
         binding.ivFotoPreview.setImageURI(uri);
-        binding.ivFotoPreview.setBorderColor(
-                requireContext().getColor(R.color.colorPrimary)
-        );
+        binding.ivFotoPreview.setVisibility(View.VISIBLE);
+        binding.ivFotoPlaceholder.setVisibility(View.GONE);
         binding.tvEstadoFoto.setText("Foto lista ✓");
-        binding.tvEstadoFoto.setTextColor(
-                requireContext().getColor(R.color.colorSuccess)
-        );
-        // Habilitar botón continuar
+        binding.tvEstadoFoto.setTextColor(requireContext().getColor(R.color.colorSuccess));
         binding.btnContinuar.setEnabled(true);
         binding.btnContinuar.setAlpha(1.0f);
+    }
+
+    private void iniciarAnimacionEscaneo() {
+        // Deshabilitar controles durante el escaneo
+        binding.btnContinuar.setEnabled(false);
+        binding.btnTomarFoto.setEnabled(false);
+        binding.btnGaleria.setEnabled(false);
+
+        // Mostrar elementos de escaneo
+        binding.viewScanLine.setVisibility(View.VISIBLE);
+        binding.overlayEscaneo.setVisibility(View.VISIBLE);
+        binding.tvEstadoFoto.setText("Verificando identidad...");
+        binding.tvEstadoFoto.setTextColor(requireContext().getColor(R.color.colorPrimary));
+
+        float halfCircle = 96 * requireContext().getResources().getDisplayMetrics().density;
+
+        // Animación de la línea de escaneo: 3 pasadas de arriba a abajo
+        ObjectAnimator scanLine = ObjectAnimator.ofFloat(
+                binding.viewScanLine, "translationY", -halfCircle, halfCircle);
+        scanLine.setDuration(900);
+        scanLine.setRepeatCount(2);
+        scanLine.setInterpolator(new LinearInterpolator());
+
+        // Pulsación de las esquinas del marco durante el escaneo
+        ObjectAnimator cornersPulse = ObjectAnimator.ofFloat(
+                binding.ivScanFrame, "alpha", 1f, 0.3f, 1f);
+        cornersPulse.setDuration(900);
+        cornersPulse.setRepeatCount(2);
+        cornersPulse.setInterpolator(new LinearInterpolator());
+
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.playTogether(scanLine, cornersPulse);
+
+        animSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (!isAdded()) return;
+
+                // Ocultar elementos de escaneo
+                binding.viewScanLine.setVisibility(View.GONE);
+                binding.overlayEscaneo.setVisibility(View.GONE);
+                binding.ivScanFrame.setAlpha(1f);
+
+                // Flash de éxito en las esquinas
+                ObjectAnimator successFlash = ObjectAnimator.ofFloat(
+                        binding.ivScanFrame, "alpha", 0f, 1f);
+                successFlash.setDuration(400);
+                successFlash.start();
+
+                // Actualizar estado a verificado
+                binding.tvEstadoFoto.setText("Identidad verificada ✓");
+                binding.tvEstadoFoto.setTextColor(
+                        requireContext().getColor(R.color.colorSuccess));
+
+                // Navegar tras breve pausa
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    if (isAdded()) {
+                        Navigation.findNavController(requireView())
+                                .navigate(R.id.action_foto_to_verificando);
+                    }
+                }, 600);
+            }
+        });
+
+        animSet.start();
     }
 
     private Uri crearUriParaFoto() {
