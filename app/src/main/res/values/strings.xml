@@ -231,4 +231,15 @@
     <string name="title_detalle_grupo_docente">Detalle del grupo</string>
     <string name="title_miembros_grupo_docente">Miembros del grupo</string>
     <string name="title_nuevo_grupo">Nuevo grupo</string>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Docente — Chat (Plan 5)
+         ════════════════════════════════════════════════════════════ -->
+    <string name="subtitle_docente_chat">Conversaciones</string>
+    <string name="chip_chat_todos">Todos</string>
+    <string name="chip_chat_grupos">Grupos</string>
+    <string name="chip_chat_privados">Privados</string>
+    <string name="hint_mensaje_chat">Escribe un mensaje…</string>
+    <string name="desc_btn_adjuntar">Adjuntar archivo</string>
+    <string name="desc_btn_enviar">Enviar mensaje</string>
 </resources>
