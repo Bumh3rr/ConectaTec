@@ -8,6 +8,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.conectatec.databinding.ActivityLoginBinding;
+import com.conectatec.ui.admin.MainAdminActivity;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 /**
@@ -47,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
             String correo     = binding.etCorreo.getText().toString().trim();
             String contrasena = binding.etContrasena.getText().toString().trim();
             // TODO: viewModel.login(correo, contrasena)
+
+            startActivity(new Intent(this, MainAdminActivity.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
 
         // Link a pantalla de registro

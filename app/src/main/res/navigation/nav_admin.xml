@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_admin"
+    app:startDestination="@id/adminDashboardFragment">
+
+    <!-- Dashboard -->
+    <fragment
+        android:id="@+id/adminDashboardFragment"
+        android:name="com.conectatec.ui.admin.dashboard.AdminDashboardFragment"
+        android:label="@string/title_dashboard" />
+
+    <!-- Usuarios (host con TabLayout interno) -->
+    <fragment
+        android:id="@+id/adminUsuariosFragment"
+        android:name="com.conectatec.ui.admin.usuarios.AdminUsuariosFragment"
+        android:label="@string/title_admin_usuarios">
+        <action
+            android:id="@+id/action_usuarios_to_detalle"
+            app:destination="@id/adminUsuarioDetalleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Detalle de usuario -->
+    <fragment
+        android:id="@+id/adminUsuarioDetalleFragment"
+        android:name="com.conectatec.ui.admin.usuarios.AdminUsuarioDetalleFragment"
+        android:label="@string/title_detalle_usuario">
+        <argument
+            android:name="usuarioId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <!-- Grupos -->
+    <fragment
+        android:id="@+id/adminGruposFragment"
+        android:name="com.conectatec.ui.admin.grupos.AdminGruposFragment"
+        android:label="@string/title_admin_grupos">
+        <argument
+            android:name="docenteNombre"
+            app:argType="string"
+            android:defaultValue="" />
+        <action
+            android:id="@+id/action_grupos_to_detalle"
+            app:destination="@id/adminGrupoDetalleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Detalle de grupo -->
+    <fragment
+        android:id="@+id/adminGrupoDetalleFragment"
+        android:name="com.conectatec.ui.admin.grupos.AdminGrupoDetalleFragment"
+        android:label="@string/title_detalle_grupo">
+        <argument
+            android:name="grupoId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_grupo_detalle_to_miembros"
+            app:destination="@id/adminMiembrosGrupoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Lista completa de miembros del grupo -->
+    <fragment
+        android:id="@+id/adminMiembrosGrupoFragment"
+        android:name="com.conectatec.ui.admin.grupos.AdminMiembrosGrupoFragment"
+        android:label="Miembros del grupo">
+        <argument
+            android:name="grupoId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="actividadId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_miembros_to_alumno_detalle"
+            app:destination="@id/adminAlumnoDetalleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Perfil de alumno (vista de solo lectura desde lista de miembros) -->
+    <fragment
+        android:id="@+id/adminAlumnoDetalleFragment"
+        android:name="com.conectatec.ui.admin.alumno.AdminAlumnoDetalleFragment"
+        android:label="Perfil del alumno">
+        <argument
+            android:name="usuarioId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <!-- Actividades -->
+    <fragment
+        android:id="@+id/adminActividadesFragment"
+        android:name="com.conectatec.ui.admin.actividades.AdminActividadesFragment"
+        android:label="@string/title_admin_actividades">
+        <action
+            android:id="@+id/action_actividades_to_detalle"
+            app:destination="@id/adminActividadDetalleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Detalle de actividad -->
+    <fragment
+        android:id="@+id/adminActividadDetalleFragment"
+        android:name="com.conectatec.ui.admin.actividades.AdminActividadDetalleFragment"
+        android:label="Detalle de actividad">
+        <argument
+            android:name="actividadId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_actividad_detalle_to_miembros"
+            app:destination="@id/adminMiembrosGrupoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Perfil -->
+    <fragment
+        android:id="@+id/adminPerfilFragment"
+        android:name="com.conectatec.ui.admin.perfil.AdminPerfilFragment"
+        android:label="@string/title_admin_perfil" />
+
+</navigation>

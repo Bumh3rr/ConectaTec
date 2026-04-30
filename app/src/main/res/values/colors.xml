@@ -43,4 +43,14 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
+    <color name="nav_screen_bg">#0A0A0A</color>
+    <color name="nav_container_bg">#1A1A1A</color>
+    <color name="nav_item_active_bg">#2A2A2A</color>
+    <color name="nav_item_border_bg">#2F2F2F</color>
+    <color name="nav_circle_inactive">#2A2A2A</color>
+    <color name="nav_circle_active">#1565C0</color>
+    <color name="nav_icon_inactive">#B0B0B0</color>
+    <color name="nav_icon_active">#FFFFFF</color>
+    <color name="nav_label">#F5F5F5</color>
+
 </resources>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/colorSurface"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Barra de acento de estado (color se setea desde el adapter) -->
+        <View
+            android:id="@+id/viewStatusAccent"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary" />
+
+        <!-- Contenido principal -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
+
+            <!-- Fila 1: título + chip de estado -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/tvTituloActividad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Título de la actividad"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="10dp" />
+
+                <TextView
+                    android:id="@+id/tvChipEstadoActividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EN CURSO"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp"
+                    android:background="@drawable/bg_chip_docente" />
+
+            </LinearLayout>
+
+            <!-- Fila 2: nombre del grupo -->
+            <TextView
+                android:id="@+id/tvGrupoActividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingeniería de Software – 6A"
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="13sp"
+                android:layout_marginBottom="2dp" />
+
+            <!-- Fila 3: docente -->
+            <TextView
+                android:id="@+id/tvDocenteActividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prof. Carlos Bautista"
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="12sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Divisor -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorDivider"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Fila 4: fecha de vencimiento + progreso de entregas -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvFechaVenceActividad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Vence: 30/05/2025"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvEntregasActividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18 / 24 entregas"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

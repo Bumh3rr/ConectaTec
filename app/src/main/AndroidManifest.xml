@@ -24,6 +24,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TecConnect">
+        <!-- TODO: quitar el intent-filter de MainAdminActivity cuando el login enrute por rol -->
+        <activity
+            android:name=".ui.admin.MainAdminActivity"
+            android:exported="true">
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
         <activity
             android:name=".ui.auth.WaitingApprovalActivity"
             android:exported="false" />
