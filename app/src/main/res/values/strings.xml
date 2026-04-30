@@ -214,4 +214,21 @@
     <string name="label_notificaciones">Notificaciones</string>
     <string name="label_tema">Tema</string>
     <string name="label_idioma">Idioma</string>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Docente — Grupos (Plan 3)
+         ════════════════════════════════════════════════════════════ -->
+    <string name="subtitle_docente_grupos">Administra tus grupos</string>
+    <string name="btn_crear_grupo_docente">Crear grupo</string>
+    <string name="hint_buscar_grupo_docente">Buscar grupo…</string>
+    <string name="hint_nombre_grupo_nuevo">Nombre del grupo</string>
+    <string name="hint_materia_grupo_nuevo">Materia</string>
+    <string name="hint_descripcion_grupo_nuevo">Descripción (opcional)</string>
+    <string name="btn_listo">Listo</string>
+    <string name="btn_ver_qr">Ver código QR</string>
+    <string name="label_codigo_union">Código de unión</string>
+    <string name="label_compartir_codigo">Comparte este código con tus alumnos</string>
+    <string name="title_detalle_grupo_docente">Detalle del grupo</string>
+    <string name="title_miembros_grupo_docente">Miembros del grupo</string>
+    <string name="title_nuevo_grupo">Nuevo grupo</string>
 </resources>
