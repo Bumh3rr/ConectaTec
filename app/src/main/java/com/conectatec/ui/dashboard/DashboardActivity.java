@@ -209,7 +209,7 @@ public class DashboardActivity extends AppCompatActivity {
             if (parts.length < 2) return result;
             byte[] decoded = android.util.Base64.decode(
                     parts[1], android.util.Base64.URL_SAFE | android.util.Base64.NO_PADDING);
-            String payload = new String(decoded, "UTF-8");
+            String payload = new String(decoded, java.nio.charset.StandardCharsets.UTF_8);
             JSONObject json = new JSONObject(payload);
             result[0] = json.optString("nombre", "Usuario");
             result[1] = json.optString("rol", "DOCENTE");
