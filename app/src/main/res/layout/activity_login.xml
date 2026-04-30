@@ -134,19 +134,48 @@
             android:layout_width="match_parent"
             android:layout_height="32dp" />
 
-        <!-- Botón Iniciar Sesión -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
+        <!-- Selector provisional de rol (MODO DEMO) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:text="MODO DEMO — selecciona tu rol"
+            android:textColor="@color/colorOnSurfaceVariant"
+            android:textSize="11sp"
+            android:letterSpacing="0.06" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:letterSpacing="0.05"
-            android:stateListAnimator="@null"
-            android:text="@string/btn_login"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/colorPrimary"
-            app:cornerRadius="10dp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:stateListAnimator="@null"
+                android:text="Admin"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLoginDocente"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:stateListAnimator="@null"
+                android:text="Docente"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:strokeColor="@color/colorPrimary"
+                app:cornerRadius="10dp" /></LinearLayout>
 
         <!-- Divider con texto -->
         <LinearLayout
