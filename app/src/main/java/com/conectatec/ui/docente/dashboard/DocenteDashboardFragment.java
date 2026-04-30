@@ -1,0 +1,39 @@
+package com.conectatec.ui.docente.dashboard;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.conectatec.databinding.FragmentDocenteDashboardPlaceholderBinding;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+/**
+ * Stub del Dashboard del Docente. Sera reemplazado por la implementacion real
+ * en el plan 2 (dashboard-perfil). Solo muestra un texto centrado.
+ */
+@AndroidEntryPoint
+public class DocenteDashboardFragment extends Fragment {
+
+    private FragmentDocenteDashboardPlaceholderBinding binding;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        binding = FragmentDocenteDashboardPlaceholderBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+}
