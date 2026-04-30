@@ -199,4 +199,19 @@
     <string name="cd_nav_docente_tareas">Tareas</string>
     <string name="cd_nav_docente_chat">Chat</string>
     <string name="cd_nav_docente_perfil">Perfil</string>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Docente — Dashboard + Perfil (Plan 2)
+         ════════════════════════════════════════════════════════════ -->
+    <string name="subtitle_docente_dashboard">Hoy, 30 abr</string>
+    <string name="label_grupos_activos">Grupos activos</string>
+    <string name="label_alumnos_totales">Alumnos totales</string>
+    <string name="label_tareas_recientes">Tareas recientes</string>
+    <string name="label_avisos_del_dia">Avisos del día</string>
+    <string name="btn_ver_todas_tareas">Ver todas</string>
+    <string name="label_id_empleado">ID Empleado</string>
+    <string name="label_departamento">Departamento</string>
+    <string name="label_notificaciones">Notificaciones</string>
+    <string name="label_tema">Tema</string>
+    <string name="label_idioma">Idioma</string>
 </resources>
