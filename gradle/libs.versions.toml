@@ -22,8 +22,9 @@ datastore = "1.1.1"
 security = "1.1.0-alpha06"
 viewpager2 = "1.1.0"
 camera = "1.4.2"
-mlkit = "18.3.1"
+mlkit = "17.3.0"
 hilt = "2.59"
+lottievrs = "3.4.0"
 
 [libraries]
 # AndroidX core
@@ -89,7 +90,10 @@ junit                    = { group = "junit",                         name = "ju
 ext-junit                = { group = "androidx.test.ext",             name = "junit",                        version.ref = "junitVersion" }
 espresso-core            = { group = "androidx.test.espresso",        name = "espresso-core",                version.ref = "espressoCore" }
 
+#Lottie (animaciones)
+lottie                   = { group = "com.airbnb.android",             name = "lottie",                         version.ref = "lottievrs" }
+
 [plugins]
 android-application      = { id = "com.android.application",          version.ref = "agp" }
 hilt                     = { id = "com.google.dagger.hilt.android",   version.ref = "hilt" }
-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+hilt-android             = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

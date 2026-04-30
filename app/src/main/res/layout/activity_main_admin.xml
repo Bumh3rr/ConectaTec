@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Actividad principal del rol Administrador: Toolbar + NavHost + BottomNav -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <!-- Contenedor de fragmentos — ocupa toda la pantalla -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostAdmin"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_admin" />
+
+    <!-- BottomNavigationView -->
+    <LinearLayout
+        android:id="@+id/bottomNavAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/pillNavAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/bg_nav_container"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <!-- Dashboard -->
+            <LinearLayout
+                android:id="@+id/itemDashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/circleDashboard"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_circle_inactive">
+
+                    <ImageView
+                        android:id="@+id/iconDashboard"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_home"
+                        android:contentDescription="Inicio"
+                        app:tint="@color/nav_icon_inactive" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/labelDashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="11dp"
+                    android:text="Inicio"
+                    android:textColor="@color/nav_label"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="1dp" />
+
+            <!-- Usuarios -->
+            <LinearLayout
+                android:id="@+id/itemUsuarios"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/circleUsuarios"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_circle_inactive">
+
+                    <ImageView
+                        android:id="@+id/iconUsuarios"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_users"
+                        android:contentDescription="Usuarios"
+                        app:tint="@color/nav_icon_inactive" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/labelUsuarios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="11dp"
+                    android:text="Usuarios"
+                    android:textColor="@color/nav_label"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="1dp" />
+
+            <!-- Grupos -->
+            <LinearLayout
+                android:id="@+id/itemGrupos"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/circleGrupos"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_circle_inactive">
+
+                    <ImageView
+                        android:id="@+id/iconGrupos"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_school"
+                        android:contentDescription="Grupos"
+                        app:tint="@color/nav_icon_inactive" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/labelGrupos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="11dp"
+                    android:text="Grupos"
+                    android:textColor="@color/nav_label"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="1dp" />
+
+            <!-- Actividades -->
+            <LinearLayout
+                android:id="@+id/itemActividades"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/circleActividades"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_circle_inactive">
+
+                    <ImageView
+                        android:id="@+id/iconActividades"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_portfolio"
+                        android:contentDescription="Actividades"
+                        app:tint="@color/nav_icon_inactive" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/labelActividades"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="11dp"
+                    android:text="Actividades"
+                    android:textColor="@color/nav_label"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="1dp" />
+
+            <!-- Perfil -->
+            <LinearLayout
+                android:id="@+id/itemPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/circlePerfil"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_icon_circle_inactive">
+
+                    <ImageView
+                        android:id="@+id/iconPerfil"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_perfil"
+                        android:contentDescription="Perfil"
+                        app:tint="@color/nav_icon_inactive" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/labelPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="11dp"
+                    android:text="Perfil"
+                    android:textColor="@color/nav_label"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

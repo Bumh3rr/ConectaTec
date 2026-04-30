@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TecConnect</string>
+    <string name="app_name">ConectaTec</string>
     <string name="app_subtitle">Plataforma Académica</string>
 
     <!-- Hints -->
@@ -114,4 +114,75 @@
     <string name="cd_enviar_mensaje">Enviar mensaje</string>
     <string name="cd_adjuntar">Adjuntar archivo</string>
     <string name="cd_volver">Volver</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Admin -->
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_admin_usuarios">Usuarios</string>
+    <string name="title_admin_grupos">Grupos</string>
+    <string name="title_admin_perfil">Perfil</string>
+    <string name="title_detalle_usuario">Detalle de usuario</string>
+    <string name="title_detalle_grupo">Detalle de grupo</string>
+    <string name="title_asignar_rol">Asignar rol</string>
+    <string name="title_usuarios_totales">Usuarios totales</string>
+    <string name="title_pendientes">Solicitudes pendientes</string>
+    <string name="title_grupos_activos">Grupos activos</string>
+    <string name="title_tareas_publicadas">Tareas publicadas</string>
+    <string name="tab_todos">Todos</string>
+    <string name="tab_pendientes_admin">Pendientes</string>
+    <string name="label_foto_verificada">Foto verificada</string>
+    <string name="label_fecha_registro">Fecha de registro</string>
+    <string name="label_estado_cuenta">Estado de cuenta</string>
+    <string name="label_info_cuenta">Información de cuenta</string>
+    <string name="label_grupos_participa">Grupos donde participa</string>
+    <string name="label_miembros">Miembros</string>
+    <string name="label_tareas_publicadas_grupo">Tareas publicadas</string>
+    <string name="label_avisos_recientes">Avisos recientes</string>
+    <string name="label_docente_creador">Docente</string>
+    <string name="label_materia">Materia</string>
+    <string name="label_fecha_creacion">Creado el</string>
+    <string name="label_activos">Activos</string>
+    <string name="label_desactivados">Desactivados</string>
+    <string name="label_todos_filtro">Todos</string>
+    <string name="label_cuenta_activa">Activa</string>
+    <string name="label_cuenta_desactivada_chip">Desactivada</string>
+    <string name="btn_cambiar_rol">Cambiar rol</string>
+    <string name="btn_activar_cuenta">Activar cuenta</string>
+    <string name="btn_desactivar_cuenta">Desactivar cuenta</string>
+    <string name="btn_eliminar_usuario">Eliminar usuario</string>
+    <string name="btn_desactivar_grupo">Desactivar grupo</string>
+    <string name="btn_eliminar_grupo">Eliminar grupo</string>
+    <string name="btn_ver_todos">Ver todos</string>
+    <string name="btn_asignar_docente">Asignar como Docente</string>
+    <string name="btn_asignar_estudiante">Asignar como Estudiante</string>
+    <string name="btn_cancelar_dialog">Cancelar</string>
+    <string name="msg_no_hay_pendientes">No hay solicitudes pendientes</string>
+    <string name="msg_no_hay_usuarios">No se encontraron usuarios</string>
+    <string name="msg_no_hay_grupos_admin">No se encontraron grupos</string>
+    <string name="msg_cargando_datos">Cargando datos…</string>
+    <string name="msg_error_cargar">No se pudieron cargar los datos</string>
+    <string name="msg_reintentar">Reintentar</string>
+    <string name="msg_confirmar_titulo">Confirmar acción</string>
+    <string name="msg_confirmar_eliminar_usuario">¿Estás seguro de que deseas eliminar este usuario? Esta acción no se puede deshacer.</string>
+    <string name="msg_confirmar_desactivar_grupo">¿Deseas desactivar este grupo? Los miembros ya no podrán acceder a él.</string>
+    <string name="msg_confirmar_eliminar_grupo">¿Estás seguro de que deseas eliminar este grupo? Esta acción no se puede deshacer.</string>
+    <string name="hint_buscar_usuario">Buscar usuario…</string>
+    <string name="hint_buscar_grupo">Buscar grupo…</string>
+    <string name="cd_avatar_usuario">Foto de perfil del usuario</string>
+    <string name="cd_mas_opciones">Más opciones</string>
+    <string name="cd_icono_dashboard">Ícono del panel</string>
+    <string name="label_ver_mas">Ver más</string>
+    <string name="label_sin_grupos">Sin grupos</string>
+    <string name="label_tareas">tareas</string>
+    <string name="label_miembros_conteo">miembros</string>
+
+    <!-- Actividades -->
+    <string name="title_admin_actividades">Actividades</string>
+    <string name="hint_buscar_actividad">Buscar actividad…</string>
+    <string name="label_en_curso">En curso</string>
+    <string name="label_completada">Completada</string>
+    <string name="label_vencida">Vencida</string>
+    <string name="label_vence">Vence:</string>
+    <string name="label_entregas">entregas</string>
+    <string name="msg_no_hay_actividades">No se encontraron actividades</string>
 </resources>

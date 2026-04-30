@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Menú del BottomNavigationView del rol Administrador -->
+<!-- TODO: reemplazar @android:drawable/... por iconos vectoriales creados con Vector Asset Studio -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/adminDashboardFragment"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/adminUsuariosFragment"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/title_admin_usuarios" />
+
+    <item
+        android:id="@+id/adminGruposFragment"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/title_admin_grupos" />
+
+    <item
+        android:id="@+id/adminPerfilFragment"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="@string/title_admin_perfil" />
+
+</menu>

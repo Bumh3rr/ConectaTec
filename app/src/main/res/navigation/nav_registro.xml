@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_registro"
+    app:startDestination="@id/fragmentRegistroForm">
+
+    <!-- Paso 1: Formulario -->
+    <fragment
+        android:id="@+id/fragmentRegistroForm"
+        android:name="com.conectatec.ui.auth.registro.RegistroFormFragment"
+        android:label="Registro">
+        <action
+            android:id="@+id/action_form_to_foto"
+            app:destination="@id/fragmentRegistroFoto"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Paso 2: Foto de perfil -->
+    <fragment
+        android:id="@+id/fragmentRegistroFoto"
+        android:name="com.conectatec.ui.auth.registro.RegistroFotoFragment"
+        android:label="Foto de perfil">
+        <action
+            android:id="@+id/action_foto_to_verificando"
+            app:destination="@id/fragmentRegistroVerificando"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Paso 3: Verificando (loading) -->
+    <fragment
+        android:id="@+id/fragmentRegistroVerificando"
+        android:name="com.conectatec.ui.auth.registro.RegistroVerificandoFragment"
+        android:label="Verificando">
+        <action
+            android:id="@+id/action_verificando_to_exitoso"
+            app:destination="@id/fragmentRegistroExitoso"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/fragmentRegistroForm"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_verificando_to_fallido"
+            app:destination="@id/fragmentRegistroFallido"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- Paso 4a: Registro exitoso -->
+    <fragment
+        android:id="@+id/fragmentRegistroExitoso"
+        android:name="com.conectatec.ui.auth.registro.RegistroExitosoFragment"
+        android:label="Registro exitoso">
+        <!-- No tiene acción de navegación — la Activity redirige a WaitingApproval -->
+    </fragment>
+
+    <!-- Paso 4b: Registro fallido -->
+    <fragment
+        android:id="@+id/fragmentRegistroFallido"
+        android:name="com.conectatec.ui.auth.registro.RegistroFallidoFragment"
+        android:label="Registro fallido">
+        <action
+            android:id="@+id/action_fallido_to_form"
+            app:destination="@id/fragmentRegistroForm"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentRegistroForm"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

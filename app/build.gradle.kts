@@ -101,6 +101,9 @@ dependencies {
     // ML Kit — Escaneo QR
     implementation(libs.mlkit.barcode)
 
+
+    implementation(libs.lottie)
+
     implementation(libs.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
