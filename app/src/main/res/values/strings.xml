@@ -242,4 +242,63 @@
     <string name="hint_mensaje_chat">Escribe un mensaje…</string>
     <string name="desc_btn_adjuntar">Adjuntar archivo</string>
     <string name="desc_btn_enviar">Enviar mensaje</string>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Docente — Tareas (Plan 4)
+         ════════════════════════════════════════════════════════════ -->
+    <!-- Subtítulos / títulos -->
+    <string name="subtitle_docente_tareas">Selecciona un grupo</string>
+    <string name="title_bloques">Bloques</string>
+    <string name="title_tareas_bloque">Tareas del bloque</string>
+    <string name="title_entregas">Entregas</string>
+
+    <!-- Botones -->
+    <string name="btn_crear_tarea">Nueva tarea</string>
+    <string name="btn_actualizar_calificacion">Actualizar calificación</string>
+
+    <!-- Hints de inputs -->
+    <string name="hint_descripcion_tarea">Descripción</string>
+
+    <!-- Tipos de tarea -->
+    <string name="label_tipo_tarea">TAREA</string>
+    <string name="label_tipo_trabajo">TRABAJO</string>
+    <string name="label_tipo_examen">EXAMEN</string>
+    <string name="label_tipo_proyecto">PROYECTO</string>
+
+    <!-- Estados de entrega -->
+    <string name="label_estado_borrador">BORRADOR</string>
+    <string name="label_estado_entregada">ENTREGADA</string>
+    <string name="label_estado_calificada">CALIFICADA</string>
+    <string name="label_estado_sin_entregar">SIN ENTREGAR</string>
+
+    <!-- Etiquetas varias -->
+    <string name="label_progreso_entregas">Progreso de entregas</string>
+    <string name="label_total_alumnos">Total</string>
+    <string name="label_entregadas">Entregadas</string>
+    <string name="label_pendientes">Pendientes</string>
+
+    <!-- Chips de tipo -->
+    <string name="chip_tipo_todas">Todas</string>
+    <string name="chip_tipo_tarea">Tarea</string>
+    <string name="chip_tipo_trabajo">Trabajo</string>
+    <string name="chip_tipo_examen">Examen</string>
+    <string name="chip_tipo_proyecto">Proyecto</string>
+
+    <!-- Chips de estado de tarea -->
+    <string name="chip_estado_todas">Todas</string>
+    <string name="chip_estado_en_curso">En curso</string>
+    <string name="chip_estado_vencida">Vencida</string>
+    <string name="chip_estado_completada">Completada</string>
+
+    <!-- Chips de filtro de entregas -->
+    <string name="chip_entregas_todas">Todas</string>
+    <string name="chip_entregas_pendientes">Pendientes</string>
+    <string name="chip_entregas_entregadas">Entregadas</string>
+    <string name="chip_entregas_calificadas">Calificadas</string>
+    <string name="chip_entregas_sin_entregar">Sin entregar</string>
+
+    <!-- Sufijos / formatos -->
+    <string name="tareas_sufijo_entregas">%1$d/%2$d entregas</string>
+    <string name="bloque_sufijo_tareas">%1$d tareas</string>
+    <string name="bloque_nombre_formato">Bloque %1$d</string>
 </resources>
