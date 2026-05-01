@@ -8,15 +8,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Entrega;
 import com.conectatec.databinding.FragmentDocenteEntregasBinding;
 import com.conectatec.ui.common.ScrollRevealAnimator;
+import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.tareas.adapter.EntregaDocenteAdapter;
-import com.conectatec.ui.docente.tareas.adapter.TareaDocenteAdapter;
-import com.conectatec.ui.docente.tareas.adapter.TareaDocenteAdapter.TareaDummyDocente;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -26,6 +30,7 @@ public class DocenteEntregasFragment extends Fragment {
     private FragmentDocenteEntregasBinding binding;
     private EntregaDocenteAdapter adapter;
     private ScrollRevealAnimator scrollRevealAnimator;
+    private DocenteEntregasViewModel viewModel;
     private int tareaId;
 
     @Nullable
@@ -42,17 +47,16 @@ public class DocenteEntregasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         tareaId = getArguments() != null ? getArguments().getInt("tareaId", 1) : 1;
 
-        TareaDummyDocente t = TareaDocenteAdapter.buscarPorId(tareaId);
-        binding.tvSubtituloEntregas.setText(t != null ? t.titulo : "Tarea");
-
         binding.btnVolverEntregas.setOnClickListener(v ->
                 requireActivity().onBackPressed());
 
         setupRecyclerView();
         scrollRevealAnimator = new ScrollRevealAnimator(binding.rvEntregas);
         setupChips();
-        actualizarResumen();
-        scrollRevealAnimator.triggerInicial();
+
+        viewModel = new ViewModelProvider(this).get(DocenteEntregasViewModel.class);
+        observeViewModel();
+        viewModel.cargarEntregas(tareaId);
     }
 
     private void setupRecyclerView() {
@@ -66,28 +70,46 @@ public class DocenteEntregasFragment extends Fragment {
         });
         binding.rvEntregas.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvEntregas.setAdapter(adapter);
-        adapter.cargarParaTarea(tareaId);
+    }
+
+    private void observeViewModel() {
+        viewModel.getTituloTarea().observe(getViewLifecycleOwner(), titulo ->
+                binding.tvSubtituloEntregas.setText(titulo));
+
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarEntregas.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                List<Entrega> entregas = ((UiState.Success<List<Entrega>>) state).data;
+                adapter.setListaCompleta(entregas);
+                actualizarResumen();
+                scrollRevealAnimator.triggerInicial();
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupChips() {
         binding.chipGroupEntregas.setOnCheckedStateChangeListener((group, checkedIds) -> {
             if (checkedIds.isEmpty()) return;
             int id = checkedIds.get(0);
-            if      (id == R.id.chipEntregasTodas)        adapter.filtrar(null);
-            else if (id == R.id.chipEntregasEntregadas)   adapter.filtrar(EntregaDocenteAdapter.ESTADO_ENTREGADA);
-            else if (id == R.id.chipEntregasCalificadas)  adapter.filtrar(EntregaDocenteAdapter.ESTADO_CALIFICADA);
-            else if (id == R.id.chipEntregasPendientes)   adapter.filtrar(EntregaDocenteAdapter.ESTADO_BORRADOR);
-            else if (id == R.id.chipEntregasSinEntregar)  adapter.filtrar(EntregaDocenteAdapter.ESTADO_SIN_ENTREGAR);
+            if      (id == R.id.chipEntregasTodas)       adapter.filtrar(null);
+            else if (id == R.id.chipEntregasEntregadas)  adapter.filtrar(Entrega.ESTADO_ENTREGADA);
+            else if (id == R.id.chipEntregasCalificadas) adapter.filtrar(Entrega.ESTADO_CALIFICADA);
+            else if (id == R.id.chipEntregasPendientes)  adapter.filtrar(Entrega.ESTADO_BORRADOR);
+            else if (id == R.id.chipEntregasSinEntregar) adapter.filtrar(Entrega.ESTADO_SIN_ENTREGAR);
             actualizarVista();
             scrollRevealAnimator.triggerInicial();
         });
     }
 
     private void actualizarResumen() {
-        int total = adapter.conteoTotal();
+        int total      = adapter.conteoTotal();
         int entregadas = adapter.conteoEntregadas();
         int pendientes = adapter.conteoPendientes();
-        int progreso = total > 0 ? (int) (entregadas * 100f / total) : 0;
+        int progreso   = total > 0 ? (int) (entregadas * 100f / total) : 0;
 
         binding.tvStatTotalEntregas.setText(String.valueOf(total));
         binding.tvStatEntregadasEntregas.setText(String.valueOf(entregadas));
@@ -99,7 +121,7 @@ public class DocenteEntregasFragment extends Fragment {
 
     private void actualizarVista() {
         int filtradas = adapter.conteo();
-        int total = adapter.conteoTotal();
+        int total     = adapter.conteoTotal();
 
         boolean vacio = filtradas == 0;
         binding.rvEntregas.setVisibility(vacio ? View.GONE : View.VISIBLE);

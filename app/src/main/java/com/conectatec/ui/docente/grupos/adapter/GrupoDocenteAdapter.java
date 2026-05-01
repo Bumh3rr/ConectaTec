@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.conectatec.data.model.Grupo;
 import com.conectatec.databinding.ItemGrupoDocenteBinding;
 
 import java.util.ArrayList;
@@ -14,60 +15,31 @@ import java.util.List;
 public class GrupoDocenteAdapter
         extends RecyclerView.Adapter<GrupoDocenteAdapter.ViewHolder> {
 
-    // ── Modelo dummy ──────────────────────────────────────────────
-    public static class GrupoDummyDocente {
-        public final int id;
-        public final String nombre;
-        public final String materia;
-        public final int totalAlumnos;
-        public final String fechaCreacion;
-        public final String codigoUnion;
-        public final boolean activo;
-
-        public GrupoDummyDocente(int id, String nombre, String materia,
-                                 int totalAlumnos, String fechaCreacion,
-                                 String codigoUnion, boolean activo) {
-            this.id = id;
-            this.nombre = nombre;
-            this.materia = materia;
-            this.totalAlumnos = totalAlumnos;
-            this.fechaCreacion = fechaCreacion;
-            this.codigoUnion = codigoUnion;
-            this.activo = activo;
-        }
-    }
-
-    public static List<GrupoDummyDocente> cargarDatosDummy() {
-        List<GrupoDummyDocente> lista = new ArrayList<>();
-        lista.add(new GrupoDummyDocente(1, "Programación Móvil 6A", "Programación Móvil",
-                18, "01/02/2026", "TC-9X4P", true));
-        lista.add(new GrupoDummyDocente(2, "Bases de Datos 4B", "Bases de Datos",
-                16, "15/01/2026", "TC-K3M2", true));
-        lista.add(new GrupoDummyDocente(3, "Cálculo Integral 2A", "Cálculo Integral",
-                13, "20/01/2026", "TC-7Z8R", true));
-        return lista;
-    }
-
-    // ── Listener ──────────────────────────────────────────────────
     public interface OnGrupoClickListener {
-        void onGrupoClick(GrupoDummyDocente grupo);
+        void onGrupoClick(Grupo grupo);
     }
 
-    // ── Adapter ───────────────────────────────────────────────────
-    private final List<GrupoDummyDocente> listaOriginal;
-    private List<GrupoDummyDocente> listaFiltrada;
+    private final List<Grupo> listaOriginal;
+    private List<Grupo> listaFiltrada;
     private final OnGrupoClickListener listener;
 
-    public GrupoDocenteAdapter(List<GrupoDummyDocente> lista, OnGrupoClickListener listener) {
+    public GrupoDocenteAdapter(List<Grupo> lista, OnGrupoClickListener listener) {
         this.listaOriginal = new ArrayList<>(lista);
         this.listaFiltrada = new ArrayList<>(lista);
         this.listener = listener;
     }
 
+    public void setLista(List<Grupo> lista) {
+        listaOriginal.clear();
+        listaOriginal.addAll(lista);
+        listaFiltrada = new ArrayList<>(lista);
+        notifyDataSetChanged();
+    }
+
     public void filtrar(String query) {
         listaFiltrada = new ArrayList<>();
         String q = query.toLowerCase().trim();
-        for (GrupoDummyDocente g : listaOriginal) {
+        for (Grupo g : listaOriginal) {
             if (g.nombre.toLowerCase().contains(q) || g.materia.toLowerCase().contains(q)) {
                 listaFiltrada.add(g);
             }
@@ -89,7 +61,7 @@ public class GrupoDocenteAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
-        GrupoDummyDocente grupo = listaFiltrada.get(position);
+        Grupo grupo = listaFiltrada.get(position);
         h.binding.tvInicialGrupoDocente.setText(extraerIniciales(grupo.nombre));
         h.binding.tvNombreGrupoDocente.setText(grupo.nombre);
         h.binding.tvMateriaGrupoDocente.setText(grupo.materia);

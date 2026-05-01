@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,9 +71,43 @@ public class DocenteCrearTareaFragment extends Fragment {
         grupoId  = getArguments() != null ? getArguments().getInt("grupoId",  1) : 1;
         bloqueId = getArguments() != null ? getArguments().getInt("bloqueId", 1) : 1;
 
+        setupLivePreview();
+        setupListeners();
+    }
+
+    private void setupLivePreview() {
+        binding.etTituloTareaNueva.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(Editable s) { actualizarPreview(); }
+        });
+
+        binding.chipGroupTipoTarea.setOnCheckedStateChangeListener(
+                (group, checkedIds) -> actualizarPreview());
+    }
+
+    private void actualizarPreview() {
+        String titulo = getText(binding.etTituloTareaNueva);
+        String fecha  = getText(binding.etFechaLimiteTareaNueva);
+        String tipo   = obtenerTipoSeleccionado();
+
+        binding.tvPreviewTituloTarea.setText(titulo.isEmpty() ? "Título de la tarea" : titulo);
+        binding.tvPreviewFechaTarea.setText(fecha.isEmpty() ? "Sin fecha definida" : "Vence: " + fecha);
+        binding.tvPreviewTipoTarea.setText(tipo);
+
+        int bgRes;
+        switch (tipo) {
+            case "TRABAJO":  bgRes = R.drawable.bg_chip_pendiente;   break;
+            case "EXAMEN":   bgRes = R.drawable.bg_chip_admin;       break;
+            case "PROYECTO": bgRes = R.drawable.bg_chip_estudiante;  break;
+            default:         bgRes = R.drawable.bg_chip_docente;     break;
+        }
+        binding.tvPreviewTipoTarea.setBackgroundResource(bgRes);
+    }
+
+    private void setupListeners() {
         binding.btnVolverCrearTarea.setOnClickListener(v -> requireActivity().onBackPressed());
-        binding.etFechaLimiteTareaNueva.setOnClickListener(v -> abrirDatePicker());
-        binding.tilFechaLimiteTareaNueva.setEndIconOnClickListener(v -> abrirDatePicker());
+        binding.rowFechaLimiteTarea.setOnClickListener(v -> abrirDatePicker());
         binding.zonaSubirArchivo.setOnClickListener(v ->
                 pickerLauncher.launch(new String[]{"*/*"}));
         binding.btnPublicarTarea.setOnClickListener(v -> onPublicarClicked());
@@ -84,6 +120,7 @@ public class DocenteCrearTareaFragment extends Fragment {
                     String fecha = String.format(Locale.getDefault(),
                             "%02d/%02d/%04d", day, month + 1, year);
                     binding.etFechaLimiteTareaNueva.setText(fecha);
+                    actualizarPreview();
                 },
                 c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
                 .show();
@@ -106,11 +143,7 @@ public class DocenteCrearTareaFragment extends Fragment {
 
             item.tvNombreArchivo.setText(resolverNombre(uri));
             item.tvTamanioArchivo.setText(resolverTamanio(uri));
-
-            // Tap en la tarjeta → abrir el archivo
             item.getRoot().setOnClickListener(v -> abrirArchivo(uri));
-
-            // Tap en X → eliminar
             item.btnEliminarArchivo.setOnClickListener(v -> {
                 archivosAdjuntos.remove(uri);
                 renderArchivos();
@@ -142,10 +175,10 @@ public class DocenteCrearTareaFragment extends Fragment {
             }
         } catch (Exception ignored) {}
 
-        if (bytes < 0)              return "· toca para abrir";
-        if (bytes < 1_024)          return bytes + " B · toca para abrir";
-        if (bytes < 1_048_576)      return String.format(Locale.getDefault(), "%.0f KB · toca para abrir", bytes / 1_024.0);
-        return                             String.format(Locale.getDefault(), "%.1f MB · toca para abrir", bytes / 1_048_576.0);
+        if (bytes < 0)         return "· toca para abrir";
+        if (bytes < 1_024)     return bytes + " B · toca para abrir";
+        if (bytes < 1_048_576) return String.format(Locale.getDefault(), "%.0f KB · toca para abrir", bytes / 1_024.0);
+        return                        String.format(Locale.getDefault(), "%.1f MB · toca para abrir", bytes / 1_048_576.0);
     }
 
     private void abrirArchivo(Uri uri) {
@@ -171,28 +204,32 @@ public class DocenteCrearTareaFragment extends Fragment {
     }
 
     private void onPublicarClicked() {
-        String titulo = binding.etTituloTareaNueva.getText() != null
-                ? binding.etTituloTareaNueva.getText().toString().trim() : "";
-        String fecha  = binding.etFechaLimiteTareaNueva.getText() != null
-                ? binding.etFechaLimiteTareaNueva.getText().toString().trim() : "";
+        String titulo = getText(binding.etTituloTareaNueva);
+        String fecha  = getText(binding.etFechaLimiteTareaNueva);
 
         if (titulo.isEmpty()) {
-            binding.tilTituloTareaNueva.setError("Requerido");
+            binding.etTituloTareaNueva.setError("Requerido");
+            binding.etTituloTareaNueva.requestFocus();
             return;
         }
         if (fecha.isEmpty()) {
-            binding.tilFechaLimiteTareaNueva.setError("Selecciona una fecha límite");
+            binding.etFechaLimiteTareaNueva.setError("Selecciona una fecha límite");
+            binding.rowFechaLimiteTarea.requestFocus();
             return;
         }
-        binding.tilTituloTareaNueva.setError(null);
-        binding.tilFechaLimiteTareaNueva.setError(null);
+        binding.etTituloTareaNueva.setError(null);
+        binding.etFechaLimiteTareaNueva.setError(null);
 
         String tipo = obtenerTipoSeleccionado();
         // TODO: llamar a TareaService.crearTarea(grupoId, bloqueId, titulo, tipo, fecha, archivosAdjuntos)
-        //       luego NotificacionService.enviar(tipo=1)
 
-        Snackbar.make(binding.getRoot(), "Tarea creada", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.getRoot(), "Tarea publicada", Snackbar.LENGTH_SHORT).show();
         Navigation.findNavController(requireView()).popBackStack();
+    }
+
+    private String getText(com.google.android.material.textfield.TextInputEditText et) {
+        CharSequence cs = et.getText();
+        return cs != null ? cs.toString().trim() : "";
     }
 
     @Override

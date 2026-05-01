@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Entrega;
 import com.conectatec.databinding.ItemEntregaDocenteBinding;
 import com.google.android.material.card.MaterialCardView;
 
@@ -20,36 +21,12 @@ import java.util.List;
 public class EntregaDocenteAdapter
         extends RecyclerView.Adapter<EntregaDocenteAdapter.ViewHolder> {
 
-    public static final int ESTADO_BORRADOR     = 0;
-    public static final int ESTADO_ENTREGADA    = 1;
-    public static final int ESTADO_CALIFICADA   = 2;
-    public static final int ESTADO_SIN_ENTREGAR = 3;
-
-    public static class EntregaDummyDocente {
-        public final int alumnoId;
-        public final String alumnoNombre;
-        public final String alumnoIniciales;
-        public final int estado;
-        public final String fechaEntrega;
-        public final Integer calificacion;
-
-        public EntregaDummyDocente(int alumnoId, String alumnoNombre, String alumnoIniciales,
-                                   int estado, String fechaEntrega, Integer calificacion) {
-            this.alumnoId = alumnoId;
-            this.alumnoNombre = alumnoNombre;
-            this.alumnoIniciales = alumnoIniciales;
-            this.estado = estado;
-            this.fechaEntrega = fechaEntrega;
-            this.calificacion = calificacion;
-        }
-    }
-
     public interface OnEntregaClickListener {
-        void onClick(EntregaDummyDocente entrega);
+        void onClick(Entrega entrega);
     }
 
-    private final List<EntregaDummyDocente> lista = new ArrayList<>();
-    private final List<EntregaDummyDocente> listaCompleta = new ArrayList<>();
+    private final List<Entrega> lista         = new ArrayList<>();
+    private final List<Entrega> listaCompleta = new ArrayList<>();
     private OnEntregaClickListener listener;
     private Integer filtroEstado = null;
 
@@ -64,8 +41,8 @@ public class EntregaDocenteAdapter
 
     public int conteoEntregadas() {
         int c = 0;
-        for (EntregaDummyDocente e : listaCompleta) {
-            if (e.estado == ESTADO_ENTREGADA || e.estado == ESTADO_CALIFICADA) c++;
+        for (Entrega e : listaCompleta) {
+            if (e.estado == Entrega.ESTADO_ENTREGADA || e.estado == Entrega.ESTADO_CALIFICADA) c++;
         }
         return c;
     }
@@ -74,36 +51,9 @@ public class EntregaDocenteAdapter
         return conteoTotal() - conteoEntregadas();
     }
 
-    public void cargarParaTarea(int tareaId) {
+    public void setListaCompleta(List<Entrega> entregas) {
         listaCompleta.clear();
-
-        TareaDocenteAdapter.TareaDummyDocente t =
-                TareaDocenteAdapter.buscarPorId(tareaId);
-        int grupoId = (t != null) ? t.grupoId : 1;
-
-        String[] nombres = nombresParaGrupo(grupoId);
-        String[] iniciales = inicialesParaGrupo(grupoId);
-        int baseId = grupoId * 100;
-
-        int[] estados = {
-                ESTADO_ENTREGADA, ESTADO_ENTREGADA,
-                ESTADO_CALIFICADA, ESTADO_CALIFICADA,
-                ESTADO_BORRADOR, ESTADO_SIN_ENTREGAR
-        };
-        String[] fechas = {
-                "05/05/2026", "06/05/2026",
-                "03/05/2026", "04/05/2026",
-                "—", null
-        };
-        Integer[] notas = { null, null, 92, 78, null, null };
-
-        for (int i = 0; i < 6; i++) {
-            listaCompleta.add(new EntregaDummyDocente(
-                    baseId + (i + 1),
-                    nombres[i], iniciales[i],
-                    estados[i], fechas[i], notas[i]));
-        }
-
+        listaCompleta.addAll(entregas);
         aplicarFiltros();
     }
 
@@ -114,51 +64,12 @@ public class EntregaDocenteAdapter
 
     private void aplicarFiltros() {
         lista.clear();
-        for (EntregaDummyDocente e : listaCompleta) {
+        for (Entrega e : listaCompleta) {
             if (filtroEstado == null || filtroEstado == e.estado) {
                 lista.add(e);
             }
         }
         notifyDataSetChanged();
-    }
-
-    public static List<EntregaDummyDocente> obtenerListaActual(EntregaDocenteAdapter a) {
-        return new ArrayList<>(a.listaCompleta);
-    }
-
-    private static String[] nombresParaGrupo(int grupoId) {
-        switch (grupoId) {
-            case 1: return new String[]{
-                    "Ana López", "Bruno García", "Carla Méndez",
-                    "Diego Ruiz", "Elena Torres", "Fernando Vega" };
-            case 2: return new String[]{
-                    "Gabriela Luna", "Héctor Pérez", "Isabel Romero",
-                    "Javier Castro", "Karla Soto", "Luis Mendoza" };
-            case 3: return new String[]{
-                    "María Reyes", "Néstor Aguilar", "Olivia Cano",
-                    "Pablo Núñez", "Quetzal Ríos", "Rocío Salinas" };
-            default: return new String[]{
-                    "Alumno 1", "Alumno 2", "Alumno 3",
-                    "Alumno 4", "Alumno 5", "Alumno 6" };
-        }
-    }
-
-    private static String[] inicialesParaGrupo(int grupoId) {
-        String[] nombres = nombresParaGrupo(grupoId);
-        String[] inis = new String[nombres.length];
-        for (int i = 0; i < nombres.length; i++) {
-            inis[i] = calcularIniciales(nombres[i]);
-        }
-        return inis;
-    }
-
-    private static String calcularIniciales(String nombre) {
-        String[] partes = nombre.split(" ");
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < Math.min(2, partes.length); i++) {
-            if (!partes[i].isEmpty()) sb.append(partes[i].charAt(0));
-        }
-        return sb.toString().toUpperCase();
     }
 
     @NonNull
@@ -170,7 +81,7 @@ public class EntregaDocenteAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
-        EntregaDummyDocente e = lista.get(position);
+        Entrega e = lista.get(position);
         h.bind(e);
         h.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onClick(e);
@@ -188,7 +99,7 @@ public class EntregaDocenteAdapter
             this.b = binding;
         }
 
-        void bind(EntregaDummyDocente e) {
+        void bind(Entrega e) {
             b.tvInicialesEntrega.setText(e.alumnoIniciales);
             b.tvNombreEntrega.setText(e.alumnoNombre);
 
@@ -198,19 +109,19 @@ public class EntregaDocenteAdapter
             int strokeColorRes;
 
             switch (e.estado) {
-                case ESTADO_ENTREGADA:
+                case Entrega.ESTADO_ENTREGADA:
                     chipDrawable = R.drawable.bg_chip_estudiante;
                     chipLabel = "ENTREGADA";
                     fechaTxt = "Entregada: " + (e.fechaEntrega != null ? e.fechaEntrega : "—");
                     strokeColorRes = R.color.colorChipEstudiante;
                     break;
-                case ESTADO_CALIFICADA:
+                case Entrega.ESTADO_CALIFICADA:
                     chipDrawable = R.drawable.bg_chip_docente;
                     chipLabel = "CALIFICADA";
                     fechaTxt = "Entregada: " + (e.fechaEntrega != null ? e.fechaEntrega : "—");
                     strokeColorRes = R.color.colorPrimary;
                     break;
-                case ESTADO_BORRADOR:
+                case Entrega.ESTADO_BORRADOR:
                     chipDrawable = R.drawable.bg_chip_pendiente;
                     chipLabel = "BORRADOR";
                     fechaTxt = "Sin envío";

@@ -1,42 +1,43 @@
 package com.conectatec.ui.docente.chat;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.conectatec.data.model.Mensaje;
 import com.conectatec.databinding.FragmentDocenteConversacionBinding;
+import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.chat.adapter.MensajeDocenteAdapter;
-import com.conectatec.ui.docente.chat.adapter.MensajeDocenteAdapter.MensajeDummyDocente;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/**
- * Conversación de una sala de chat del docente.
- *
- * Muestra:
- *  - Header con nombre de sala y (para grupos) cantidad de miembros.
- *  - RecyclerView con mensajes dummy en dos viewTypes (enviado/recibido).
- *  - Barra inferior: botón adjuntar + campo de texto + botón enviar.
- */
 @AndroidEntryPoint
 public class DocenteConversacionFragment extends Fragment {
 
     private FragmentDocenteConversacionBinding binding;
     private MensajeDocenteAdapter adapter;
+    private DocenteConversacionViewModel viewModel;
     private int salaId;
+    private ViewTreeObserver.OnGlobalLayoutListener keyboardListener;
 
     @Nullable
     @Override
@@ -54,6 +55,11 @@ public class DocenteConversacionFragment extends Fragment {
         renderHeader();
         setupRecyclerView();
         setupListeners();
+
+        viewModel = new ViewModelProvider(this).get(DocenteConversacionViewModel.class);
+        observeViewModel();
+        viewModel.cargarMensajes(salaId);
+        setupKeyboardListener();
     }
 
     private void renderHeader() {
@@ -80,17 +86,29 @@ public class DocenteConversacionFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        List<MensajeDummyDocente> mensajes = MensajeDocenteAdapter.cargarParaSala(salaId);
-        adapter = new MensajeDocenteAdapter(mensajes);
-
+        adapter = new MensajeDocenteAdapter(new ArrayList<>());
         LinearLayoutManager lm = new LinearLayoutManager(requireContext());
         lm.setStackFromEnd(true);
         binding.rvMensajesChat.setLayoutManager(lm);
         binding.rvMensajesChat.setAdapter(adapter);
+    }
 
-        if (adapter.getItemCount() > 0) {
-            binding.rvMensajesChat.scrollToPosition(adapter.getItemCount() - 1);
-        }
+    private void observeViewModel() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarMensajes.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                List<Mensaje> mensajes = ((UiState.Success<List<Mensaje>>) state).data;
+                adapter = new MensajeDocenteAdapter(mensajes);
+                binding.rvMensajesChat.setAdapter(adapter);
+                if (adapter.getItemCount() > 0) {
+                    binding.rvMensajesChat.scrollToPosition(adapter.getItemCount() - 1);
+                }
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupListeners() {
@@ -109,8 +127,7 @@ public class DocenteConversacionFragment extends Fragment {
 
         String hora = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         int nuevoId = adapter.getItemCount() + 1;
-        MensajeDummyDocente nuevo = new MensajeDummyDocente(
-                nuevoId, texto, hora, true, "Yo", "CB", false);
+        Mensaje nuevo = new Mensaje(nuevoId, texto, hora, true, "Yo", "CB", false);
 
         adapter.agregarMensaje(nuevo);
         binding.rvMensajesChat.smoothScrollToPosition(adapter.getItemCount() - 1);
@@ -121,8 +138,43 @@ public class DocenteConversacionFragment extends Fragment {
         // TODO: llamar a ArchivoService.adjuntar()
     }
 
+    private void setupKeyboardListener() {
+        keyboardListener = () -> {
+            if (binding == null) return;
+            Rect visibleFrame = new Rect();
+            View decorView = requireActivity().getWindow().getDecorView();
+            decorView.getWindowVisibleDisplayFrame(visibleFrame);
+            int screenHeight = decorView.getHeight();
+            int keyboardHeight = screenHeight - visibleFrame.bottom;
+
+            ConstraintLayout.LayoutParams rvParams =
+                    (ConstraintLayout.LayoutParams) binding.rvMensajesChat.getLayoutParams();
+
+            if (keyboardHeight > screenHeight * 0.15f) {
+                binding.barraInferiorChat.setTranslationY(-keyboardHeight);
+                rvParams.bottomMargin = keyboardHeight;
+                binding.rvMensajesChat.setLayoutParams(rvParams);
+                if (adapter != null && adapter.getItemCount() > 0) {
+                    binding.rvMensajesChat.post(() -> {
+                        if (binding != null)
+                            binding.rvMensajesChat.scrollToPosition(adapter.getItemCount() - 1);
+                    });
+                }
+            } else {
+                binding.barraInferiorChat.setTranslationY(0);
+                rvParams.bottomMargin = 0;
+                binding.rvMensajesChat.setLayoutParams(rvParams);
+            }
+        };
+        binding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(keyboardListener);
+    }
+
     @Override
     public void onDestroyView() {
+        if (keyboardListener != null) {
+            binding.getRoot().getViewTreeObserver().removeOnGlobalLayoutListener(keyboardListener);
+            keyboardListener = null;
+        }
         super.onDestroyView();
         binding = null;
     }

@@ -78,6 +78,7 @@
 
             <!-- ══ CARD HERO ════════════════════════════════════════════ -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardHeroPerfilDocente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -152,6 +153,7 @@
 
             <!-- ══ CARD INFORMACIÓN DE CUENTA ═══════════════════════════ -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardInfoCuentaDocente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -291,6 +293,7 @@
 
             <!-- ══ CARD CONFIGURACIÓN ══════════════════════════════════ -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardConfigDocente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"

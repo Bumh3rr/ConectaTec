@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Nueva Tarea — Docente -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,53 +8,53 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
-    <!-- ══ HEADER ════════════════════════════════════════════════════ -->
+    <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="@color/colorSurface"
-        android:paddingTop="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingBottom="16dp"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="48dp">
 
         <ImageView
             android:id="@+id/btnVolverCrearTarea"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_arrow_left"
-            android:contentDescription="Volver"
-            android:padding="6dp"
-            android:clickable="true"
-            android:focusable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Volver"
+            android:focusable="true"
+            android:padding="6dp"
+            android:src="@drawable/ic_arrow_left"
             app:tint="@color/colorOnSurface" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:letterSpacing="0.18"
                 android:text="@string/app_name"
                 android:textColor="@color/colorPrimary"
                 android:textSize="9sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.18" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
                 android:text="@string/title_nueva_tarea"
                 android:textColor="@color/colorOnSurface"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -64,393 +65,399 @@
         android:layout_height="3dp"
         android:background="@color/colorPrimary" />
 
+    <!-- ══ CONTENIDO SCROLLABLE ═════════════════════════════════════════ -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="120dp">
+            android:padding="20dp">
 
-            <!-- ══ CARD INFORMACIÓN ═══════════════════════════════════ -->
+            <!-- Vista previa de la tarea -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPreviewTarea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="@color/colorSurface"
-                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="24dp">
+
+                    <ImageView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="16dp"
+                        android:alpha="0.85"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_assignment"
+                        app:tint="@color/white" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="14dp">
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/ic_clipboard"
-                            android:contentDescription="@null"
-                            app:tint="@color/colorPrimary" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="INFORMACIÓN"
-                            android:textColor="@color/colorOnSurfaceVariant"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.08" />
+                            android:alpha="0.7"
+                            android:letterSpacing="0.1"
+                            android:text="VISTA PREVIA"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPreviewTituloTarea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Título de la tarea"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvPreviewTipoTarea"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_chip_docente"
+                                android:letterSpacing="0.04"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="3dp"
+                                android:text="TAREA"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvPreviewFechaTarea"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:alpha="0.7"
+                                android:text="Sin fecha definida"
+                                android:textColor="@color/white"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorDivider"
-                        android:layout_marginBottom="16dp" />
-
-                    <!-- Título -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilTituloTareaNueva"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="@string/hint_titulo_tarea"
-                        app:boxBackgroundColor="@color/colorSurface"
-                        app:boxCornerRadiusTopStart="10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:boxCornerRadiusBottomStart="10dp"
-                        app:boxCornerRadiusBottomEnd="10dp"
-                        app:boxStrokeColor="@color/colorBorder"
-                        app:hintTextColor="@color/colorOnSurfaceVariant">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etTituloTareaNueva"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textCapSentences"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="14sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Descripción -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilDescripcionTareaNueva"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_descripcion_tarea"
-                        app:boxBackgroundColor="@color/colorSurface"
-                        app:boxCornerRadiusTopStart="10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:boxCornerRadiusBottomStart="10dp"
-                        app:boxCornerRadiusBottomEnd="10dp"
-                        app:boxStrokeColor="@color/colorBorder"
-                        app:hintTextColor="@color/colorOnSurfaceVariant">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etDescripcionTareaNueva"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine|textCapSentences"
-                            android:minLines="3"
-                            android:gravity="top|start"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="14sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- ══ CARD CONFIGURACIÓN ═════════════════════════════════ -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- ── TÍTULO ─────────────────────────────────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:letterSpacing="0.06"
+                android:text="TÍTULO *"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTituloTareaNueva"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="@color/colorSurface"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+                android:background="@drawable/bg_input"
+                android:hint="@string/hint_titulo_tarea"
+                android:inputType="textCapSentences"
+                android:maxLines="1"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp"
+                android:textColor="@color/colorOnSurface"
+                android:textColorHint="@color/colorOnSurfaceVariant"
+                android:textSize="15sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <!-- ── DESCRIPCIÓN ────────────────────────────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.06"
+                android:text="DESCRIPCIÓN"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescripcionTareaNueva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:gravity="top|start"
+                android:hint="@string/hint_descripcion_tarea"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="5"
+                android:minLines="3"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textColor="@color/colorOnSurface"
+                android:textColorHint="@color/colorOnSurfaceVariant"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Opcional · Visible para los alumnos"
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="11sp" />
+
+            <!-- ── TIPO DE ACTIVIDAD ──────────────────────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.06"
+                android:text="@string/label_tipo_tarea"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupTipoTarea"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="14dp">
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/ic_info"
-                            android:contentDescription="@null"
-                            app:tint="@color/colorPrimary" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="CONFIGURACIÓN"
-                            android:textColor="@color/colorOnSurfaceVariant"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.08" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorDivider"
-                        android:layout_marginBottom="16dp" />
-
-                    <!-- Tipo de tarea — chips de selección -->
-                    <TextView
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTipoTarea"
+                        style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/label_tipo_tarea"
-                        android:textColor="@color/colorOnSurfaceVariant"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.04" />
+                        android:checked="true"
+                        android:text="Tarea" />
 
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTipoTrabajo"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:scrollbars="none">
+                        android:text="Trabajo" />
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chipGroupTipoTarea"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:singleSelection="true"
-                            app:selectionRequired="true">
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipTipoTarea"
-                                style="@style/Widget.Material3.Chip.Filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tarea"
-                                android:checked="true" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipTipoTrabajo"
-                                style="@style/Widget.Material3.Chip.Filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Trabajo" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipTipoExamen"
-                                style="@style/Widget.Material3.Chip.Filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Examen" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chipTipoProyecto"
-                                style="@style/Widget.Material3.Chip.Filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Proyecto" />
-
-                        </com.google.android.material.chip.ChipGroup>
-
-                    </HorizontalScrollView>
-
-                    <!-- Fecha límite -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilFechaLimiteTareaNueva"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTipoExamen"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="@string/hint_fecha_limite"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/ic_assignment"
-                        app:endIconTint="@color/colorOnSurfaceVariant"
-                        app:boxBackgroundColor="@color/colorSurface"
-                        app:boxCornerRadiusTopStart="10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:boxCornerRadiusBottomStart="10dp"
-                        app:boxCornerRadiusBottomEnd="10dp"
-                        app:boxStrokeColor="@color/colorBorder"
-                        app:hintTextColor="@color/colorOnSurfaceVariant">
+                        android:text="Examen" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etFechaLimiteTareaNueva"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:clickable="true"
-                            android:inputType="none"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="14sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Calificación máxima -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilCalificacionMaxTareaNueva"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipTipoProyecto"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/hint_calificacion_max"
-                        app:boxBackgroundColor="@color/colorSurface"
-                        app:boxCornerRadiusTopStart="10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:boxCornerRadiusBottomStart="10dp"
-                        app:boxCornerRadiusBottomEnd="10dp"
-                        app:boxStrokeColor="@color/colorBorder"
-                        app:hintTextColor="@color/colorOnSurfaceVariant">
+                        android:text="Proyecto" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etCalificacionMaxTareaNueva"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:text="100"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="14sp" />
+                </com.google.android.material.chip.ChipGroup>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+            </HorizontalScrollView>
 
-                </LinearLayout>
+            <!-- ── FECHA LÍMITE ───────────────────────────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.06"
+                android:text="FECHA LÍMITE *"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
 
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- ══ CARD ARCHIVOS ADJUNTOS ═════════════════════════════ -->
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
+                android:id="@+id/rowFechaLimiteTarea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="@color/colorSurface"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+                android:background="@drawable/bg_input"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFechaLimiteTareaNueva"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:hint="@string/hint_fecha_limite"
+                    android:inputType="none"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/colorOnSurface"
+                    android:textColorHint="@color/colorOnSurfaceVariant"
+                    android:textSize="15sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="14dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_assignment"
+                    app:tint="@color/colorOnSurfaceVariant" />
 
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/ic_paperclip"
-                            android:contentDescription="@null"
-                            app:tint="@color/colorPrimary" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/label_archivo_adjunto"
-                            android:textColor="@color/colorOnSurfaceVariant"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:letterSpacing="0.08" />
+            <!-- ── CALIFICACIÓN MÁXIMA ────────────────────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.06"
+                android:text="@string/hint_calificacion_max"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
 
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorDivider"
-                        android:layout_marginBottom="16dp" />
-
-                    <!-- Zona de subida -->
-                    <LinearLayout
-                        android:id="@+id/zonaSubirArchivo"
-                        android:layout_width="match_parent"
-                        android:layout_height="88dp"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:background="@drawable/bg_upload_zone"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:src="@drawable/ic_upload"
-                            android:layout_marginBottom="6dp"
-                            app:tint="@color/colorOnSurfaceVariant"
-                            android:contentDescription="@null" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/btn_subir_archivo"
-                            android:textColor="@color/colorOnSurfaceVariant"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <!-- Lista de archivos adjuntados -->
-                    <LinearLayout
-                        android:id="@+id/containerArchivosAdjuntos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="12dp"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- ══ BOTÓN PUBLICAR ═════════════════════════════════════ -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPublicarTarea"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/btn_publicar_tarea"
-                app:cornerRadius="12dp" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCalificacionMaxTareaNueva"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:paddingVertical="14dp"
+                    android:text="100"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="puntos"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!-- ── ARCHIVOS ADJUNTOS ──────────────────────────────────── -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.06"
+                android:text="@string/label_archivo_adjunto"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/zonaSubirArchivo"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_upload_zone"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginBottom="6dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_upload"
+                    app:tint="@color/colorOnSurfaceVariant" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_subir_archivo"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/containerArchivosAdjuntos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:visibility="gone" />
 
         </LinearLayout>
 
     </ScrollView>
+
+    <!-- ══ ACCIÓN STICKY ════════════════════════════════════════════════ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:orientation="vertical"
+        android:paddingBottom="88dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPublicarTarea"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_publicar_tarea"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_send"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
 
 </LinearLayout>

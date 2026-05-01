@@ -10,31 +10,29 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Grupo;
 import com.conectatec.databinding.FragmentDocenteGruposBinding;
 import com.conectatec.ui.common.ScrollRevealAnimator;
+import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.grupos.adapter.GrupoDocenteAdapter;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/**
- * Lista de grupos del docente.
- *
- * Muestra:
- *  - Header con total de grupos (badge).
- *  - Botón "Crear grupo" → fragment crear grupo.
- *  - Buscador que filtra la lista.
- *  - RecyclerView con 3 grupos dummy.
- *  - Empty state cuando no hay resultados.
- */
 @AndroidEntryPoint
 public class DocenteGruposFragment extends Fragment {
 
     private FragmentDocenteGruposBinding binding;
     private GrupoDocenteAdapter adapter;
     private ScrollRevealAnimator scrollRevealAnimator;
+    private DocenteGruposViewModel viewModel;
 
     @Nullable
     @Override
@@ -48,24 +46,39 @@ public class DocenteGruposFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(DocenteGruposViewModel.class);
         setupRecyclerView();
         scrollRevealAnimator = new ScrollRevealAnimator(binding.rvGruposDocente);
         setupSearch();
         setupListeners();
-        scrollRevealAnimator.triggerInicial();
+        observeViewModel();
+        viewModel.cargarDatos();
     }
 
     private void setupRecyclerView() {
-        adapter = new GrupoDocenteAdapter(
-                GrupoDocenteAdapter.cargarDatosDummy(),
-                grupo -> {
-                    Bundle args = new Bundle();
-                    args.putInt("grupoId", grupo.id);
-                    Navigation.findNavController(requireView())
-                            .navigate(R.id.action_grupos_to_detalle, args);
-                });
+        adapter = new GrupoDocenteAdapter(new ArrayList<>(), grupo -> {
+            Bundle args = new Bundle();
+            args.putInt("grupoId", grupo.id);
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.action_grupos_to_detalle, args);
+        });
         binding.rvGruposDocente.setAdapter(adapter);
-        actualizarUI();
+    }
+
+    private void observeViewModel() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarGrupos.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                List<Grupo> grupos = ((UiState.Success<List<Grupo>>) state).data;
+                adapter.setLista(grupos);
+                actualizarUI();
+                scrollRevealAnimator.triggerInicial();
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupSearch() {

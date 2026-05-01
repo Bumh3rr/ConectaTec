@@ -107,9 +107,13 @@ public class MainDocenteActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, dest, args) -> {
             int id = dest.getId();
 
-            // Ocultar pill nav en la pantalla de conversación (chat a pantalla completa)
-            boolean fullscreen = (id == R.id.docenteConversacionFragment);
-            binding.bottomNavDocente.setVisibility(fullscreen ? View.GONE : View.VISIBLE);
+            // Pill nav solo en los 5 destinos raíz
+            boolean esRaiz = (id == R.id.docenteDashboardFragment
+                    || id == R.id.docenteGruposFragment
+                    || id == R.id.docenteTareasFragment
+                    || id == R.id.docenteChatFragment
+                    || id == R.id.docentePerfilFragment);
+            binding.bottomNavDocente.setVisibility(esRaiz ? View.VISIBLE : View.GONE);
 
             for (int i = 0; i < DESTINATIONS.length; i++) {
                 if (DESTINATIONS[i] == id) {
@@ -122,9 +126,11 @@ public class MainDocenteActivity extends AppCompatActivity {
             if (id == R.id.docenteCrearGrupoFragment
                     || id == R.id.docenteGrupoDetalleFragment
                     || id == R.id.docenteMiembrosGrupoFragment
-                    || id == R.id.docenteAlumnoPerfilFragment) {
+                    || id == R.id.docenteAlumnoPerfilFragment
+                    || id == R.id.docenteQrGrupoFragment) {
                 selectItem(1); // Grupos
             } else if (id == R.id.docenteBloquesFragment
+                    || id == R.id.docenteCrearBloqueFragment
                     || id == R.id.docenteTareasBloqueFragment
                     || id == R.id.docenteCrearTareaFragment
                     || id == R.id.docenteEntregasFragment

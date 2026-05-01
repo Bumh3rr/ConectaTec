@@ -1,229 +1,443 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Crear Grupo del Docente — Plan 3 -->
-<ScrollView
+<!-- Crear Grupo del Docente -->
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:fillViewport="true">
+    android:orientation="vertical">
 
+    <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:paddingBottom="32dp">
+        android:background="@color/colorSurface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="48dp">
 
-        <!-- ══ HEADER CON BACK ══════════════════════════════════════ -->
+        <ImageView
+            android:id="@+id/btnBackCrearGrupo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/cd_volver"
+            android:focusable="true"
+            android:padding="6dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/colorOnSurface" />
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingTop="48dp"
-            android:paddingBottom="20dp">
-
-            <ImageView
-                android:id="@+id/btnBackCrearGrupo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_arrow_left"
-                android:contentDescription="@string/cd_volver"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginEnd="12dp"
-                app:tint="@color/colorOnSurface" />
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:letterSpacing="0.18"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
                 android:text="@string/title_nuevo_grupo"
                 android:textColor="@color/colorOnSurface"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- ══ FORMULARIO ══════════════════════════════════════════════ -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/colorSurface"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp">
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary" />
 
-                <!-- Nombre del grupo -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilNombreGrupoNuevo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="14dp"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp">
+    <!-- ══ CONTENIDO SCROLLABLE ═════════════════════════════════════════ -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etNombreGrupoNuevo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_nombre_grupo_nuevo"
-                        android:inputType="textCapSentences"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Materia -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilMateriaGrupoNuevo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="14dp"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etMateriaGrupoNuevo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_materia_grupo_nuevo"
-                        android:inputType="textCapSentences"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Descripción opcional -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilDescripcionGrupoNuevo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etDescripcionGrupoNuevo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_descripcion_grupo_nuevo"
-                        android:inputType="textCapSentences|textMultiLine"
-                        android:minLines="2"
-                        android:maxLines="4"
-                        android:gravity="top" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- ══ BOTÓN CREAR ══════════════════════════════════════════ -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCrearGrupoNuevo"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="@string/btn_crear_grupo_docente"
-            android:textSize="15sp"
-            android:layout_marginBottom="20dp"
-            app:cornerRadius="10dp"
-            android:stateListAnimator="@null" />
-
-        <!-- ══ SECCIÓN ÉXITO / QR ════════════════════════════════════ -->
         <LinearLayout
-            android:id="@+id/layoutQrExito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="gone">
+            android:padding="20dp">
 
+            <!-- Vista previa del grupo -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPreviewGrupo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/colorSurface"
-                app:cardCornerRadius="12dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="24dp">
 
-                    <ImageView
-                        android:id="@+id/ivQrGrupoNuevo"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_qr_placeholder"
-                        android:contentDescription="@null"
-                        android:layout_marginBottom="16dp" />
+                    <!-- Avatar círculo blanco con iniciales azules -->
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bg_avatar_placeholder"
+                        android:backgroundTint="@color/white">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/label_codigo_union"
-                        android:textColor="@color/colorOnSurfaceVariant"
-                        android:textSize="12sp"
-                        android:layout_marginBottom="4dp" />
+                        <TextView
+                            android:id="@+id/tvPreviewInicialesGrupo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="?"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvCodigoUnionNuevo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:fontFamily="monospace"
-                        android:layout_marginBottom="8dp" />
+                    </FrameLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Nombre, materia, alumnos -->
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/label_compartir_codigo"
-                        android:textColor="@color/colorOnSurfaceVariant"
-                        android:textSize="12sp"
-                        android:gravity="center" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.7"
+                            android:letterSpacing="0.1"
+                            android:text="VISTA PREVIA"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPreviewNombreGrupo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Nombre del grupo"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPreviewMateriaGrupo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:alpha="0.7"
+                            android:text="Materia"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:alpha="0.6"
+                            android:text="0 alumnos · Activo"
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnListoCrearGrupo"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+            <!-- Descripción contextual -->
+            <TextView
+                android:id="@+id/tvContextoCrearGrupo"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/btn_listo"
-                android:textSize="15sp"
-                android:textColor="@color/colorPrimary"
-                app:strokeColor="@color/colorPrimary"
-                app:cornerRadius="10dp"
-                android:stateListAnimator="@null" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingMultiplier="1.4"
+                android:text="Crea un grupo para gestionar a tus alumnos, publicar tareas y mantener comunicación directa."
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="13sp" />
+
+            <!-- ── Campos del formulario ─────────────────────────────── -->
+            <LinearLayout
+                android:id="@+id/containerFormGrupoNuevo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Nombre del grupo -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.06"
+                    android:text="NOMBRE DEL GRUPO *"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNombreGrupoNuevo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input"
+                    android:hint="@string/hint_nombre_grupo_nuevo"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/colorOnSurface"
+                    android:textColorHint="@color/colorOnSurfaceVariant"
+                    android:textSize="15sp" />
+
+                <!-- Materia -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="20dp"
+                    android:letterSpacing="0.06"
+                    android:text="MATERIA *"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMateriaGrupoNuevo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input"
+                    android:hint="@string/hint_materia_grupo_nuevo"
+                    android:inputType="textCapSentences"
+                    android:maxLines="1"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textColor="@color/colorOnSurface"
+                    android:textColorHint="@color/colorOnSurfaceVariant"
+                    android:textSize="15sp" />
+
+                <!-- Descripción opcional -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="20dp"
+                    android:letterSpacing="0.06"
+                    android:text="DESCRIPCIÓN"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDescripcionGrupoNuevo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input"
+                    android:gravity="top"
+                    android:hint="@string/hint_descripcion_grupo_nuevo"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines="5"
+                    android:minLines="3"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/colorOnSurface"
+                    android:textColorHint="@color/colorOnSurfaceVariant"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Opcional · Visible para los alumnos del grupo"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <!-- ── Sección éxito (se muestra al crear) ───────────────── -->
+            <LinearLayout
+                android:id="@+id/layoutExitoGrupoNuevo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Confirmación del grupo creado -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/colorSurface"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="24dp"
+                        android:paddingHorizontal="24dp"
+                        android:paddingTop="28dp">
+
+                        <ImageView
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginBottom="12dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_group"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/tvNombreGrupoExito"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="creado exitosamente"
+                            android:textColor="@color/colorOnSurfaceVariant"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card con código QR -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/colorSurface"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/colorDivider"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="24dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:letterSpacing="0.06"
+                            android:text="@string/label_codigo_union"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvCodigoUnionNuevo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivQrGrupoNuevo"
+                            android:layout_width="160dp"
+                            android:layout_height="160dp"
+                            android:layout_marginBottom="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_qr_placeholder" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.4"
+                            android:text="@string/label_compartir_codigo"
+                            android:textColor="@color/colorOnSurfaceVariant"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
+    </ScrollView>
+
+    <!-- ══ ACCIÓN STICKY ════════════════════════════════════════════════ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:orientation="vertical"
+        android:paddingBottom="88dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCrearGrupoNuevo"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_crear_grupo_docente"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_group"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnListoCrearGrupo"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_listo"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:cornerRadius="12dp"
+            app:strokeColor="@color/colorPrimary" />
+
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

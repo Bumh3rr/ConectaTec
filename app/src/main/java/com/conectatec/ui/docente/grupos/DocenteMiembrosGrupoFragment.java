@@ -8,57 +8,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Miembro;
 import com.conectatec.databinding.FragmentDocenteMiembrosGrupoBinding;
 import com.conectatec.ui.common.ScrollRevealAnimator;
+import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.grupos.adapter.MiembroGrupoDocenteAdapter;
-import com.conectatec.ui.docente.grupos.adapter.MiembroGrupoDocenteAdapter.MiembroDummyDocente;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Arrays;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/**
- * Lista completa de miembros de un grupo del docente.
- *
- * 3 grupos × 6 miembros = 18 entradas dummy.
- */
 @AndroidEntryPoint
 public class DocenteMiembrosGrupoFragment extends Fragment {
-
-    private static final MiembroDummyDocente[][] MIEMBROS_POR_GRUPO = {
-            // Grupo 1 — Programación Móvil 6A
-            {
-                new MiembroDummyDocente(101, "Ana García",     "AG", "ana.garcia@tec.mx",     "L20010001"),
-                new MiembroDummyDocente(102, "Luis Martínez",  "LM", "luis.martinez@tec.mx",  "L20010002"),
-                new MiembroDummyDocente(103, "Sofía López",    "SL", "sofia.lopez@tec.mx",    "L20010003"),
-                new MiembroDummyDocente(104, "Carlos Ramírez", "CR", "carlos.ramirez@tec.mx", "L20010004"),
-                new MiembroDummyDocente(105, "María Torres",   "MT", "maria.torres@tec.mx",   "L20010005"),
-                new MiembroDummyDocente(106, "Pedro Sánchez",  "PS", "pedro.sanchez@tec.mx",  "L20010006"),
-            },
-            // Grupo 2 — Bases de Datos 4B
-            {
-                new MiembroDummyDocente(201, "Laura Mendoza",  "LM", "laura.mendoza@tec.mx",  "L20020001"),
-                new MiembroDummyDocente(202, "Jorge Herrera",  "JH", "jorge.herrera@tec.mx",  "L20020002"),
-                new MiembroDummyDocente(203, "Elena Castro",   "EC", "elena.castro@tec.mx",   "L20020003"),
-                new MiembroDummyDocente(204, "Andrés Ruiz",    "AR", "andres.ruiz@tec.mx",    "L20020004"),
-                new MiembroDummyDocente(205, "Valeria Díaz",   "VD", "valeria.diaz@tec.mx",   "L20020005"),
-                new MiembroDummyDocente(206, "Roberto Vargas", "RV", "roberto.vargas@tec.mx", "L20020006"),
-            },
-            // Grupo 3 — Cálculo Integral 2A
-            {
-                new MiembroDummyDocente(301, "Daniela Flores", "DF", "daniela.flores@tec.mx", "L20030001"),
-                new MiembroDummyDocente(302, "Miguel Ortega",  "MO", "miguel.ortega@tec.mx",  "L20030002"),
-                new MiembroDummyDocente(303, "Paola Reyes",    "PR", "paola.reyes@tec.mx",    "L20030003"),
-                new MiembroDummyDocente(304, "Iván Morales",   "IM", "ivan.morales@tec.mx",   "L20030004"),
-                new MiembroDummyDocente(305, "Alejandra Gil",  "AG", "alejandra.gil@tec.mx",  "L20030005"),
-                new MiembroDummyDocente(306, "Fernando Cruz",  "FC", "fernando.cruz@tec.mx",  "L20030006"),
-            }
-    };
 
     private static final String[] NOMBRES_GRUPO = {
             "Programación Móvil 6A",
@@ -69,6 +36,8 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
     private FragmentDocenteMiembrosGrupoBinding binding;
     private MiembroGrupoDocenteAdapter adapter;
     private ScrollRevealAnimator scrollRevealAnimator;
+    private DocenteMiembrosViewModel viewModel;
+    private int grupoId;
 
     @Nullable
     @Override
@@ -82,24 +51,30 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        grupoId = getArguments() != null ? getArguments().getInt("grupoId", 1) : 1;
 
-        int grupoId = getArguments() != null ? getArguments().getInt("grupoId", 1) : 1;
-        setupRecyclerView(grupoId);
+        int idx = Math.max(0, Math.min(grupoId - 1, NOMBRES_GRUPO.length - 1));
+        binding.tvSubtituloMiembrosDocente.setText(NOMBRES_GRUPO[idx]);
+
+        setupRecyclerView();
         scrollRevealAnimator = new ScrollRevealAnimator(binding.rvMiembrosGrupoDocente);
-        scrollRevealAnimator.triggerInicial();
+
+        viewModel = new ViewModelProvider(this).get(DocenteMiembrosViewModel.class);
+        observeViewModel();
+        viewModel.cargarMiembros(grupoId);
 
         binding.btnBackMiembrosDocente.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
     }
 
-    private void setupRecyclerView(int grupoId) {
+    private void setupRecyclerView() {
         adapter = new MiembroGrupoDocenteAdapter();
         binding.rvMiembrosGrupoDocente.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvMiembrosGrupoDocente.setAdapter(adapter);
 
         adapter.setListener(new MiembroGrupoDocenteAdapter.OnMiembroActionListener() {
             @Override
-            public void onVerPerfil(MiembroDummyDocente m) {
+            public void onVerPerfil(Miembro m) {
                 Bundle args = new Bundle();
                 args.putInt("alumnoId", m.id);
                 args.putString("nombre", m.nombre);
@@ -111,24 +86,33 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
             }
 
             @Override
-            public void onMensaje(MiembroDummyDocente m) {
+            public void onMensaje(Miembro m) {
                 Bundle args = new Bundle();
                 args.putInt("salaId", 4);
                 Navigation.findNavController(requireView())
                         .navigate(R.id.action_miembros_to_conversacion, args);
             }
         });
+    }
 
-        int idx = Math.max(0, Math.min(grupoId - 1, MIEMBROS_POR_GRUPO.length - 1));
-        List<MiembroDummyDocente> lista = Arrays.asList(MIEMBROS_POR_GRUPO[idx]);
-        adapter.setLista(lista);
-
-        binding.tvSubtituloMiembrosDocente.setText(NOMBRES_GRUPO[idx]);
-        binding.tvBadgeMiembrosDocente.setText(adapter.conteo() + " alumnos");
-
-        int total = adapter.conteo();
-        binding.rvMiembrosGrupoDocente.setVisibility(total > 0 ? View.VISIBLE : View.GONE);
-        binding.emptyStateMiembrosDocente.getRoot().setVisibility(total > 0 ? View.GONE : View.VISIBLE);
+    private void observeViewModel() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarMiembros.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                List<Miembro> miembros = ((UiState.Success<List<Miembro>>) state).data;
+                adapter.setLista(miembros);
+                int total = adapter.conteo();
+                binding.tvBadgeMiembrosDocente.setText(total + " alumnos");
+                binding.rvMiembrosGrupoDocente.setVisibility(total > 0 ? View.VISIBLE : View.GONE);
+                binding.emptyStateMiembrosDocente.getRoot()
+                        .setVisibility(total > 0 ? View.GONE : View.VISIBLE);
+                scrollRevealAnimator.triggerInicial();
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

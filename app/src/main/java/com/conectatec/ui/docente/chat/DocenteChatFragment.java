@@ -8,32 +8,30 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Sala;
 import com.conectatec.databinding.FragmentDocenteChatBinding;
 import com.conectatec.ui.common.ScrollRevealAnimator;
+import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.chat.adapter.SalaDocenteAdapter;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/**
- * Lista de salas de chat del docente.
- *
- * Muestra:
- *  - Header con badge de mensajes no leídos.
- *  - Chips para filtrar por tipo: Todos / Grupos / Privados.
- *  - RecyclerView con 5 salas dummy (3 grupales + 2 privadas).
- *  - Al tocar una sala navega a la conversación.
- */
 @AndroidEntryPoint
 public class DocenteChatFragment extends Fragment {
 
     private FragmentDocenteChatBinding binding;
     private SalaDocenteAdapter adapter;
     private ScrollRevealAnimator scrollRevealAnimator;
+    private DocenteChatViewModel viewModel;
 
     @Nullable
     @Override
@@ -49,9 +47,11 @@ public class DocenteChatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
         setupChips();
-        renderHeader();
         scrollRevealAnimator = new ScrollRevealAnimator(binding.rvSalasChat);
-        scrollRevealAnimator.triggerInicial();
+
+        viewModel = new ViewModelProvider(this).get(DocenteChatViewModel.class);
+        observeViewModel();
+        viewModel.cargarDatos();
     }
 
     private void setupRecyclerView() {
@@ -63,7 +63,23 @@ public class DocenteChatFragment extends Fragment {
         });
         binding.rvSalasChat.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvSalasChat.setAdapter(adapter);
-        toggleEmpty();
+    }
+
+    private void observeViewModel() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarSalas.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                List<Sala> salas = ((UiState.Success<List<Sala>>) state).data;
+                adapter.setLista(salas);
+                renderHeader();
+                toggleEmpty();
+                scrollRevealAnimator.triggerInicial();
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupChips() {
@@ -82,7 +98,7 @@ public class DocenteChatFragment extends Fragment {
         int total = adapter.getTotalNoLeidos();
         if (total > 0) {
             binding.tvBadgeTotalNoLeidos.setVisibility(View.VISIBLE);
-            binding.tvBadgeTotalNoLeidos.setText(String.valueOf(total));
+            binding.tvBadgeTotalNoLeidos.setText(total + " no leídos");
         } else {
             binding.tvBadgeTotalNoLeidos.setVisibility(View.GONE);
         }

@@ -107,6 +107,9 @@ dependencies {
     // MPAndroidChart
     implementation(libs.mpandroidchart)
 
+    // ZXing — generación de QR
+    implementation(libs.zxing.core)
+
     testImplementation(libs.junit)
     testImplementation(libs.arch.core.testing)
     androidTestImplementation(libs.ext.junit)

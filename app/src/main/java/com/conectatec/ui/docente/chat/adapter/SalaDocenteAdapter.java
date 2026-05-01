@@ -10,63 +10,44 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Sala;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SalaDocenteAdapter extends RecyclerView.Adapter<SalaDocenteAdapter.SalaViewHolder> {
 
     public interface OnSalaClickListener {
-        void onSalaClick(SalaDummyDocente sala);
+        void onSalaClick(Sala sala);
     }
 
-    public static final class SalaDummyDocente {
-        public final int id;
-        public final String nombre;
-        public final String tipo;           // "GRUPO" | "PRIVADO"
-        public final String avatarIniciales;
-        public final String ultimoMensaje;
-        public final String fechaUltimo;
-        public final int noLeidos;
-
-        public SalaDummyDocente(int id, String nombre, String tipo, String avatarIniciales,
-                                String ultimoMensaje, String fechaUltimo, int noLeidos) {
-            this.id = id;
-            this.nombre = nombre;
-            this.tipo = tipo;
-            this.avatarIniciales = avatarIniciales;
-            this.ultimoMensaje = ultimoMensaje;
-            this.fechaUltimo = fechaUltimo;
-            this.noLeidos = noLeidos;
-        }
-    }
-
-    private final List<SalaDummyDocente> dataset;
-    private final List<SalaDummyDocente> visible;
+    private final List<Sala> dataset = new ArrayList<>();
+    private final List<Sala> visible = new ArrayList<>();
     private final OnSalaClickListener listener;
     @Nullable private String filtroTipo;
 
     public SalaDocenteAdapter(OnSalaClickListener listener) {
         this.listener = listener;
-        this.dataset = new ArrayList<>(Arrays.asList(
-                new SalaDummyDocente(1, "Programación Móvil 6A", "GRUPO",   "PM", "Recuerden la entrega del viernes", "10:32", 3),
-                new SalaDummyDocente(2, "Bases de Datos 4B",     "GRUPO",   "BD", "¿Hay duda sobre el ER?",           "Ayer",  0),
-                new SalaDummyDocente(3, "Cálculo Integral 2A",   "GRUPO",   "CI", "Práctica resuelta arriba",         "Lun",   1),
-                new SalaDummyDocente(4, "Ana López",             "PRIVADO", "AL", "Profe, una consulta…",             "11:05", 2),
-                new SalaDummyDocente(5, "Diego Ruiz",            "PRIVADO", "DR", "Gracias por la asesoría",          "Mar",   0)
-        ));
-        this.visible = new ArrayList<>(dataset);
+    }
+
+    public void setLista(List<Sala> salas) {
+        dataset.clear();
+        dataset.addAll(salas);
+        aplicarFiltro();
     }
 
     public void setFiltroTipo(@Nullable String tipoOrNull) {
         this.filtroTipo = tipoOrNull;
+        aplicarFiltro();
+    }
+
+    private void aplicarFiltro() {
         visible.clear();
-        if (tipoOrNull == null) {
+        if (filtroTipo == null) {
             visible.addAll(dataset);
         } else {
-            for (SalaDummyDocente s : dataset) {
-                if (tipoOrNull.equals(s.tipo)) visible.add(s);
+            for (Sala s : dataset) {
+                if (filtroTipo.equals(s.tipo)) visible.add(s);
             }
         }
         notifyDataSetChanged();
@@ -74,7 +55,7 @@ public class SalaDocenteAdapter extends RecyclerView.Adapter<SalaDocenteAdapter.
 
     public int getTotalNoLeidos() {
         int total = 0;
-        for (SalaDummyDocente s : dataset) total += s.noLeidos;
+        for (Sala s : dataset) total += s.noLeidos;
         return total;
     }
 
@@ -88,7 +69,7 @@ public class SalaDocenteAdapter extends RecyclerView.Adapter<SalaDocenteAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SalaViewHolder h, int position) {
-        SalaDummyDocente s = visible.get(position);
+        Sala s = visible.get(position);
         h.tvAvatar.setText(s.avatarIniciales);
         h.tvNombre.setText(s.nombre);
         h.tvUltimoMensaje.setText(s.ultimoMensaje);

@@ -8,13 +8,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.conectatec.R;
+import com.conectatec.data.model.Tarea;
 import com.conectatec.databinding.FragmentDocenteTareasBloqueBinding;
 import com.conectatec.ui.common.ScrollRevealAnimator;
+import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.tareas.adapter.TareaDocenteAdapter;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -24,6 +30,7 @@ public class DocenteTareasBloqueFragment extends Fragment {
     private FragmentDocenteTareasBloqueBinding binding;
     private TareaDocenteAdapter adapter;
     private ScrollRevealAnimator scrollRevealAnimator;
+    private DocenteTareasBloqueViewModel viewModel;
 
     private int grupoId;
     private int bloqueId;
@@ -55,8 +62,10 @@ public class DocenteTareasBloqueFragment extends Fragment {
         scrollRevealAnimator = new ScrollRevealAnimator(binding.rvTareasBloque);
         setupFiltros();
         setupBotonCrear();
-        actualizarVista();
-        scrollRevealAnimator.triggerInicial();
+
+        viewModel = new ViewModelProvider(this).get(DocenteTareasBloqueViewModel.class);
+        observeViewModel();
+        viewModel.cargarTareas(grupoId, bloqueId);
     }
 
     private void setupRecyclerView() {
@@ -69,17 +78,32 @@ public class DocenteTareasBloqueFragment extends Fragment {
         });
         binding.rvTareasBloque.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvTareasBloque.setAdapter(adapter);
-        adapter.cargarParaBloque(grupoId, bloqueId);
+    }
+
+    private void observeViewModel() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarTareasBloque.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                List<Tarea> tareas = ((UiState.Success<List<Tarea>>) state).data;
+                adapter.setListaCompleta(tareas);
+                actualizarVista();
+                scrollRevealAnimator.triggerInicial();
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void setupFiltros() {
         binding.chipGroupTipo.setOnCheckedStateChangeListener((group, checkedIds) -> {
             if (checkedIds.isEmpty()) return;
             int id = checkedIds.get(0);
-            if      (id == R.id.chipTipoTarea)    filtroTipo = TareaDocenteAdapter.TIPO_TAREA;
-            else if (id == R.id.chipTipoTrabajo)  filtroTipo = TareaDocenteAdapter.TIPO_TRABAJO;
-            else if (id == R.id.chipTipoExamen)   filtroTipo = TareaDocenteAdapter.TIPO_EXAMEN;
-            else if (id == R.id.chipTipoProyecto) filtroTipo = TareaDocenteAdapter.TIPO_PROYECTO;
+            if      (id == R.id.chipTipoTarea)    filtroTipo = Tarea.TIPO_TAREA;
+            else if (id == R.id.chipTipoTrabajo)  filtroTipo = Tarea.TIPO_TRABAJO;
+            else if (id == R.id.chipTipoExamen)   filtroTipo = Tarea.TIPO_EXAMEN;
+            else if (id == R.id.chipTipoProyecto) filtroTipo = Tarea.TIPO_PROYECTO;
             else                                   filtroTipo = null;
             aplicar();
         });
@@ -87,9 +111,9 @@ public class DocenteTareasBloqueFragment extends Fragment {
         binding.chipGroupEstado.setOnCheckedStateChangeListener((group, checkedIds) -> {
             if (checkedIds.isEmpty()) return;
             int id = checkedIds.get(0);
-            if      (id == R.id.chipEstadoEnCurso)   filtroEstado = TareaDocenteAdapter.EST_EN_CURSO;
-            else if (id == R.id.chipEstadoVencida)   filtroEstado = TareaDocenteAdapter.EST_VENCIDA;
-            else if (id == R.id.chipEstadoCompletada) filtroEstado = TareaDocenteAdapter.EST_COMPLETADA;
+            if      (id == R.id.chipEstadoEnCurso)    filtroEstado = Tarea.EST_EN_CURSO;
+            else if (id == R.id.chipEstadoVencida)    filtroEstado = Tarea.EST_VENCIDA;
+            else if (id == R.id.chipEstadoCompletada) filtroEstado = Tarea.EST_COMPLETADA;
             else                                       filtroEstado = null;
             aplicar();
         });
@@ -119,17 +143,16 @@ public class DocenteTareasBloqueFragment extends Fragment {
         binding.rvTareasBloque.setVisibility(vacio ? View.GONE : View.VISIBLE);
         binding.emptyStateTareasBloque.getRoot().setVisibility(vacio ? View.VISIBLE : View.GONE);
 
-        // Stats siempre desde el bloque completo (no filtrado)
         if (filtradas == total) {
             binding.tvStatsResumen.setText(total + " tarea" + (total != 1 ? "s" : ""));
         } else {
             binding.tvStatsResumen.setText(filtradas + " de " + total + " tarea" + (total != 1 ? "s" : ""));
         }
         binding.tvStatsEnCurso.setText(
-                adapter.conteoEstado(TareaDocenteAdapter.EST_EN_CURSO) + " en curso");
+                adapter.conteoEstado(Tarea.EST_EN_CURSO) + " en curso");
+        int completadas = adapter.conteoEstado(Tarea.EST_COMPLETADA);
         binding.tvStatsCompletadas.setText(
-                adapter.conteoEstado(TareaDocenteAdapter.EST_COMPLETADA) + " completada" +
-                (adapter.conteoEstado(TareaDocenteAdapter.EST_COMPLETADA) != 1 ? "s" : ""));
+                completadas + " completada" + (completadas != 1 ? "s" : ""));
     }
 
     private String nombreDeGrupo(int id) {

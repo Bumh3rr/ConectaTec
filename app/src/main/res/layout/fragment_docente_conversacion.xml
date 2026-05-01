@@ -14,18 +14,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="8dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
         android:paddingTop="48dp"
-        android:paddingBottom="12dp"
+        android:paddingBottom="14dp"
         android:background="@color/colorSurface"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/btnBackConversacion"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="8dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="6dp"
             android:contentDescription="@string/cd_volver"
             android:src="@drawable/ic_arrow_left"
             app:tint="@color/colorOnSurface"
@@ -37,21 +36,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="10dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.18" />
 
             <TextView
                 android:id="@+id/tvNombreSalaConversacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
                 android:textColor="@color/colorOnSurface" />
 
             <TextView
                 android:id="@+id/tvSubtituloSalaConversacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:textSize="11sp"
                 android:textColor="@color/colorOnSurfaceVariant"
                 android:visibility="gone" />
@@ -59,6 +70,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- Barra de acento -->
+    <View
+        android:id="@+id/accentBarConversacion"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/headerConversacion" />
 
     <!-- RecyclerView de mensajes -->
     <androidx.recyclerview.widget.RecyclerView
@@ -68,7 +87,7 @@
         android:clipToPadding="false"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/headerConversacion"
+        app:layout_constraintTop_toBottomOf="@id/accentBarConversacion"
         app:layout_constraintBottom_toTopOf="@id/barraInferiorChat" />
 
     <!-- Barra inferior fija -->
@@ -123,5 +142,17 @@
             android:focusable="true" />
 
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBarMensajes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:indicatorColor="@color/colorPrimary"
+        app:trackColor="@color/colorDivider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

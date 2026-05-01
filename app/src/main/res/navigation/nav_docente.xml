@@ -96,6 +96,25 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_grupo_detalle_to_qr"
+            app:destination="@id/docenteQrGrupoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/docenteQrGrupoFragment"
+        android:name="com.conectatec.ui.docente.grupos.DocenteQrGrupoFragment"
+        android:label="Código QR del Grupo">
+        <argument android:name="grupoId"      app:argType="integer" android:defaultValue="0" />
+        <argument android:name="codigoUnion"  app:argType="string"  android:defaultValue="" />
+        <argument android:name="nombreGrupo"  app:argType="string"  android:defaultValue="" />
+        <argument android:name="materiaGrupo" app:argType="string"  android:defaultValue="" />
+        <argument android:name="totalAlumnos" app:argType="integer" android:defaultValue="0" />
+        <argument android:name="fechaCreacion" app:argType="string" android:defaultValue="" />
     </fragment>
 
     <fragment
@@ -172,6 +191,27 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_bloques_to_crear_bloque"
+            app:destination="@id/docenteCrearBloqueFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/docenteCrearBloqueFragment"
+        android:name="com.conectatec.ui.docente.tareas.DocenteCrearBloqueFragment"
+        android:label="Nuevo bloque">
+        <argument
+            android:name="grupoId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="siguienteNumero"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 
     <fragment

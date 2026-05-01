@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
@@ -76,10 +80,11 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingTop="20dp"
-            android:paddingBottom="120dp">
+            android:paddingBottom="20dp">
 
             <!-- ══ CARD ALUMNO ════════════════════════════════════════ -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAlumnoCalif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -397,6 +402,7 @@
 
             <!-- ══ CARD CALIFICACIÓN ══════════════════════════════════ -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCalificacionEntrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -415,10 +421,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="CALIFICACIÓN"
-                        android:textColor="@color/colorOnSurfaceVariant"
-                        android:textSize="11sp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"
                         android:textStyle="bold"
-                        android:letterSpacing="0.08"
+                        android:letterSpacing="0.06"
                         android:layout_marginBottom="12dp" />
 
                     <View
@@ -476,46 +482,69 @@
                     </LinearLayout>
 
                     <!-- Retroalimentación -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilRetroalimentacionEntrega"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRetroalimentacionEntrega"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_input"
+                        android:gravity="top|start"
                         android:hint="@string/hint_retroalimentacion"
-                        app:boxBackgroundColor="@color/colorSurface"
-                        app:boxCornerRadiusTopStart="10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:boxCornerRadiusBottomStart="10dp"
-                        app:boxCornerRadiusBottomEnd="10dp"
-                        app:boxStrokeColor="@color/colorBorder"
-                        app:hintTextColor="@color/colorOnSurfaceVariant">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etRetroalimentacionEntrega"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textMultiLine|textCapSentences"
-                            android:minLines="3"
-                            android:gravity="top|start"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="14sp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:minLines="3"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="12dp"
+                        android:textColor="@color/colorOnSurface"
+                        android:textColorHint="@color/colorOnSurfaceVariant"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- ══ BOTÓN GUARDAR ══════════════════════════════════════ -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGuardarCalificacion"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="@string/btn_calificar"
-                app:cornerRadius="12dp" />
-
         </LinearLayout>
 
     </ScrollView>
 
+    <!-- ══ ACCIÓN STICKY ════════════════════════════════════════════════ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:orientation="vertical"
+        android:paddingBottom="88dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarCalificacion"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_calificar"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_grading"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
+
 </LinearLayout>
+
+<com.google.android.material.progressindicator.CircularProgressIndicator
+    android:id="@+id/progressBarCalificar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    app:indicatorColor="@color/colorPrimary"
+    app:trackColor="@color/colorDivider" />
+
+</FrameLayout>

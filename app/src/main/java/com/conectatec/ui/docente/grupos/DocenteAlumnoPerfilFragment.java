@@ -8,10 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.conectatec.R;
+import com.conectatec.data.model.AlumnoPerfil;
 import com.conectatec.databinding.FragmentDocenteAlumnoPerfilBinding;
+import com.conectatec.ui.common.UiState;
+import com.google.android.material.snackbar.Snackbar;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -19,27 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class DocenteAlumnoPerfilFragment extends Fragment {
 
     private FragmentDocenteAlumnoPerfilBinding binding;
-
-    private static final String[] SEMESTRES = {
-            "6° Semestre", "6° Semestre", "6° Semestre",
-            "6° Semestre", "6° Semestre", "6° Semestre",
-            "4° Semestre", "4° Semestre", "4° Semestre",
-            "4° Semestre", "4° Semestre", "4° Semestre",
-            "2° Semestre", "2° Semestre", "2° Semestre",
-            "2° Semestre", "2° Semestre", "2° Semestre"
-    };
-    private static final String[] CARRERAS = {
-            "Ing. en Sistemas Computacionales",
-            "Ing. en Software",
-            "Ing. en Tecnologías de la Información",
-            "Ing. en Sistemas Computacionales",
-            "Ing. en Software",
-            "Ing. en Tecnologías de la Información"
-    };
-    private static final String[] FECHAS_INSCRIPCION = {
-            "01/02/2026", "15/01/2026", "20/01/2026",
-            "01/02/2026", "15/01/2026", "20/01/2026"
-    };
+    private DocenteAlumnoPerfilViewModel viewModel;
 
     @Nullable
     @Override
@@ -64,29 +48,9 @@ public class DocenteAlumnoPerfilFragment extends Fragment {
         binding.btnBackPerfilAlumno.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
 
-        binding.tvInicialesPerfilAlumno.setText(iniciales);
-        binding.tvNombrePerfilAlumno.setText(nombre);
-        binding.tvCorreoPerfilAlumno.setText(correo);
-        binding.tvMatriculaPerfilAlumno.setText(matricula);
-
-        int sIdx = alumnoId % SEMESTRES.length;
-        int cIdx = alumnoId % CARRERAS.length;
-        int fIdx = alumnoId % FECHAS_INSCRIPCION.length;
-        binding.tvSemestrePerfilAlumno.setText(SEMESTRES[sIdx]);
-        binding.tvCarreraPerfilAlumno.setText(CARRERAS[cIdx]);
-        binding.tvInscritoPerfilAlumno.setText(FECHAS_INSCRIPCION[fIdx]);
-
-        int total      = 18;
-        int entregadas = 10 + (alumnoId % 8);
-        if (entregadas > total) entregadas = total;
-        int calificadas = entregadas / 2;
-        int pendientes  = total - entregadas;
-        int progreso    = (int) (entregadas * 100f / total);
-
-        binding.progressActividadAlumno.setProgress(progreso);
-        binding.tvActEntregadas.setText(entregadas + "/" + total);
-        binding.tvActCalificadas.setText(String.valueOf(calificadas));
-        binding.tvActPendientes.setText(String.valueOf(pendientes));
+        viewModel = new ViewModelProvider(this).get(DocenteAlumnoPerfilViewModel.class);
+        observeViewModel();
+        viewModel.cargarPerfil(alumnoId, nombre, iniciales, correo, matricula);
 
         binding.btnMensajePerfilAlumno.setOnClickListener(v -> {
             Bundle chatArgs = new Bundle();
@@ -94,6 +58,37 @@ public class DocenteAlumnoPerfilFragment extends Fragment {
             Navigation.findNavController(v)
                     .navigate(R.id.action_perfil_alumno_to_conversacion, chatArgs);
         });
+    }
+
+    private void observeViewModel() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            binding.progressBarAlumnoPerfil.setVisibility(
+                    state instanceof UiState.Loading ? View.VISIBLE : View.GONE);
+            if (state instanceof UiState.Success) {
+                AlumnoPerfil perfil = ((UiState.Success<AlumnoPerfil>) state).data;
+                poblarVistas(perfil);
+            } else if (state instanceof UiState.Error) {
+                Snackbar.make(binding.getRoot(),
+                        ((UiState.Error<?>) state).mensaje, Snackbar.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void poblarVistas(AlumnoPerfil perfil) {
+        binding.tvInicialesPerfilAlumno.setText(perfil.iniciales);
+        binding.tvNombrePerfilAlumno.setText(perfil.nombre);
+        binding.tvCorreoPerfilAlumno.setText(perfil.correo);
+        binding.tvMatriculaPerfilAlumno.setText(perfil.matricula);
+        binding.tvSemestrePerfilAlumno.setText(perfil.semestre);
+        binding.tvCarreraPerfilAlumno.setText(perfil.carrera);
+        binding.tvInscritoPerfilAlumno.setText(perfil.fechaInscripcion);
+
+        int progreso = perfil.totalActividades > 0
+                ? (int) (perfil.entregadas * 100f / perfil.totalActividades) : 0;
+        binding.progressActividadAlumno.setProgress(progreso);
+        binding.tvActEntregadas.setText(perfil.entregadas + "/" + perfil.totalActividades);
+        binding.tvActCalificadas.setText(String.valueOf(perfil.calificadas));
+        binding.tvActPendientes.setText(String.valueOf(perfil.pendientes));
     }
 
     @Override

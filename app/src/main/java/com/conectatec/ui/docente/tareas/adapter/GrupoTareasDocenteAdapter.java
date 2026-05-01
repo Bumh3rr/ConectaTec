@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.conectatec.data.model.Grupo;
 import com.conectatec.databinding.ItemGrupoDocenteBinding;
 
 import java.util.ArrayList;
@@ -14,59 +15,27 @@ import java.util.List;
 public class GrupoTareasDocenteAdapter
         extends RecyclerView.Adapter<GrupoTareasDocenteAdapter.ViewHolder> {
 
-    public static class GrupoDummyTareas {
-        public final int id;
-        public final String nombre;
-        public final String materia;
-        public final int totalAlumnos;
-        public final String fechaCreacion;
-        public final String codigoUnion;
-        public final boolean activo;
-
-        public GrupoDummyTareas(int id, String nombre, String materia,
-                                int totalAlumnos, String fechaCreacion,
-                                String codigoUnion, boolean activo) {
-            this.id = id;
-            this.nombre = nombre;
-            this.materia = materia;
-            this.totalAlumnos = totalAlumnos;
-            this.fechaCreacion = fechaCreacion;
-            this.codigoUnion = codigoUnion;
-            this.activo = activo;
-        }
-    }
-
     public interface OnGrupoClickListener {
-        void onClick(GrupoDummyTareas grupo);
+        void onClick(Grupo grupo);
     }
 
-    private final List<GrupoDummyTareas> lista = new ArrayList<>();
+    private final List<Grupo> lista = new ArrayList<>();
     private OnGrupoClickListener listener;
 
-    public GrupoTareasDocenteAdapter() {
-        cargarDatosDummy();
-    }
+    public GrupoTareasDocenteAdapter() { }
 
     public void setOnClickListener(OnGrupoClickListener l) {
         this.listener = l;
     }
 
-    public int conteo() {
-        return lista.size();
+    public void setLista(List<Grupo> nuevaLista) {
+        lista.clear();
+        lista.addAll(nuevaLista);
+        notifyDataSetChanged();
     }
 
-    private void cargarDatosDummy() {
-        lista.clear();
-        lista.add(new GrupoDummyTareas(1,
-                "Programación Móvil 6A", "Programación Móvil",
-                18, "01/02/2026", "TC-9X4P", true));
-        lista.add(new GrupoDummyTareas(2,
-                "Bases de Datos 4B", "Bases de Datos",
-                16, "15/01/2026", "TC-K3M2", true));
-        lista.add(new GrupoDummyTareas(3,
-                "Cálculo Integral 2A", "Cálculo Integral",
-                13, "20/01/2026", "TC-7Z8R", true));
-        notifyDataSetChanged();
+    public int conteo() {
+        return lista.size();
     }
 
     @NonNull
@@ -78,7 +47,7 @@ public class GrupoTareasDocenteAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
-        GrupoDummyTareas g = lista.get(position);
+        Grupo g = lista.get(position);
         h.bind(g);
         h.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onClick(g);
@@ -98,7 +67,7 @@ public class GrupoTareasDocenteAdapter
             this.b = binding;
         }
 
-        void bind(GrupoDummyTareas g) {
+        void bind(Grupo g) {
             b.tvInicialGrupoDocente.setText(extraerIniciales(g.nombre));
             b.tvNombreGrupoDocente.setText(g.nombre);
             b.tvMateriaGrupoDocente.setText(g.materia);
