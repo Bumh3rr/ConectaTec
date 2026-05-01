@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Crear Bloque — Docente -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="48dp">
+
+        <ImageView
+            android:id="@+id/btnVolverCrearBloque"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Volver"
+            android:focusable="true"
+            android:padding="6dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/colorOnSurface" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.18"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Nuevo Bloque"
+                android:textColor="@color/colorOnSurface"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary" />
+
+    <!-- ══ CONTENIDO SCROLLABLE ═════════════════════════════════════════ -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Vista previa del bloque -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/tvPreviewNumeroBloque"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="1"
+                        android:textColor="@color/white"
+                        android:textSize="52sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.7"
+                            android:letterSpacing="0.1"
+                            android:text="VISTA PREVIA"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPreviewNombreBloque"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Nombre del bloque"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:alpha="0.65"
+                            android:text="0 tareas · Sin publicar"
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:alpha="0.5"
+                        android:contentDescription="Flecha"
+                        android:rotation="180"
+                        android:src="@drawable/ic_arrow_left"
+                        app:tint="@color/white" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Descripción contextual -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingMultiplier="1.4"
+                android:text="Los bloques organizan tus tareas por temas o unidades. Puedes crear cuantos necesites y añadirles tareas después."
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="13sp" />
+
+            <!-- Número asignado (solo lectura) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:letterSpacing="0.06"
+                android:text="NÚMERO ASIGNADO"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_input"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Número"
+                    android:src="@drawable/ic_clipboard"
+                    app:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvNumeroAsignadoBloque"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bloque 1"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_docente"
+                    android:letterSpacing="0.04"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp"
+                    android:text="AUTO"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Nombre del bloque -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:letterSpacing="0.06"
+                android:text="NOMBRE DEL BLOQUE *"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombreNuevoBloque"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:hint="Ej. Fundamentos, Unidad 2, Examen final…"
+                android:inputType="textCapSentences"
+                android:maxLines="1"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp"
+                android:textColor="@color/colorOnSurface"
+                android:textColorHint="@color/colorOnSurfaceVariant"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Requerido · La vista previa se actualiza al escribir"
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- ══ ACCIÓN STICKY ════════════════════════════════════════════════ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:paddingBottom="88dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarBloque"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Crear Bloque"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_plus"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Finder square Top-Left: marco exterior -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M5,5h25v25h-25z M9,9v17h17v-17z" />
+    <!-- Finder square TL: cuadrado interior -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M13,13h9v9h-9z" />
+
+    <!-- Finder square Top-Right: marco exterior -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,5h25v25h-25z M74,9v17h17v-17z" />
+    <!-- Finder square TR: cuadrado interior -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M78,13h9v9h-9z" />
+
+    <!-- Finder square Bottom-Left: marco exterior -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M5,70h25v25h-25z M9,74v17h17v-17z" />
+    <!-- Finder square BL: cuadrado interior -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M13,78h9v9h-9z" />
+
+    <!-- Patron central: cuadritos 4x4 simulando puntos del payload -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,10h4v4h-4z M50,10h4v4h-4z M60,10h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,20h4v4h-4z M55,20h4v4h-4z M65,20h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10,40h4v4h-4z M40,40h4v4h-4z M50,40h4v4h-4z M60,40h4v4h-4z M75,40h4v4h-4z M85,40h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M15,50h4v4h-4z M35,50h4v4h-4z M45,50h4v4h-4z M55,50h4v4h-4z M70,50h4v4h-4z M80,50h4v4h-4z M90,50h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10,60h4v4h-4z M30,60h4v4h-4z M40,60h4v4h-4z M55,60h4v4h-4z M65,60h4v4h-4z M75,60h4v4h-4z M85,60h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,70h4v4h-4z M50,70h4v4h-4z M65,70h4v4h-4z M80,70h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,80h4v4h-4z M55,80h4v4h-4z M65,80h4v4h-4z M75,80h4v4h-4z M90,80h4v4h-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,90h4v4h-4z M50,90h4v4h-4z M60,90h4v4h-4z M75,90h4v4h-4z M85,90h4v4h-4z" />
+
+</vector>

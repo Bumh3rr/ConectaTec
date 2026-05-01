@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/btnBackPerfilAlumno"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Volver"
+            android:focusable="true"
+            android:padding="6dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/colorOnSurface" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.18"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Perfil del alumno"
+                android:textColor="@color/colorOnSurface"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary" />
+
+    <!-- ══ CONTENIDO SCROLLABLE ════════════════════════════════════════ -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Hero card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingTop="28dp"
+                    android:paddingBottom="24dp"
+                    android:paddingHorizontal="20dp">
+
+                    <FrameLayout
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:background="@drawable/bg_avatar_placeholder"
+                        android:layout_marginBottom="14dp">
+
+                        <TextView
+                            android:id="@+id/tvInicialesPerfilAlumno"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tvNombrePerfilAlumno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/colorOnSurface"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvCorreoPerfilAlumno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorOnSurfaceVariant"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_chip_estudiante"
+                        android:letterSpacing="0.05"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="ESTUDIANTE"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Información académica card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/colorDivider">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_school"
+                            android:contentDescription="Info"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="INFORMACIÓN ACADÉMICA"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.06" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="10dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Matrícula" android:textColor="@color/colorOnSurfaceVariant" android:textSize="12sp" />
+                        <TextView android:id="@+id/tvMatriculaPerfilAlumno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/colorOnSurface" android:textSize="12sp" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="10dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Semestre" android:textColor="@color/colorOnSurfaceVariant" android:textSize="12sp" />
+                        <TextView android:id="@+id/tvSemestrePerfilAlumno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/colorOnSurface" android:textSize="12sp" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="10dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Carrera" android:textColor="@color/colorOnSurfaceVariant" android:textSize="12sp" />
+                        <TextView android:id="@+id/tvCarreraPerfilAlumno" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/colorOnSurface" android:textSize="12sp" android:textStyle="bold" android:gravity="end" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Inscrito" android:textColor="@color/colorOnSurfaceVariant" android:textSize="12sp" />
+                        <TextView android:id="@+id/tvInscritoPerfilAlumno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/colorOnSurface" android:textSize="12sp" android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Actividad en el grupo card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/colorDivider">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_assignment"
+                            android:contentDescription="Actividad"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="ACTIVIDAD EN EL GRUPO"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.06" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider"
+                        android:layout_marginBottom="12dp" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressActividadAlumno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="0"
+                        app:trackColor="@color/colorDivider"
+                        app:indicatorColor="@color/colorSuccess"
+                        app:trackCornerRadius="4dp"
+                        android:layout_marginBottom="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:id="@+id/tvActEntregadas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/colorSuccess" android:textSize="20sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Entregadas" android:textColor="@color/colorOnSurfaceVariant" android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <View android:layout_width="1dp" android:layout_height="32dp" android:layout_gravity="center_vertical" android:background="@color/colorDivider" />
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:id="@+id/tvActCalificadas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/colorPrimary" android:textSize="20sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Calificadas" android:textColor="@color/colorOnSurfaceVariant" android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <View android:layout_width="1dp" android:layout_height="32dp" android:layout_gravity="center_vertical" android:background="@color/colorDivider" />
+
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+                            <TextView android:id="@+id/tvActPendientes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/colorWarning" android:textSize="20sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pendientes" android:textColor="@color/colorOnSurfaceVariant" android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- ══ ACCIÓN STICKY ════════════════════════════════════════════════ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="88dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMensajePerfilAlumno"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Enviar mensaje privado"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_chat"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<com.google.android.material.progressindicator.CircularProgressIndicator
+    android:id="@+id/progressBarAlumnoPerfil"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    app:indicatorColor="@color/colorPrimary"
+    app:trackColor="@color/colorDivider" />
+
+</FrameLayout>

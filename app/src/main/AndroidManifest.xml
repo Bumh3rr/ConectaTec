@@ -8,7 +8,9 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" /> <!-- Para leer imágenes en Android 13+ -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- Notificaciones push (Android 13+) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" /> <!-- Notificaciones push (Android 13+) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Feature requerida para la cámara -->
     <uses-feature
         android:name="android.hardware.camera"
@@ -28,6 +30,19 @@
         <activity
             android:name=".ui.admin.MainAdminActivity"
             android:exported="true">
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
+        <!-- TODO: quitar el intent-filter de MainDocenteActivity cuando el login enrute por rol -->
+        <activity
+            android:name=".ui.docente.MainDocenteActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,6 +71,9 @@
             android:name=".ui.auth.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

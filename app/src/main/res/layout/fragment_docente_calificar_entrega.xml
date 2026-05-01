@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <!-- ══ HEADER ════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorSurface"
+        android:paddingTop="48dp"
+        android:paddingBottom="16dp"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/btnVolverCalificar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="Volver"
+            android:padding="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/colorOnSurface" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.18" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_calificar"
+                android:textColor="@color/colorOnSurface"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <!-- ══ CARD ALUMNO ════════════════════════════════════════ -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAlumnoCalif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Avatar + info -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="20dp">
+
+                        <FrameLayout
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/bg_avatar_placeholder">
+
+                            <TextView
+                                android:id="@+id/tvInicialesAlumnoCalif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="AL"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvNombreAlumnoCalif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ana López"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:fontFamily="sans-serif-medium" />
+
+                            <TextView
+                                android:id="@+id/tvCorreoAlumnoCalif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="alumno@correo.com"
+                                android:textColor="@color/colorOnSurfaceVariant"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvChipEstadoCalif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="ENTREGADA"
+                                android:textColor="@color/white"
+                                android:textSize="9sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.05"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:background="@drawable/bg_chip_estudiante" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Divider -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider" />
+
+                    <!-- Fila fecha de entrega -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="12dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/ic_assignment"
+                            android:contentDescription="@null"
+                            app:tint="@color/colorOnSurfaceVariant" />
+
+                        <TextView
+                            android:id="@+id/tvFechaEntregaCalif"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Entregada: 05/05/2026"
+                            android:textColor="@color/colorOnSurfaceVariant"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ══ ARCHIVOS ENTREGADOS ════════════════════════════════ -->
+            <LinearLayout
+                android:id="@+id/containerArchivoCalif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/colorSurface"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- Sección header -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="12dp">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:src="@drawable/ic_paperclip"
+                                android:contentDescription="@null"
+                                app:tint="@color/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="ARCHIVOS ENTREGADOS"
+                                android:textColor="@color/colorOnSurfaceVariant"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.08" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorDivider"
+                            android:layout_marginBottom="14dp" />
+
+                        <!-- Archivo 1 -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardEntregaArchivo1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/colorSurface"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="14dp"
+                                android:paddingVertical="14dp">
+
+                                <ImageView
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:src="@drawable/ic_clipboard"
+                                    android:contentDescription="@null"
+                                    app:tint="@color/colorPrimary" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvArchivoCalif"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="tarea_entregable.pdf"
+                                        android:textColor="@color/colorOnSurface"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold"
+                                        android:maxLines="1"
+                                        android:ellipsize="end" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="1.2 MB · toca para abrir"
+                                        android:textColor="@color/colorOnSurfaceVariant"
+                                        android:textSize="11sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Archivo 2 -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardEntregaArchivo2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/colorSurface"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="14dp"
+                                android:paddingVertical="14dp">
+
+                                <ImageView
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:src="@drawable/ic_clipboard"
+                                    android:contentDescription="@null"
+                                    app:tint="@color/colorPrimary" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="evidencia_practica.jpg"
+                                        android:textColor="@color/colorOnSurface"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold"
+                                        android:maxLines="1"
+                                        android:ellipsize="end" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="580 KB · toca para abrir"
+                                        android:textColor="@color/colorOnSurfaceVariant"
+                                        android:textSize="11sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Comentario del alumno -->
+                        <TextView
+                            android:id="@+id/tvComentariosAlumno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Adjunto el documento con los layouts solicitados. Cualquier comentario es bienvenido."
+                            android:textColor="@color/colorOnSurfaceVariant"
+                            android:textSize="12sp"
+                            android:lineSpacingExtra="3dp"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- ══ CARD CALIFICACIÓN ══════════════════════════════════ -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCalificacionEntrega"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/colorSurface"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CALIFICACIÓN"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.06"
+                        android:layout_marginBottom="12dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorDivider"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Fila de calificación: label + pill input + /100 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/hint_calificacion"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="15sp" />
+
+                        <FrameLayout
+                            android:layout_width="72dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_input">
+
+                            <EditText
+                                android:id="@+id/etCalificacionEntrega"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:hint="---"
+                                android:textColorHint="@color/colorOnSurfaceVariant"
+                                android:inputType="number"
+                                android:textColor="@color/colorOnSurface"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:maxLength="3"
+                                android:background="@null"
+                                android:paddingHorizontal="8dp" />
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="/100"
+                            android:textColor="@color/colorOnSurfaceVariant"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <!-- Retroalimentación -->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRetroalimentacionEntrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_input"
+                        android:gravity="top|start"
+                        android:hint="@string/hint_retroalimentacion"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:minLines="3"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="12dp"
+                        android:textColor="@color/colorOnSurface"
+                        android:textColorHint="@color/colorOnSurfaceVariant"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- ══ ACCIÓN STICKY ════════════════════════════════════════════════ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
+        android:orientation="vertical"
+        android:paddingBottom="88dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarCalificacion"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="@string/btn_calificar"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_grading"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<com.google.android.material.progressindicator.CircularProgressIndicator
+    android:id="@+id/progressBarCalificar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    app:indicatorColor="@color/colorPrimary"
+    app:trackColor="@color/colorDivider" />
+
+</FrameLayout>

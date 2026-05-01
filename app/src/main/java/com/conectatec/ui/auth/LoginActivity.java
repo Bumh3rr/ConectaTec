@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.conectatec.databinding.ActivityLoginBinding;
 import com.conectatec.ui.admin.MainAdminActivity;
+import com.conectatec.ui.docente.MainDocenteActivity;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -44,13 +45,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setupListeners() {
 
-        // Botón login — aquí Jose Emmanuel conectará el ViewModel
+        // TODO: viewModel.login(correo, contrasena) — provisional: selector de rol
         binding.btnLogin.setOnClickListener(v -> {
-            String correo     = binding.etCorreo.getText().toString().trim();
-            String contrasena = binding.etContrasena.getText().toString().trim();
-            // TODO: viewModel.login(correo, contrasena)
-
             startActivity(new Intent(this, MainAdminActivity.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
+
+        binding.btnLoginDocente.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainDocenteActivity.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
 
