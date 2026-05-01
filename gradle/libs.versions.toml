@@ -28,6 +28,7 @@ lottievrs = "3.4.0"
 mpandroidchart = "v3.1.0"
 arch-core-testing = "2.2.0"
 zxing = "3.5.3"
+dotsindicator = "5.0"
 
 [libraries]
 # AndroidX core
@@ -102,6 +103,7 @@ mpandroidchart           = { group = "com.github.PhilJay",             name = "M
 # Testing — LiveData
 arch-core-testing        = { group = "androidx.arch.core",            name = "core-testing",                   version.ref = "arch-core-testing" }
 zxing-core               = { group = "com.google.zxing",               name = "core",                           version.ref = "zxing" }
+dotsindicator            = { group = "com.tbuonomo",                    name = "dotsindicator",                  version.ref = "dotsindicator" }
 
 [plugins]
 android-application      = { id = "com.android.application",          version.ref = "agp" }

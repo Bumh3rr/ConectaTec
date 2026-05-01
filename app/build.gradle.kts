@@ -107,6 +107,9 @@ dependencies {
     // MPAndroidChart
     implementation(libs.mpandroidchart)
 
+    // DotsIndicator (carousel page indicators)
+    implementation(libs.dotsindicator)
+
     // ZXing — generación de QR
     implementation(libs.zxing.core)
 

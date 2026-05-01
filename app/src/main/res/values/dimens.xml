@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="carousel_peek_width">32dp</dimen>
+    <dimen name="carousel_chart_height">220dp</dimen>
+</resources>

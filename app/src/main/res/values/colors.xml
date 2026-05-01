@@ -53,6 +53,24 @@
     <color name="nav_icon_active">#FFFFFF</color>
     <color name="nav_label">#F5F5F5</color>
 
+    <!-- Dashboard dark palette (github-inspired) -->
+    <color name="db_background">#0D1117</color>
+    <color name="db_surface">#161B22</color>
+    <color name="db_border">#21262D</color>
+    <color name="db_blue">#58A6FF</color>
+    <color name="db_green">#3FB950</color>
+    <color name="db_purple">#D2A8FF</color>
+    <color name="db_orange">#F0883E</color>
+    <color name="db_red">#F78166</color>
+    <color name="db_text_primary">#E6EDF3</color>
+    <color name="db_text_secondary">#C9D1D9</color>
+    <color name="db_text_muted">#7D8590</color>
+    <color name="db_dim">#484F58</color>
+    <!-- Filter chip backgrounds -->
+    <color name="db_chip_bg_blue">#1A2E4A</color>
+    <color name="db_chip_bg_green">#1A3A2A</color>
+    <color name="db_chip_bg_purple">#2A1F3A</color>
+
     <!-- Dashboard Activity (modo claro) -->
     <color name="colorDashBg">#F4F6FA</color>
     <color name="colorDashCard">#FFFFFF</color>

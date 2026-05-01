@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/db_background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -13,432 +13,364 @@
         android:orientation="vertical"
         android:paddingBottom="100dp">
 
-        <!-- ══ HEADER ══════════════════════════════════════════════ -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@color/colorSurface"
-            android:paddingTop="48dp"
-            android:paddingBottom="20dp"
-            android:paddingHorizontal="20dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.18"
-                    android:layout_marginBottom="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bienvenido Pedro"
-                    android:textColor="@color/colorOnSurfaceVariant"
-                    android:textSize="13sp"
-                    android:layout_marginBottom="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Panel de control"
-                    android:textColor="@color/colorOnSurface"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-medium" />
-
-            </LinearLayout>
-
-            <!-- Admin avatar -->
-            <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/bg_chip_admin">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="LR"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <!-- Línea de acento -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/colorPrimary" />
-
-        <!-- ══ STATS GRID ══════════════════════════════════════════ -->
+        <!-- ══ A. HEADER ══════════════════════════════════════════════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="20dp">
+            android:background="@color/db_surface"
+            android:paddingTop="48dp"
+            android:paddingBottom="16dp"
+            android:paddingHorizontal="16dp">
 
-            <!-- Sección label -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="10dp">
 
+                <!-- Logo TC chip -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="RESUMEN"
-                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:text="TC"
+                    android:textColor="@color/white"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:letterSpacing="0.10" />
+                    android:letterSpacing="0.05"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:background="@drawable/bg_chip_db_blue"
+                    android:layout_marginEnd="12dp" />
 
-                <View
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dashboard Admin"
+                        android:textColor="@color/db_text_primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TecNM · Verano 2025"
+                        android:textColor="@color/db_text_muted"
+                        android:textSize="12sp"
+                        android:layout_marginTop="1dp" />
+
+                </LinearLayout>
+
+                <!-- En línea indicator -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hoy, 29 abr"
-                    android:textColor="@color/colorOnSurfaceVariant"
-                    android:textSize="11sp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:background="@color/db_green"
+                        android:layout_marginEnd="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="En línea"
+                        android:textColor="@color/db_green"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <!-- Fila 1: Usuarios + Pendientes -->
+            <!-- ══ B. FILTER CHIPS ══════════════════════════════════ -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Todos los roles"
+                        android:textColor="@color/db_blue"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:background="@drawable/bg_chip_db_blue"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activos"
+                        android:textColor="@color/db_green"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:background="@drawable/bg_chip_db_green"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Periodo actual"
+                        android:textColor="@color/db_purple"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:background="@drawable/bg_chip_db_purple" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <!-- Border bottom header -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/db_border" />
+
+        <!-- ══ C. KPI GRID 2×2 ════════════════════════════════════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RESUMEN"
+                android:textColor="@color/db_text_muted"
+                android:textSize="9sp"
+                android:textAllCaps="true"
+                android:letterSpacing="0.08"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Fila 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="8dp">
 
-                <!-- Card Usuarios -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardUsuarios"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="4dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/colorSurface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp">
+                    style="@style/KpiCard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Usuarios totales"
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="11sp"
-                                android:letterSpacing="0.03" />
-
-                            <FrameLayout
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/bg_chip_admin">
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_gravity="center"
-                                    android:src="@android:drawable/ic_menu_manage"
-                                    android:contentDescription="@null"
-                                    android:scaleType="fitCenter"
-                                    app:tint="@color/white" />
-
-                            </FrameLayout>
-
-                        </LinearLayout>
+                            android:text="Usuarios Totales"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.04"
+                            android:layout_marginBottom="6dp" />
 
                         <TextView
                             android:id="@+id/tvTotalUsuarios"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="24"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="30sp"
+                            android:text="47"
+                            android:textColor="@color/db_blue"
+                            android:textSize="26sp"
                             android:textStyle="bold"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginBottom="6dp" />
+                            android:fontFamily="sans-serif-medium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="↑ +2 este mes"
-                            android:textColor="@color/colorSuccess"
-                            android:textSize="11sp" />
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:layout_marginTop="4dp" />
 
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Card Pendientes -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardPendientes"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="5dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="@color/colorSurface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/colorWarning">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Pendientes"
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="11sp"
-                                android:letterSpacing="0.03" />
-
-                            <FrameLayout
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/bg_chip_pendiente">
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_gravity="center"
-                                    android:src="@android:drawable/ic_dialog_alert"
-                                    android:contentDescription="@null"
-                                    android:scaleType="fitCenter"
-                                    app:tint="@color/white" />
-
-                            </FrameLayout>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tvTotalPendientes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3"
-                            android:textColor="@color/colorWarning"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginBottom="6dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Requieren acción"
-                            android:textColor="@color/colorWarning"
-                            android:textSize="11sp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-            <!-- Fila 2: Grupos + Tareas -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Card Grupos -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardGrupos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="4dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/colorSurface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp">
+                    style="@style/KpiCard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Grupos activos"
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="11sp"
-                                android:letterSpacing="0.03" />
-
-                            <FrameLayout
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/bg_chip_estudiante">
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_gravity="center"
-                                    android:src="@android:drawable/ic_menu_share"
-                                    android:contentDescription="@null"
-                                    android:scaleType="fitCenter"
-                                    app:tint="@color/white" />
-
-                            </FrameLayout>
-
-                        </LinearLayout>
+                            android:text="Grupos Activos"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.04"
+                            android:layout_marginBottom="6dp" />
 
                         <TextView
                             android:id="@+id/tvTotalGrupos"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="8"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="30sp"
+                            android:textColor="@color/db_green"
+                            android:textSize="26sp"
                             android:textStyle="bold"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginBottom="6dp" />
+                            android:fontFamily="sans-serif-medium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="↑ +1 este mes"
-                            android:textColor="@color/colorSuccess"
-                            android:textSize="11sp" />
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:layout_marginTop="4dp" />
 
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Card Tareas -->
+            </LinearLayout>
+
+            <!-- Fila 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardTareas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="4dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/colorSurface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="0dp">
+                    style="@style/KpiCard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Tareas publs."
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="11sp"
-                                android:letterSpacing="0.03" />
-
-                            <FrameLayout
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/bg_chip_docente">
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_gravity="center"
-                                    android:src="@android:drawable/ic_menu_agenda"
-                                    android:contentDescription="@null"
-                                    android:scaleType="fitCenter"
-                                    app:tint="@color/white" />
-
-                            </FrameLayout>
-
-                        </LinearLayout>
+                            android:text="Tareas Publicadas"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.04"
+                            android:layout_marginBottom="6dp" />
 
                         <TextView
                             android:id="@+id/tvTotalTareas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="41"
-                            android:textColor="@color/colorOnSurface"
-                            android:textSize="30sp"
+                            android:text="89"
+                            android:textColor="@color/db_purple"
+                            android:textSize="26sp"
                             android:textStyle="bold"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_marginBottom="6dp" />
+                            android:fontFamily="sans-serif-medium" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="↑ +5 esta semana"
-                            android:textColor="@color/colorSuccess"
-                            android:textSize="11sp" />
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardPendientes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    style="@style/KpiCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sin Calificar"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.04"
+                            android:layout_marginBottom="6dp" />
+
+                        <TextView
+                            android:id="@+id/tvTotalPendientes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="41"
+                            android:textColor="@color/db_red"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Requieren calificación"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="9sp"
+                            android:layout_marginTop="4dp" />
 
                     </LinearLayout>
 
@@ -448,301 +380,783 @@
 
         </LinearLayout>
 
-        <!-- ══ ACTIVIDAD RECIENTE ══════════════════════════════════ -->
+        <!-- ══ D. DONUT: USUARIOS POR ROL ════════════════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="16dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="USUARIOS POR ROL"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="12dp" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chartDonutRoles"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <!-- Leyenda manual -->
+                <LinearLayout
+                    android:id="@+id/layoutLeyendaRoles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
+
+                    <!-- ESTUDIANTE -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="6dp">
+
+                        <View
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:background="@color/db_blue"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ESTUDIANTE"
+                            android:textColor="@color/db_text_secondary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvLeyendaEstudiante"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="31"
+                            android:textColor="@color/db_text_primary"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="66%"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="11sp"
+                            android:gravity="end" />
+
+                    </LinearLayout>
+
+                    <!-- DOCENTE -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="6dp">
+
+                        <View
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:background="@color/db_green"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="DOCENTE"
+                            android:textColor="@color/db_text_secondary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvLeyendaDocente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9"
+                            android:textColor="@color/db_text_primary"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="19%"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="11sp"
+                            android:gravity="end" />
+
+                    </LinearLayout>
+
+                    <!-- PENDIENTE -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="6dp">
+
+                        <View
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:background="@color/db_red"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="PENDIENTE"
+                            android:textColor="@color/db_text_secondary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvLeyendaPendiente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4"
+                            android:textColor="@color/db_text_primary"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="9%"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="11sp"
+                            android:gravity="end" />
+
+                    </LinearLayout>
+
+                    <!-- ADMIN -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:background="@color/db_purple"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ADMIN"
+                            android:textColor="@color/db_text_secondary"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvLeyendaAdmin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="@color/db_text_primary"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="6%"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="11sp"
+                            android:gravity="end" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ E. PIE: TAREAS POR TIPO ════════════════════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TAREAS POR TIPO"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="10dp" />
+
+                <!-- Chips de tipo -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TAREA"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:background="@drawable/bg_chip_docente"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TRABAJO"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:background="@drawable/bg_chip_pendiente"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EXAMEN"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:background="@drawable/bg_chip_admin"
+                        android:layout_marginEnd="6dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PROYECTO"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:background="@drawable/bg_chip_estudiante" />
+
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chartDonutTipos"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <!-- Leyenda tipos -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="6dp">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_blue" android:layout_marginEnd="6dp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tarea 44" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_purple" android:layout_marginEnd="6dp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Examen 14" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="6dp">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_green" android:layout_marginEnd="6dp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trabajo 24" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_orange" android:layout_marginEnd="6dp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Proyecto 7" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ F. DONUT: CALIFICADAS VS SIN CALIFICAR ════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ESTADO DE ENTREGAS"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="12dp" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chartDonutCalif"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp" />
+
+                <!-- Métricas debajo -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="48"
+                            android:textColor="@color/db_green"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Calificadas"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="@color/db_border"
+                        android:layout_gravity="center_vertical" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="41"
+                            android:textColor="@color/db_red"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sin calificar"
+                            android:textColor="@color/db_text_muted"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ G. BARRA: ENTREGAS POR ESTADO ═════════════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENTREGAS POR ESTADO"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="12dp" />
+
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:id="@+id/chartBarraEstados"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ H. DONUT COMPACTO: FOTOS IA ═══════════════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VERIFICACIÓN DE FOTOS IA"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/chartDonutFotos"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginEnd="16dp" />
+
+                    <!-- Leyenda derecha -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="10dp">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_green" android:layout_marginEnd="8dp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Aprobadas" android:textColor="@color/db_text_secondary" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="33" android:textColor="@color/db_text_primary" android:textSize="12sp" android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="10dp">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_red" android:layout_marginEnd="8dp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Rechazadas" android:textColor="@color/db_text_secondary" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5" android:textColor="@color/db_text_primary" android:textSize="12sp" android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <View android:layout_width="9dp" android:layout_height="9dp" android:background="@color/db_dim" android:layout_marginEnd="8dp"/>
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Sin verificar" android:textColor="@color/db_text_secondary" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9" android:textColor="@color/db_text_primary" android:textSize="12sp" android:textStyle="bold"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ J. CARRUSEL: VISTA RÁPIDA USUARIOS ═══════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VISTA RÁPIDA — USUARIOS"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="10dp" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpChartUsuarios"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dotsUsuarios"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    app:dotsColor="@color/db_text_muted"
+                    app:selectedDotColor="@color/db_blue"
+                    app:dotsSize="6dp"
+                    app:dotsSpacing="4dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ K. CARRUSEL: VISTA RÁPIDA TAREAS ═══════════════════ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            style="@style/ChartCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VISTA RÁPIDA — TAREAS"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="10dp" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpChartTareas"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dotsTareas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    app:dotsColor="@color/db_text_muted"
+                    app:selectedDotColor="@color/db_blue"
+                    app:dotsSize="6dp"
+                    app:dotsSpacing="4dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ══ I. FEED: ACTIVIDAD RECIENTE ════════════════════════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="28dp">
+            android:paddingHorizontal="12dp"
+            android:paddingTop="16dp">
 
-            <!-- Header sección -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TRABAJOS Y TAREAS RECIENTES"
-                    android:textColor="@color/colorOnSurfaceVariant"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.10" />
+                    android:text="ACTIVIDAD RECIENTE"
+                    android:textColor="@color/db_text_muted"
+                    android:textSize="9sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08" />
 
                 <TextView
                     android:id="@+id/tvVerTodoActividad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ver todo"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp"
+                    android:textColor="@color/db_blue"
+                    android:textSize="11sp"
                     android:textStyle="bold"
                     android:clickable="true"
                     android:focusable="true" />
 
             </LinearLayout>
 
-            <!-- Card de actividad -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorSurface"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+                style="@style/ChartCard">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingVertical="4dp">
+                    android:paddingVertical="8dp">
 
-                    <!-- Item 1: Trabajo -->
+                    <!-- Feed item 1 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_marginEnd="14dp"
-                            android:background="@drawable/bg_chip_docente">
-
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_gravity="center"
-                                android:src="@android:drawable/ic_menu_agenda"
-                                android:contentDescription="@null"
-                                android:scaleType="fitCenter"
-                                app:tint="@color/white" />
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:layout_marginBottom="2dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="TRABAJO"
-                                    android:textColor="@color/colorChipDocente"
-                                    android:textSize="9sp"
-                                    android:textStyle="bold"
-                                    android:letterSpacing="0.08"
-                                    android:layout_marginEnd="6dp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="hace 1h"
-                                    android:textColor="@color/colorOnSurfaceVariant"
-                                    android:textSize="10sp" />
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Proyecto Final de Software"
-                                android:textColor="@color/colorOnSurface"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Ing. de Software – 6A · vence 05/05/2025"
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="12sp" />
-
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="10dp">
+                        <View android:layout_width="6dp" android:layout_height="6dp" android:background="@color/db_blue" android:layout_marginEnd="12dp"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nueva tarea publicada: Proyecto Final POO" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prog. Móvil 6A · hace 1h" android:textColor="@color/db_text_muted" android:textSize="9sp" android:layout_marginTop="2dp"/>
                         </LinearLayout>
-
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorDivider"
-                        android:layout_marginHorizontal="16dp" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/db_border" android:layout_marginHorizontal="14dp"/>
 
-                    <!-- Item 2: Tarea -->
+                    <!-- Feed item 2 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_marginEnd="14dp"
-                            android:background="@drawable/bg_chip_estudiante">
-
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_gravity="center"
-                                android:src="@android:drawable/ic_menu_edit"
-                                android:contentDescription="@null"
-                                android:scaleType="fitCenter"
-                                app:tint="@color/white" />
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:layout_marginBottom="2dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="TAREA"
-                                    android:textColor="@color/colorChipEstudiante"
-                                    android:textSize="9sp"
-                                    android:textStyle="bold"
-                                    android:letterSpacing="0.08"
-                                    android:layout_marginEnd="6dp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="hace 4h"
-                                    android:textColor="@color/colorOnSurfaceVariant"
-                                    android:textSize="10sp" />
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tarea 3: Normalización BD"
-                                android:textColor="@color/colorOnSurface"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Bases de Datos – 4B · vence 02/05/2025"
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="12sp" />
-
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="10dp">
+                        <View android:layout_width="6dp" android:layout_height="6dp" android:background="@color/db_green" android:layout_marginEnd="12dp"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Entrega calificada: Tarea 3 Normalización BD" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bases de Datos 4B · hace 2h" android:textColor="@color/db_text_muted" android:textSize="9sp" android:layout_marginTop="2dp"/>
                         </LinearLayout>
-
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorDivider"
-                        android:layout_marginHorizontal="16dp" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/db_border" android:layout_marginHorizontal="14dp"/>
 
-                    <!-- Item 3: Examen -->
+                    <!-- Feed item 3 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_marginEnd="14dp"
-                            android:background="@drawable/bg_chip_admin">
-
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:layout_gravity="center"
-                                android:src="@android:drawable/ic_menu_info_details"
-                                android:contentDescription="@null"
-                                android:scaleType="fitCenter"
-                                app:tint="@color/white" />
-
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center_vertical"
-                                android:layout_marginBottom="2dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="EXAMEN"
-                                    android:textColor="@color/colorChipAdmin"
-                                    android:textSize="9sp"
-                                    android:textStyle="bold"
-                                    android:letterSpacing="0.08"
-                                    android:layout_marginEnd="6dp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="hace 1d"
-                                    android:textColor="@color/colorOnSurfaceVariant"
-                                    android:textSize="10sp" />
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Examen Parcial 2"
-                                android:textColor="@color/colorOnSurface"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Cálculo Integral – 2A · vence 30/04/2025"
-                                android:textColor="@color/colorOnSurfaceVariant"
-                                android:textSize="12sp" />
-
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="10dp">
+                        <View android:layout_width="6dp" android:layout_height="6dp" android:background="@color/db_red" android:layout_marginEnd="12dp"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Foto rechazada: Carlos Hernández Ortiz" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="hace 3h" android:textColor="@color/db_text_muted" android:textSize="9sp" android:layout_marginTop="2dp"/>
                         </LinearLayout>
+                    </LinearLayout>
 
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/db_border" android:layout_marginHorizontal="14dp"/>
+
+                    <!-- Feed item 4 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="10dp">
+                        <View android:layout_width="6dp" android:layout_height="6dp" android:background="@color/db_purple" android:layout_marginEnd="12dp"/>
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nuevo usuario registrado: Ana García López" android:textColor="@color/db_text_secondary" android:textSize="11sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="hace 5h" android:textColor="@color/db_text_muted" android:textSize="9sp" android:layout_marginTop="2dp"/>
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
