@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
-    <!-- Back header -->
+    <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +59,6 @@
                 android:id="@+id/tvSubtituloEntregas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tarea"
                 android:textColor="@color/colorOnSurfaceVariant"
                 android:textSize="12sp"
                 android:maxLines="1"
@@ -74,7 +73,7 @@
         android:layout_height="3dp"
         android:background="@color/colorPrimary" />
 
-    <!-- Card resumen -->
+    <!-- ══ CARD RESUMEN ════════════════════════════════════════════════ -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,23 +82,24 @@
         app:cardBackgroundColor="@color/colorSurface"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
-        app:strokeWidth="0dp">
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/colorDivider">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_progreso_entregas"
                 android:textColor="@color/colorOnSurfaceVariant"
-                android:textSize="11sp"
+                android:textSize="10sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.08"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="10dp" />
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressEntregasResumen"
@@ -111,7 +111,7 @@
                 app:trackColor="@color/colorDivider"
                 app:indicatorColor="@color/colorSuccess"
                 app:trackCornerRadius="4dp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="14dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,80 +209,108 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Chips de filtro -->
-    <HorizontalScrollView
+    <!-- ══ PANEL DE FILTROS ════════════════════════════════════════════ -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:paddingHorizontal="16dp"
+        android:background="@color/colorBackground"
+        android:orientation="vertical"
         android:paddingTop="12dp"
-        android:paddingBottom="6dp">
+        android:paddingBottom="4dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingHorizontal="16dp"
+            android:scrollbars="none">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipEntregasTodas"
-                style="@style/Widget.Material3.Chip.Filter"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupEntregas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/chip_entregas_todas"
-                android:checked="true" />
+                app:singleSelection="true"
+                app:selectionRequired="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipEntregasPendientes"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/chip_entregas_pendientes" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntregasTodas"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/chip_entregas_todas" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipEntregasEntregadas"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/chip_entregas_entregadas" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntregasEntregadas"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_entregas_entregadas" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipEntregasCalificadas"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/chip_entregas_calificadas" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntregasCalificadas"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_entregas_calificadas" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipEntregasSinEntregar"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/chip_entregas_sin_entregar" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntregasPendientes"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_entregas_pendientes" />
 
-        </LinearLayout>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntregasSinEntregar"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chip_entregas_sin_entregar" />
 
-    </HorizontalScrollView>
+            </com.google.android.material.chip.ChipGroup>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEntregas"
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tvStatsResumenEntregas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/colorOnSurfaceVariant"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider" />
+
+    <!-- ══ LISTA / EMPTY STATE ═════════════════════════════════════════ -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="88dp"
-        android:clipToPadding="false"
-        android:scrollbars="none" />
+        android:layout_weight="1">
 
-    <include
-        android:id="@+id/emptyStateEntregas"
-        layout="@layout/layout_empty_state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvEntregas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="88dp"
+            android:clipToPadding="false"
+            android:scrollbars="none" />
+
+        <include
+            android:id="@+id/emptyStateEntregas"
+            layout="@layout/layout_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.conectatec.R;
 import com.conectatec.databinding.FragmentDocenteGruposBinding;
+import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.docente.grupos.adapter.GrupoDocenteAdapter;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -33,6 +34,7 @@ public class DocenteGruposFragment extends Fragment {
 
     private FragmentDocenteGruposBinding binding;
     private GrupoDocenteAdapter adapter;
+    private ScrollRevealAnimator scrollRevealAnimator;
 
     @Nullable
     @Override
@@ -47,8 +49,10 @@ public class DocenteGruposFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
+        scrollRevealAnimator = new ScrollRevealAnimator(binding.rvGruposDocente);
         setupSearch();
         setupListeners();
+        scrollRevealAnimator.triggerInicial();
     }
 
     private void setupRecyclerView() {
@@ -72,6 +76,7 @@ public class DocenteGruposFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 adapter.filtrar(s.toString());
                 actualizarUI();
+                scrollRevealAnimator.triggerInicial();
             }
         });
     }

@@ -10,7 +10,8 @@
     app:cardBackgroundColor="@color/colorSurface"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp"
-    app:strokeWidth="0dp">
+    app:strokeWidth="1.5dp"
+    app:strokeColor="@color/colorBorder">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +21,13 @@
         android:paddingTop="14dp"
         android:paddingBottom="14dp">
 
-        <!-- Fila 1: chip tipo + chip estado -->
+        <!-- Fila 1: tipo chip (izquierda) + estado chip (derecha) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/tvChipTipoTarea"
@@ -71,9 +72,19 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="6dp" />
+            android:layout_marginBottom="12dp" />
 
-        <!-- Fila 3: fecha vence + entregas -->
+        <!-- Barra de progreso de entregas -->
+        <ProgressBar
+            android:id="@+id/pbEntregasTarea"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginBottom="8dp"
+            android:max="100"
+            android:progress="0" />
+
+        <!-- Fila 3: fecha + contador de entregas -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

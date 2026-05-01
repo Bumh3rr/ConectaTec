@@ -90,11 +90,22 @@ public class GrupoDocenteAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
         GrupoDummyDocente grupo = listaFiltrada.get(position);
+        h.binding.tvInicialGrupoDocente.setText(extraerIniciales(grupo.nombre));
         h.binding.tvNombreGrupoDocente.setText(grupo.nombre);
         h.binding.tvMateriaGrupoDocente.setText(grupo.materia);
-        h.binding.tvFechaGrupoDocente.setText("Creado: " + grupo.fechaCreacion);
+        h.binding.tvFechaGrupoDocente.setText("Creado el " + grupo.fechaCreacion);
+        h.binding.tvCodigoGrupoDocente.setText("Código de acceso: " + grupo.codigoUnion);
         h.binding.tvBadgeAlumnosDocente.setText(grupo.totalAlumnos + " alumnos");
         h.itemView.setOnClickListener(v -> listener.onGrupoClick(grupo));
+    }
+
+    private static String extraerIniciales(String nombre) {
+        String[] palabras = nombre.trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < Math.min(2, palabras.length); i++) {
+            if (!palabras[i].isEmpty()) sb.append(palabras[i].charAt(0));
+        }
+        return sb.toString().toUpperCase();
     }
 
     @Override

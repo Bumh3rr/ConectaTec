@@ -77,6 +77,12 @@
 
     </LinearLayout>
 
+    <!-- Línea de acento -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTareasGrupos"
         android:layout_width="match_parent"

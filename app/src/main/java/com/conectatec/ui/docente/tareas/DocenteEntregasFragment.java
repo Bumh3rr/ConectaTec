@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.conectatec.R;
 import com.conectatec.databinding.FragmentDocenteEntregasBinding;
+import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.docente.tareas.adapter.EntregaDocenteAdapter;
 import com.conectatec.ui.docente.tareas.adapter.TareaDocenteAdapter;
 import com.conectatec.ui.docente.tareas.adapter.TareaDocenteAdapter.TareaDummyDocente;
@@ -24,6 +25,7 @@ public class DocenteEntregasFragment extends Fragment {
 
     private FragmentDocenteEntregasBinding binding;
     private EntregaDocenteAdapter adapter;
+    private ScrollRevealAnimator scrollRevealAnimator;
     private int tareaId;
 
     @Nullable
@@ -47,8 +49,10 @@ public class DocenteEntregasFragment extends Fragment {
                 requireActivity().onBackPressed());
 
         setupRecyclerView();
+        scrollRevealAnimator = new ScrollRevealAnimator(binding.rvEntregas);
         setupChips();
         actualizarResumen();
+        scrollRevealAnimator.triggerInicial();
     }
 
     private void setupRecyclerView() {
@@ -66,32 +70,16 @@ public class DocenteEntregasFragment extends Fragment {
     }
 
     private void setupChips() {
-        binding.chipEntregasTodas.setOnCheckedChangeListener((c, checked) -> {
-            if (checked) { adapter.filtrar(null); actualizarVista(); }
-        });
-        binding.chipEntregasPendientes.setOnCheckedChangeListener((c, checked) -> {
-            if (checked) {
-                adapter.filtrar(EntregaDocenteAdapter.ESTADO_BORRADOR);
-                actualizarVista();
-            }
-        });
-        binding.chipEntregasEntregadas.setOnCheckedChangeListener((c, checked) -> {
-            if (checked) {
-                adapter.filtrar(EntregaDocenteAdapter.ESTADO_ENTREGADA);
-                actualizarVista();
-            }
-        });
-        binding.chipEntregasCalificadas.setOnCheckedChangeListener((c, checked) -> {
-            if (checked) {
-                adapter.filtrar(EntregaDocenteAdapter.ESTADO_CALIFICADA);
-                actualizarVista();
-            }
-        });
-        binding.chipEntregasSinEntregar.setOnCheckedChangeListener((c, checked) -> {
-            if (checked) {
-                adapter.filtrar(EntregaDocenteAdapter.ESTADO_SIN_ENTREGAR);
-                actualizarVista();
-            }
+        binding.chipGroupEntregas.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (checkedIds.isEmpty()) return;
+            int id = checkedIds.get(0);
+            if      (id == R.id.chipEntregasTodas)        adapter.filtrar(null);
+            else if (id == R.id.chipEntregasEntregadas)   adapter.filtrar(EntregaDocenteAdapter.ESTADO_ENTREGADA);
+            else if (id == R.id.chipEntregasCalificadas)  adapter.filtrar(EntregaDocenteAdapter.ESTADO_CALIFICADA);
+            else if (id == R.id.chipEntregasPendientes)   adapter.filtrar(EntregaDocenteAdapter.ESTADO_BORRADOR);
+            else if (id == R.id.chipEntregasSinEntregar)  adapter.filtrar(EntregaDocenteAdapter.ESTADO_SIN_ENTREGAR);
+            actualizarVista();
+            scrollRevealAnimator.triggerInicial();
         });
     }
 
@@ -110,9 +98,20 @@ public class DocenteEntregasFragment extends Fragment {
     }
 
     private void actualizarVista() {
-        boolean vacio = adapter.conteo() == 0;
+        int filtradas = adapter.conteo();
+        int total = adapter.conteoTotal();
+
+        boolean vacio = filtradas == 0;
         binding.rvEntregas.setVisibility(vacio ? View.GONE : View.VISIBLE);
         binding.emptyStateEntregas.getRoot().setVisibility(vacio ? View.VISIBLE : View.GONE);
+
+        if (filtradas == total) {
+            binding.tvStatsResumenEntregas.setText(
+                    total + " entrega" + (total != 1 ? "s" : ""));
+        } else {
+            binding.tvStatsResumenEntregas.setText(
+                    filtradas + " de " + total + " entrega" + (total != 1 ? "s" : ""));
+        }
     }
 
     @Override

@@ -1,15 +1,18 @@
 package com.conectatec.ui.docente.tareas.adapter;
 
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.conectatec.R;
 import com.conectatec.databinding.ItemEntregaDocenteBinding;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,37 +195,47 @@ public class EntregaDocenteAdapter
             int chipDrawable;
             String chipLabel;
             String fechaTxt;
+            int strokeColorRes;
+
             switch (e.estado) {
                 case ESTADO_ENTREGADA:
                     chipDrawable = R.drawable.bg_chip_estudiante;
                     chipLabel = "ENTREGADA";
                     fechaTxt = "Entregada: " + (e.fechaEntrega != null ? e.fechaEntrega : "—");
+                    strokeColorRes = R.color.colorChipEstudiante;
                     break;
                 case ESTADO_CALIFICADA:
-                    chipDrawable = R.drawable.bg_chip_estudiante;
+                    chipDrawable = R.drawable.bg_chip_docente;
                     chipLabel = "CALIFICADA";
                     fechaTxt = "Entregada: " + (e.fechaEntrega != null ? e.fechaEntrega : "—");
+                    strokeColorRes = R.color.colorPrimary;
                     break;
                 case ESTADO_BORRADOR:
                     chipDrawable = R.drawable.bg_chip_pendiente;
                     chipLabel = "BORRADOR";
                     fechaTxt = "Sin envío";
+                    strokeColorRes = R.color.colorChipPendiente;
                     break;
                 default:
                     chipDrawable = R.drawable.bg_chip_admin;
                     chipLabel = "SIN ENTREGAR";
                     fechaTxt = "—";
+                    strokeColorRes = R.color.colorError;
                     break;
             }
+
             b.tvChipEstadoEntrega.setBackgroundResource(chipDrawable);
             b.tvChipEstadoEntrega.setText(chipLabel);
             b.tvFechaEntrega.setText(fechaTxt);
 
-            if (e.calificacion != null) {
-                b.tvCalificacionEntrega.setVisibility(View.VISIBLE);
+            int strokeColor = ContextCompat.getColor(b.getRoot().getContext(), strokeColorRes);
+            ((MaterialCardView) b.getRoot()).setStrokeColor(ColorStateList.valueOf(strokeColor));
+
+            boolean tieneCalificacion = e.calificacion != null;
+            b.dividerCalificacion.setVisibility(tieneCalificacion ? View.VISIBLE : View.GONE);
+            b.rowCalificacion.setVisibility(tieneCalificacion ? View.VISIBLE : View.GONE);
+            if (tieneCalificacion) {
                 b.tvCalificacionEntrega.setText(e.calificacion + "/100");
-            } else {
-                b.tvCalificacionEntrega.setVisibility(View.GONE);
             }
         }
     }

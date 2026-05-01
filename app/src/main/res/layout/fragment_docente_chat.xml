@@ -12,6 +12,7 @@
         android:id="@+id/headerChatDocente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorSurface"
         android:orientation="vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -81,7 +82,6 @@
                 android:visibility="gone" />
 
         </LinearLayout>
-
     </LinearLayout>
 
     <!-- Chips filtro tipo -->

@@ -10,73 +10,72 @@
     app:cardBackgroundColor="@color/colorSurface"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp"
-    app:strokeWidth="0dp">
+    app:strokeWidth="1.5dp"
+    app:strokeColor="@color/colorBorder">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingTop="12dp"
+        android:paddingTop="14dp"
         android:paddingBottom="12dp">
 
-        <FrameLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="14dp"
-            android:background="@drawable/bg_avatar_placeholder">
-
-            <TextView
-                android:id="@+id/tvInicialesEntrega"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="AL"
-                android:textColor="@color/colorOnSurface"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-        </FrameLayout>
-
+        <!-- Fila principal: avatar + nombre/fecha + chip -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
 
-            <TextView
-                android:id="@+id/tvNombreEntrega"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_avatar_placeholder"
+                android:layout_marginEnd="14dp">
+
+                <TextView
+                    android:id="@+id/tvInicialesEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Ana López"
-                android:textColor="@color/colorOnSurface"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvFechaEntrega"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Entregada: 05/05/2026"
-                android:textColor="@color/colorOnSurfaceVariant"
-                android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/tvNombreEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvFechaEntrega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/colorOnSurfaceVariant"
+                    android:textSize="11sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="end">
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvChipEstadoEntrega"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ENTREGADA"
+                android:layout_marginStart="12dp"
                 android:textColor="@color/white"
                 android:textSize="9sp"
                 android:textStyle="bold"
@@ -85,17 +84,40 @@
                 android:paddingVertical="3dp"
                 android:background="@drawable/bg_chip_estudiante" />
 
+        </LinearLayout>
+
+        <!-- Divider + calificación (visible solo si calificada) -->
+        <View
+            android:id="@+id/dividerCalificacion"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/rowCalificacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Calificación"
+                android:textColor="@color/colorOnSurfaceVariant"
+                android:textSize="11sp" />
+
             <TextView
                 android:id="@+id/tvCalificacionEntrega"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_gravity="end"
-                android:text="85/100"
-                android:textColor="@color/colorSuccess"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
