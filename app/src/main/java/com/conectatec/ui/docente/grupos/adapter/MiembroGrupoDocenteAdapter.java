@@ -31,11 +31,21 @@ public class MiembroGrupoDocenteAdapter
         }
     }
 
+    public interface OnMiembroActionListener {
+        void onVerPerfil(MiembroDummyDocente m);
+        void onMensaje(MiembroDummyDocente m);
+    }
+
     private List<MiembroDummyDocente> lista = new ArrayList<>();
+    private OnMiembroActionListener listener;
 
     public void setLista(List<MiembroDummyDocente> nuevaLista) {
         this.lista = new ArrayList<>(nuevaLista);
         notifyDataSetChanged();
+    }
+
+    public void setListener(OnMiembroActionListener l) {
+        this.listener = l;
     }
 
     public int conteo() {
@@ -57,6 +67,13 @@ public class MiembroGrupoDocenteAdapter
         h.binding.tvNombreMiembroDocente.setText(m.nombre);
         h.binding.tvCorreoMiembroDocente.setText(m.correo);
         h.binding.tvMatriculaMiembroDocente.setText(m.matricula);
+
+        h.binding.btnVerPerfilMiembro.setOnClickListener(v -> {
+            if (listener != null) listener.onVerPerfil(m);
+        });
+        h.binding.btnMensajeMiembro.setOnClickListener(v -> {
+            if (listener != null) listener.onMensaje(m);
+        });
     }
 
     @Override

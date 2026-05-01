@@ -86,8 +86,11 @@
             android:id="@+id/rvMiembrosGrupoDocente"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="12dp"
             android:paddingBottom="88dp"
             android:clipToPadding="false"
+            android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <include

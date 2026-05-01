@@ -9,8 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.conectatec.R;
 import com.conectatec.databinding.FragmentDocenteMiembrosGrupoBinding;
+import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.docente.grupos.adapter.MiembroGrupoDocenteAdapter;
 import com.conectatec.ui.docente.grupos.adapter.MiembroGrupoDocenteAdapter.MiembroDummyDocente;
 
@@ -65,6 +68,7 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
 
     private FragmentDocenteMiembrosGrupoBinding binding;
     private MiembroGrupoDocenteAdapter adapter;
+    private ScrollRevealAnimator scrollRevealAnimator;
 
     @Nullable
     @Override
@@ -81,6 +85,8 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
 
         int grupoId = getArguments() != null ? getArguments().getInt("grupoId", 1) : 1;
         setupRecyclerView(grupoId);
+        scrollRevealAnimator = new ScrollRevealAnimator(binding.rvMiembrosGrupoDocente);
+        scrollRevealAnimator.triggerInicial();
 
         binding.btnBackMiembrosDocente.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
@@ -88,9 +94,32 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
 
     private void setupRecyclerView(int grupoId) {
         adapter = new MiembroGrupoDocenteAdapter();
+        binding.rvMiembrosGrupoDocente.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvMiembrosGrupoDocente.setAdapter(adapter);
 
-        int idx = grupoId - 1;
+        adapter.setListener(new MiembroGrupoDocenteAdapter.OnMiembroActionListener() {
+            @Override
+            public void onVerPerfil(MiembroDummyDocente m) {
+                Bundle args = new Bundle();
+                args.putInt("alumnoId", m.id);
+                args.putString("nombre", m.nombre);
+                args.putString("iniciales", m.iniciales);
+                args.putString("correo", m.correo);
+                args.putString("matricula", m.matricula);
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_miembros_to_perfil_alumno, args);
+            }
+
+            @Override
+            public void onMensaje(MiembroDummyDocente m) {
+                Bundle args = new Bundle();
+                args.putInt("salaId", 4);
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_miembros_to_conversacion, args);
+            }
+        });
+
+        int idx = Math.max(0, Math.min(grupoId - 1, MIEMBROS_POR_GRUPO.length - 1));
         List<MiembroDummyDocente> lista = Arrays.asList(MIEMBROS_POR_GRUPO[idx]);
         adapter.setLista(lista);
 

@@ -69,13 +69,11 @@
 
     <!-- ───────────── Sub-destinos: Grupos ───────────── -->
 
-    <!-- Crear nuevo grupo (sin args) -->
     <fragment
         android:id="@+id/docenteCrearGrupoFragment"
         android:name="com.conectatec.ui.docente.grupos.DocenteCrearGrupoFragment"
         android:label="Nuevo grupo" />
 
-    <!-- Detalle de grupo -->
     <fragment
         android:id="@+id/docenteGrupoDetalleFragment"
         android:name="com.conectatec.ui.docente.grupos.DocenteGrupoDetalleFragment"
@@ -100,7 +98,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <!-- Lista completa de miembros del grupo -->
     <fragment
         android:id="@+id/docenteMiembrosGrupoFragment"
         android:name="com.conectatec.ui.docente.grupos.DocenteMiembrosGrupoFragment"
@@ -109,11 +106,57 @@
             android:name="grupoId"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_miembros_to_perfil_alumno"
+            app:destination="@id/docenteAlumnoPerfilFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_miembros_to_conversacion"
+            app:destination="@id/docenteConversacionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/docenteAlumnoPerfilFragment"
+        android:name="com.conectatec.ui.docente.grupos.DocenteAlumnoPerfilFragment"
+        android:label="Perfil del alumno">
+        <argument
+            android:name="alumnoId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="nombre"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="iniciales"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="correo"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="matricula"
+            app:argType="string"
+            android:defaultValue="" />
+        <action
+            android:id="@+id/action_perfil_alumno_to_conversacion"
+            app:destination="@id/docenteConversacionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <!-- ───────────── Sub-destinos: Tareas ───────────── -->
 
-    <!-- Bloques del grupo -->
     <fragment
         android:id="@+id/docenteBloquesFragment"
         android:name="com.conectatec.ui.docente.tareas.DocenteBloquesFragment"
@@ -131,7 +174,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <!-- Tareas dentro de un bloque -->
     <fragment
         android:id="@+id/docenteTareasBloqueFragment"
         android:name="com.conectatec.ui.docente.tareas.DocenteTareasBloqueFragment"
@@ -160,7 +202,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <!-- Crear nueva tarea -->
     <fragment
         android:id="@+id/docenteCrearTareaFragment"
         android:name="com.conectatec.ui.docente.tareas.DocenteCrearTareaFragment"
@@ -175,7 +216,6 @@
             android:defaultValue="0" />
     </fragment>
 
-    <!-- Lista de entregas de una tarea -->
     <fragment
         android:id="@+id/docenteEntregasFragment"
         android:name="com.conectatec.ui.docente.tareas.DocenteEntregasFragment"
@@ -193,7 +233,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <!-- Calificar entrega de un alumno -->
     <fragment
         android:id="@+id/docenteCalificarEntregaFragment"
         android:name="com.conectatec.ui.docente.tareas.DocenteCalificarEntregaFragment"
@@ -210,7 +249,6 @@
 
     <!-- ───────────── Sub-destinos: Chat ───────────── -->
 
-    <!-- Conversacion (sala de chat individual o grupal) -->
     <fragment
         android:id="@+id/docenteConversacionFragment"
         android:name="com.conectatec.ui.docente.chat.DocenteConversacionFragment"

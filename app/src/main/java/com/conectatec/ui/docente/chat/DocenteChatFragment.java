@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.conectatec.R;
 import com.conectatec.databinding.FragmentDocenteChatBinding;
+import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.docente.chat.adapter.SalaDocenteAdapter;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -32,6 +33,7 @@ public class DocenteChatFragment extends Fragment {
 
     private FragmentDocenteChatBinding binding;
     private SalaDocenteAdapter adapter;
+    private ScrollRevealAnimator scrollRevealAnimator;
 
     @Nullable
     @Override
@@ -48,6 +50,8 @@ public class DocenteChatFragment extends Fragment {
         setupRecyclerView();
         setupChips();
         renderHeader();
+        scrollRevealAnimator = new ScrollRevealAnimator(binding.rvSalasChat);
+        scrollRevealAnimator.triggerInicial();
     }
 
     private void setupRecyclerView() {
@@ -63,17 +67,14 @@ public class DocenteChatFragment extends Fragment {
     }
 
     private void setupChips() {
-        binding.chipChatTodos.setOnClickListener(v -> {
-            adapter.setFiltroTipo(null);
+        binding.chipGroupChat.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (checkedIds.isEmpty()) return;
+            int id = checkedIds.get(0);
+            if      (id == R.id.chipChatTodos)    adapter.setFiltroTipo(null);
+            else if (id == R.id.chipChatGrupos)   adapter.setFiltroTipo("GRUPO");
+            else if (id == R.id.chipChatPrivados) adapter.setFiltroTipo("PRIVADO");
             toggleEmpty();
-        });
-        binding.chipChatGrupos.setOnClickListener(v -> {
-            adapter.setFiltroTipo("GRUPO");
-            toggleEmpty();
-        });
-        binding.chipChatPrivados.setOnClickListener(v -> {
-            adapter.setFiltroTipo("PRIVADO");
-            toggleEmpty();
+            scrollRevealAnimator.triggerInicial();
         });
     }
 

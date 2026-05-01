@@ -107,6 +107,10 @@ public class MainDocenteActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, dest, args) -> {
             int id = dest.getId();
 
+            // Ocultar pill nav en la pantalla de conversación (chat a pantalla completa)
+            boolean fullscreen = (id == R.id.docenteConversacionFragment);
+            binding.bottomNavDocente.setVisibility(fullscreen ? View.GONE : View.VISIBLE);
+
             for (int i = 0; i < DESTINATIONS.length; i++) {
                 if (DESTINATIONS[i] == id) {
                     selectItem(i);
@@ -117,7 +121,8 @@ public class MainDocenteActivity extends AppCompatActivity {
             // Sub-destinos: resaltar la pestaña padre
             if (id == R.id.docenteCrearGrupoFragment
                     || id == R.id.docenteGrupoDetalleFragment
-                    || id == R.id.docenteMiembrosGrupoFragment) {
+                    || id == R.id.docenteMiembrosGrupoFragment
+                    || id == R.id.docenteAlumnoPerfilFragment) {
                 selectItem(1); // Grupos
             } else if (id == R.id.docenteBloquesFragment
                     || id == R.id.docenteTareasBloqueFragment

@@ -192,44 +192,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aedc624c-f069-4a6c-8299-461ae8b89410" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.1.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAUDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/DocenteGruposFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/DocenteGruposFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/adapter/GrupoDocenteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/adapter/GrupoDocenteAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteCalificarEntregaFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteCalificarEntregaFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteCrearTareaFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteCrearTareaFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteEntregasFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteEntregasFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteTareasBloqueFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/DocenteTareasBloqueFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/adapter/EntregaDocenteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/adapter/EntregaDocenteAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/adapter/GrupoTareasDocenteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/adapter/GrupoTareasDocenteAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/adapter/TareaDocenteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/tareas/adapter/TareaDocenteAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_calificar_entrega.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_calificar_entrega.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/MainDocenteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/MainDocenteActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/chat/DocenteChatFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/chat/DocenteChatFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/DocenteMiembrosGrupoFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/DocenteMiembrosGrupoFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/adapter/MiembroGrupoDocenteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/conectatec/ui/docente/grupos/adapter/MiembroGrupoDocenteAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_chat.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_chat.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_crear_tarea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_crear_tarea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_entregas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_entregas.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_grupos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_grupos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_perfil.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_perfil.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_tareas.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_tareas.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_tareas_bloque.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_tareas_bloque.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_bloque_docente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_bloque_docente.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_entrega_docente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_entrega_docente.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_grupo_docente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_grupo_docente.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_tarea_docente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_tarea_docente.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_miembros_grupo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_docente_miembros_grupo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_miembro_grupo_docente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_miembro_grupo_docente.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_docente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_docente.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
