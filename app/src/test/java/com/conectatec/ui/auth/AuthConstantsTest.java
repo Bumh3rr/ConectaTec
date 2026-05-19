@@ -24,4 +24,14 @@ public class AuthConstantsTest {
     public void esDominioValido_soloArroba_retornaFalse() {
         assertFalse(AuthConstants.esDominioValido("@"));
     }
+
+    @Test
+    public void esDominioValido_emailNull_retornaFalse() {
+        assertFalse(AuthConstants.esDominioValido(null));
+    }
+
+    @Test
+    public void esDominioValido_emailConDominioConcatenado_retornaFalse() {
+        assertFalse(AuthConstants.esDominioValido("atacante@evil.com@tudominio.edu.mx"));
+    }
 }

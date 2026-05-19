@@ -10,9 +10,10 @@ public final class AuthConstants {
 
     private AuthConstants() {}
 
-    /** Retorna true si el email termina con el dominio institucional. */
+    /** Retorna true si el dominio del email coincide exactamente con el dominio institucional. */
     public static boolean esDominioValido(String email) {
         if (email == null || email.isEmpty()) return false;
-        return email.endsWith(DOMINIO_INSTITUCIONAL);
+        int atIndex = email.indexOf('@');
+        return atIndex > 0 && email.substring(atIndex).equals(DOMINIO_INSTITUCIONAL);
     }
 }
