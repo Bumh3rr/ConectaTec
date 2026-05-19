@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Primario -->
+    <!-- Primario (igual en ambos temas) -->
     <color name="colorPrimary">#1976D2</color>
     <color name="colorPrimaryDark">#1565C0</color>
     <color name="colorPrimaryLight">#42A5F5</color>
 
-    <!-- Fondos -->
-    <color name="colorBackground">#262625</color>
-    <color name="colorSurface">#1E1E1E</color>
-    <color name="colorSurfaceVariant">#2C2C2C</color>
+    <!-- Fondos (claro) -->
+    <color name="colorBackground">#F2F4F8</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorSurfaceVariant">#EAECF0</color>
 
-    <!-- Texto -->
-    <color name="colorOnSurface">#FFFFFF</color>
-    <color name="colorOnSurfaceVariant">#AAAAAA</color>
+    <!-- Texto (claro) -->
+    <color name="colorOnSurface">#1A1A1A</color>
+    <color name="colorOnSurfaceVariant">#5A5A6A</color>
     <color name="colorOnPrimary">#FFFFFF</color>
 
-    <!-- Estado -->
+    <!-- Estado (igual en ambos temas) -->
     <color name="colorError">#CF6679</color>
     <color name="colorSuccess">#4CAF50</color>
     <color name="colorWarning">#F57C00</color>
 
-    <!-- Chips de rol -->
+    <!-- Chips de rol (igual en ambos temas) -->
     <color name="colorChipDocente">#1976D2</color>
     <color name="colorChipEstudiante">#388E3C</color>
     <color name="colorChipPendiente">#F57C00</color>
     <color name="colorChipAdmin">#7B1FA2</color>
 
-    <!-- Chat -->
-    <color name="colorMensajeEnviado">#2C2C2C</color>
-    <color name="colorMensajeRecibido">#1E1E1E</color>
+    <!-- Chat (claro) -->
+    <color name="colorMensajeEnviado">#E3EAF5</color>
+    <color name="colorMensajeRecibido">#FFFFFF</color>
 
-    <!-- Tareas -->
+    <!-- Tareas (igual en ambos temas) -->
     <color name="colorTareaUrgente">#1976D2</color>
     <color name="colorCalificacion">#4CAF50</color>
 
-    <!-- Divisores -->
-    <color name="colorDivider">#2C2C2C</color>
-    <color name="colorBorder">#333333</color>
+    <!-- Divisores (claro) -->
+    <color name="colorDivider">#D0D4DE</color>
+    <color name="colorBorder">#C8CCD8</color>
 
     <!-- Básicos -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="nav_screen_bg">#0A0A0A</color>
-    <color name="nav_container_bg">#1A1A1A</color>
-    <color name="nav_item_active_bg">#2A2A2A</color>
-    <color name="nav_item_border_bg">#2F2F2F</color>
-    <color name="nav_circle_inactive">#2A2A2A</color>
+    <!-- Navegación (claro) -->
+    <color name="nav_screen_bg">#F2F4F8</color>
+    <color name="nav_container_bg">#FFFFFF</color>
+    <color name="nav_item_active_bg">#EEF2FA</color>
+    <color name="nav_item_border_bg">#E0E4EE</color>
+    <color name="nav_circle_inactive">#EEF2FA</color>
     <color name="nav_circle_active">#1565C0</color>
-    <color name="nav_icon_inactive">#B0B0B0</color>
+    <color name="nav_icon_inactive">#8A8A9A</color>
     <color name="nav_icon_active">#FFFFFF</color>
-    <color name="nav_label">#F5F5F5</color>
+    <color name="nav_label">#1A1A1A</color>
 
     <!-- Dashboard Activity (modo claro) -->
     <color name="colorDashBg">#F4F6FA</color>
