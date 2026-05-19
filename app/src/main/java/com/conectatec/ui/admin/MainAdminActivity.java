@@ -33,6 +33,7 @@ public class MainAdminActivity extends AppCompatActivity {
     private ActivityMainAdminBinding binding;
     private NavController navController;
     private NavItem[] items;
+    private int currentActiveIndex = -1;
 
     /** Destinos del nav graph en el mismo orden que el array items. */
     private static final int[] DESTINATIONS = {
@@ -53,6 +54,9 @@ public class MainAdminActivity extends AppCompatActivity {
             container = c; circle = fc; icon = i; label = l;
         }
     }
+
+    private static final OvershootInterpolator OVERSHOOT  = new OvershootInterpolator(1.5f);
+    private static final PathInterpolator      DECELERATE = new PathInterpolator(0.4f, 0f, 0.2f, 1f);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +137,9 @@ public class MainAdminActivity extends AppCompatActivity {
     }
 
     private void selectItem(int activeIndex) {
+        if (activeIndex == currentActiveIndex) return;
+        currentActiveIndex = activeIndex;
+
         int activeIcon   = ContextCompat.getColor(this, R.color.nav_icon_active);
         int inactiveIcon = ContextCompat.getColor(this, R.color.nav_icon_inactive);
 
@@ -157,19 +164,18 @@ public class MainAdminActivity extends AppCompatActivity {
                     .scaleX(targetScale)
                     .scaleY(targetScale)
                     .setDuration(200)
-                    .setInterpolator(active
-                            ? new OvershootInterpolator(1.5f)
-                            : new PathInterpolator(0.4f, 0f, 0.2f, 1f))
+                    .setInterpolator(active ? OVERSHOOT : DECELERATE)
                     .start();
 
             // Label: fade in/out
             if (active) {
+                item.label.animate().cancel();
                 item.label.setAlpha(0f);
                 item.label.setVisibility(View.VISIBLE);
                 item.label.animate()
                         .alpha(1f)
                         .setDuration(150)
-                        .setInterpolator(new PathInterpolator(0.4f, 0f, 0.2f, 1f))
+                        .setInterpolator(DECELERATE)
                         .start();
             } else {
                 item.label.animate()
