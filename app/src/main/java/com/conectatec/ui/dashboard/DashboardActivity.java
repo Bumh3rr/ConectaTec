@@ -1,11 +1,10 @@
 package com.conectatec.ui.dashboard;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.PathInterpolator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -135,17 +134,21 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void animarKpiCards() {
+        float density = getResources().getDisplayMetrics().density;
+        float translY = 20f * density;
+        PathInterpolator interp = new PathInterpolator(0.4f, 0f, 0.2f, 1f);
+
         for (int i = 0; i < binding.linearKpis.getChildCount(); i++) {
             View card = binding.linearKpis.getChildAt(i);
             card.setAlpha(0f);
-            card.setTranslationY(30f);
-            ObjectAnimator fade  = ObjectAnimator.ofFloat(card, View.ALPHA, 0f, 1f);
-            ObjectAnimator slide = ObjectAnimator.ofFloat(card, View.TRANSLATION_Y, 30f, 0f);
-            AnimatorSet set = new AnimatorSet();
-            set.playTogether(fade, slide);
-            set.setDuration(300);
-            set.setStartDelay((long) i * 80);
-            set.start();
+            card.setTranslationY(translY);
+            card.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(300)
+                    .setStartDelay((long) i * 60)
+                    .setInterpolator(interp)
+                    .start();
         }
     }
 
