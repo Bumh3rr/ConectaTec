@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import com.conectatec.R;
 import com.conectatec.databinding.FragmentDocentePerfilBinding;
 import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.auth.LoginActivity;
@@ -43,7 +45,9 @@ public class DocentePerfilFragment extends Fragment {
 
     private void setupListeners() {
         binding.rowNotificacionesDocente.setOnClickListener(v -> { /* placeholder */ });
-        binding.rowTemaDocente.setOnClickListener(v -> { /* placeholder */ });
+        binding.rowTemaDocente.setOnClickListener(v ->
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_docente_perfil_to_ajustes));
         binding.rowIdiomaDocente.setOnClickListener(v -> { /* placeholder */ });
         binding.btnCerrarSesionDocente.setOnClickListener(v -> cerrarSesion());
     }
