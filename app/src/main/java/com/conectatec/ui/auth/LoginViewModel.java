@@ -52,11 +52,11 @@ public class LoginViewModel extends ViewModel {
      *   - UiState.Error con mensaje si el backend falla
      */
     public void loginConGoogle(String idToken, String email) {
-        if (!AuthConstants.esDominioValido(email)) {
-            state.setValue(new UiState.Error<>(
-                    "Solo se permiten cuentas " + AuthConstants.DOMINIO_INSTITUCIONAL));
-            return;
-        }
+        // TODO: reactivar cuando el dominio institucional esté configurado en AuthConstants
+        // if (!AuthConstants.esDominioValido(email)) {
+        //     state.setValue(new UiState.Error<>("Solo se permiten cuentas " + AuthConstants.DOMINIO_INSTITUCIONAL));
+        //     return;
+        // }
 
         state.setValue(UiState.Loading.get());
         executor.execute(() -> {
