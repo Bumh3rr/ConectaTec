@@ -65,7 +65,17 @@
     <fragment
         android:id="@+id/docentePerfilFragment"
         android:name="com.conectatec.ui.docente.perfil.DocentePerfilFragment"
-        android:label="@string/title_docente_perfil" />
+        android:label="@string/title_docente_perfil">
+        <action
+            android:id="@+id/action_docente_perfil_to_ajustes"
+            app:destination="@id/ajustesFragment" />
+    </fragment>
+
+    <!-- Ajustes -->
+    <fragment
+        android:id="@+id/ajustesFragment"
+        android:name="com.conectatec.ui.common.ajustes.AjustesFragment"
+        android:label="Ajustes" />
 
     <!-- ───────────── Sub-destinos: Grupos ───────────── -->
 

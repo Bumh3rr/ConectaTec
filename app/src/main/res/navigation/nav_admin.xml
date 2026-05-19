@@ -140,6 +140,16 @@
     <fragment
         android:id="@+id/adminPerfilFragment"
         android:name="com.conectatec.ui.admin.perfil.AdminPerfilFragment"
-        android:label="@string/title_admin_perfil" />
+        android:label="@string/title_admin_perfil">
+        <action
+            android:id="@+id/action_admin_perfil_to_ajustes"
+            app:destination="@id/ajustesFragment" />
+    </fragment>
+
+    <!-- Ajustes -->
+    <fragment
+        android:id="@+id/ajustesFragment"
+        android:name="com.conectatec.ui.common.ajustes.AjustesFragment"
+        android:label="Ajustes" />
 
 </navigation>
