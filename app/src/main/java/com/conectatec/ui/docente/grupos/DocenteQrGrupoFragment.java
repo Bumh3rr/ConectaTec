@@ -11,14 +11,13 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.conectatec.databinding.FragmentDocenteQrGrupoBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -62,7 +61,7 @@ public class DocenteQrGrupoFragment extends Fragment {
 
         poblarVistas(nombre, materia, alumnos, fecha);
         generarYMostrarQr(codigoUnion);
-        animarEntrada();
+        EntradaAnimator.animar(binding.cardQrDisplay, binding.cardInfoQr);
 
         binding.btnBackQrGrupo.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
@@ -136,23 +135,6 @@ public class DocenteQrGrupoFragment extends Fragment {
         } catch (Exception e) {
             Snackbar.make(binding.getRoot(),
                     "Error al guardar el QR", Snackbar.LENGTH_SHORT).show();
-        }
-    }
-
-    private void animarEntrada() {
-        float translY = 40f * getResources().getDisplayMetrics().density;
-        View[] cards = {binding.cardQrDisplay, binding.cardInfoQr};
-        for (int i = 0; i < cards.length; i++) {
-            View card = cards[i];
-            card.setAlpha(0f);
-            card.setTranslationY(translY);
-            card.animate()
-                    .alpha(1f)
-                    .translationY(0f)
-                    .setStartDelay(i * 80L)
-                    .setDuration(320)
-                    .setInterpolator(new DecelerateInterpolator())
-                    .start();
         }
     }
 

@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.conectatec.databinding.FragmentDocentePerfilBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.auth.LoginActivity;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -33,9 +32,13 @@ public class DocentePerfilFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        prepararAnimacion();
         setupListeners();
-        animarEntrada();
+        EntradaAnimator.animar(
+            binding.cardHeroPerfilDocente,
+            binding.cardInfoCuentaDocente,
+            binding.cardConfigDocente,
+            binding.btnCerrarSesionDocente
+        );
     }
 
     private void setupListeners() {
@@ -52,34 +55,6 @@ public class DocentePerfilFragment extends Fragment {
         startActivity(intent);
         requireActivity().overridePendingTransition(
                 android.R.anim.fade_in, android.R.anim.fade_out);
-    }
-
-    private void prepararAnimacion() {
-        binding.cardHeroPerfilDocente.setAlpha(0f);
-        binding.cardInfoCuentaDocente.setAlpha(0f);
-        binding.cardConfigDocente.setAlpha(0f);
-        binding.btnCerrarSesionDocente.setAlpha(0f);
-    }
-
-    private void animarEntrada() {
-        float translY = getResources().getDisplayMetrics().density * 32;
-        View[] views = {
-                binding.cardHeroPerfilDocente,
-                binding.cardInfoCuentaDocente,
-                binding.cardConfigDocente,
-                binding.btnCerrarSesionDocente
-        };
-        for (int i = 0; i < views.length; i++) {
-            View card = views[i];
-            card.setTranslationY(translY);
-            card.animate()
-                    .alpha(1f)
-                    .translationY(0f)
-                    .setStartDelay(i * 80L)
-                    .setDuration(300)
-                    .setInterpolator(new DecelerateInterpolator())
-                    .start();
-        }
     }
 
     @Override

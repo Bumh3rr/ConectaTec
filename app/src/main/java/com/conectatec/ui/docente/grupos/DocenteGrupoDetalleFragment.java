@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +25,7 @@ import androidx.navigation.Navigation;
 import com.conectatec.R;
 import com.conectatec.data.model.Grupo;
 import com.conectatec.databinding.FragmentDocenteGrupoDetalleBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.UiState;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -66,7 +66,6 @@ public class DocenteGrupoDetalleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         grupoId = getArguments() != null ? getArguments().getInt("grupoId", 1) : 1;
-        prepararAnimacion();
         viewModel = new ViewModelProvider(this).get(DocenteGrupoDetalleViewModel.class);
         observeViewModel();
         viewModel.cargarDetalle(grupoId);
@@ -98,7 +97,12 @@ public class DocenteGrupoDetalleFragment extends Fragment {
         binding.tvTareasHeroNum.setText(String.valueOf(TOTAL_TAREAS[idx]));
         cargarMiembrosPreview(MIEMBROS_PREVIEW[idx]);
         cargarAvisosPreview(AVISOS_PREVIEW[idx]);
-        animarEntrada();
+        EntradaAnimator.animar(
+            binding.cardHeroGrupo,
+            binding.cardAccionesRapidas,
+            binding.cardMiembrosGrupo,
+            binding.cardAvisosGrupo
+        );
     }
 
     private void cargarMiembrosPreview(String[] nombres) {
@@ -260,34 +264,6 @@ public class DocenteGrupoDetalleFragment extends Fragment {
         args.putInt("grupoId", grupoId);
         Navigation.findNavController(v)
                 .navigate(R.id.action_grupo_detalle_to_miembros, args);
-    }
-
-    private void prepararAnimacion() {
-        binding.cardHeroGrupo.setAlpha(0f);
-        binding.cardAccionesRapidas.setAlpha(0f);
-        binding.cardMiembrosGrupo.setAlpha(0f);
-        binding.cardAvisosGrupo.setAlpha(0f);
-    }
-
-    private void animarEntrada() {
-        float translY = dpToPx(36);
-        View[] cards = {
-                binding.cardHeroGrupo,
-                binding.cardAccionesRapidas,
-                binding.cardMiembrosGrupo,
-                binding.cardAvisosGrupo
-        };
-        for (int i = 0; i < cards.length; i++) {
-            View card = cards[i];
-            card.setTranslationY(translY);
-            card.animate()
-                    .alpha(1f)
-                    .translationY(0f)
-                    .setStartDelay(i * 75L)
-                    .setDuration(320)
-                    .setInterpolator(new DecelerateInterpolator())
-                    .start();
-        }
     }
 
     private int dpToPx(int dp) {
