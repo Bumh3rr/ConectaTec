@@ -301,4 +301,10 @@
     <string name="tareas_sufijo_entregas">%1$d/%2$d entregas</string>
     <string name="bloque_sufijo_tareas">%1$d tareas</string>
     <string name="bloque_nombre_formato">Bloque %1$d</string>
+
+    <!-- Google Login -->
+    <string name="google_web_client_id">TU_WEB_CLIENT_ID_AQUI</string>
+    <string name="btn_login_google">Continuar con Google</string>
+    <string name="error_dominio_invalido">Solo se permiten cuentas institucionales</string>
+    <string name="error_google_signin">No se pudo iniciar sesión con Google</string>
 </resources>

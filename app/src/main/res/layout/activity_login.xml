@@ -207,6 +207,25 @@
                 android:background="@color/colorDivider" />
         </LinearLayout>
 
+        <!-- Botón: Continuar con Google -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLoginGoogle"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="24dp"
+            android:stateListAnimator="@null"
+            android:text="@string/btn_login_google"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="14sp"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/ic_google"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconSize="20dp"
+            app:strokeColor="@color/colorBorder"
+            app:strokeWidth="1dp" />
+
         <!-- Link a registro -->
         <TextView
             android:id="@+id/tvIrRegistro"
