@@ -307,4 +307,5 @@
     <string name="btn_login_google">Continuar con Google</string>
     <string name="error_dominio_invalido">Solo se permiten cuentas institucionales</string>
     <string name="error_google_signin">No se pudo iniciar sesión con Google</string>
+    <string name="modulo_estudiante_proximamente">Módulo de estudiante próximamente</string>
 </resources>

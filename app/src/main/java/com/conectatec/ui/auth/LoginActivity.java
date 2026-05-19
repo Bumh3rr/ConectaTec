@@ -2,7 +2,6 @@ package com.conectatec.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,11 +82,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelado() {
+                    if (binding == null) return;
                     binding.btnLoginGoogle.setEnabled(true);
                 }
 
                 @Override
                 public void onError(String mensaje) {
+                    if (binding == null) return;
                     binding.btnLoginGoogle.setEnabled(true);
                     Snackbar.make(binding.getRoot(),
                             getString(R.string.error_google_signin),
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             default:
                 // ESTUDIANTE: módulo no implementado aún
                 Snackbar.make(binding.getRoot(),
-                        "Módulo de estudiante próximamente", Snackbar.LENGTH_LONG).show();
+                        getString(R.string.modulo_estudiante_proximamente), Snackbar.LENGTH_LONG).show();
                 return;
         }
         startActivity(intent);
