@@ -49,6 +49,9 @@ public class SessionManager {
 
     public void guardarSesion(String jwt, String rol, String nombre) {
         if (prefs == null) return;
+        if (jwt == null || jwt.trim().isEmpty()) {
+            throw new IllegalArgumentException("JWT no puede ser nulo o vacío");
+        }
         prefs.edit()
                 .putString(KEY_JWT, jwt)
                 .putString(KEY_ROL, rol)
