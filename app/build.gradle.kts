@@ -110,6 +110,12 @@ dependencies {
     // ZXing — generación de QR
     implementation(libs.zxing.core)
 
+    // Google Sign-In — Credential Manager
+    implementation(libs.credentials)
+    implementation(libs.credentials.gms)
+    implementation(libs.google.identity)
+    implementation(libs.security.crypto)
+
     testImplementation(libs.junit)
     testImplementation(libs.arch.core.testing)
     androidTestImplementation(libs.ext.junit)
