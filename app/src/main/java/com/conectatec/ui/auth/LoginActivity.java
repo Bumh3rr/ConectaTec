@@ -71,31 +71,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        // ── Google Sign-In (flujo real) ──────────────────────────────────
-        binding.btnLoginGoogle.setOnClickListener(v -> {
-            binding.btnLoginGoogle.setEnabled(false);
-            googleHelper.solicitarCredencial(this, new GoogleAuthHelper.Callback() {
-                @Override
-                public void onExito(GoogleAuthHelper.GoogleCredencial cred) {
-                    viewModel.loginConGoogle(cred.idToken, cred.email);
-                }
-
-                @Override
-                public void onCancelado() {
-                    if (binding == null) return;
-                    binding.btnLoginGoogle.setEnabled(true);
-                }
-
-                @Override
-                public void onError(String mensaje) {
-                    if (binding == null) return;
-                    binding.btnLoginGoogle.setEnabled(true);
-                    Snackbar.make(binding.getRoot(),
-                            getString(R.string.error_google_signin),
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
-        });
+        // TODO: reemplazar por googleHelper.solicitarCredencial() cuando las credenciales OAuth estén configuradas
+        binding.btnLoginGoogle.setOnClickListener(v ->
+                viewModel.loginConGoogle("dummy-token", "demo@gmail.com"));
 
         // ── Selector de rol DEMO (provisional) ──────────────────────────
         // TODO: eliminar cuando el login real con Google esté integrado al 100%
