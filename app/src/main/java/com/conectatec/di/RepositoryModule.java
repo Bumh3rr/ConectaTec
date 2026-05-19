@@ -1,5 +1,7 @@
 package com.conectatec.di;
 
+import com.conectatec.data.repository.AuthRepository;
+import com.conectatec.data.repository.AuthRepositoryImpl;
 import com.conectatec.data.repository.ChatRepository;
 import com.conectatec.data.repository.ChatRepositoryImpl;
 import com.conectatec.data.repository.DashboardRepository;
@@ -31,4 +33,7 @@ public abstract class RepositoryModule {
 
     @Binds @Singleton
     abstract DashboardRepository bindDashboardRepository(DashboardRepositoryImpl impl);
+
+    @Binds @Singleton
+    abstract AuthRepository bindAuthRepository(AuthRepositoryImpl impl);
 }

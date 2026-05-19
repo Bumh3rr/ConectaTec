@@ -1,4 +1,14 @@
 package com.conectatec.data.network;
 
-// Placeholder — full implementation in Task 4
-public interface AuthService {}
+import com.conectatec.data.model.LoginResponse;
+
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+
+public interface AuthService {
+    @POST("api/auth/google")
+    Call<LoginResponse> loginConGoogle(@Body Map<String, String> body);
+}
