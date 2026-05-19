@@ -1,7 +1,7 @@
 package com.conectatec.ui.common;
 
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.PathInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class ScrollRevealAnimator {
 
-    private static final float MIN_ALPHA  = 0.3f;
-    private static final float MIN_SCALE  = 0.88f;
+    private static final float MIN_ALPHA  = 0.0f;
+    private static final float MIN_SCALE  = 0.92f;
     /** Zona (en dp) desde el borde superior/inferior donde empieza el fade. */
     private static final int   EDGE_DP    = 120;
-    private static final long  ANIM_MS    = 260;
-    private static final long  STAGGER_MS = 55;
+    private static final long  ANIM_MS    = 300;
+    private static final long  STAGGER_MS = 50;
 
     private final RecyclerView rv;
     private final float        edgePx;
-    private final DecelerateInterpolator interpolator = new DecelerateInterpolator(1.6f);
+    private final PathInterpolator interpolator = new PathInterpolator(0.4f, 0f, 0.2f, 1f);
 
     public ScrollRevealAnimator(@NonNull RecyclerView recyclerView) {
         this.rv     = recyclerView;
@@ -55,7 +55,7 @@ public class ScrollRevealAnimator {
                 child.setAlpha(tAlpha * 0.4f);
                 child.setScaleX(MIN_SCALE);
                 child.setScaleY(MIN_SCALE);
-                child.setTranslationY(16f);
+                child.setTranslationY(24f);
 
                 child.animate()
                         .alpha(tAlpha)
