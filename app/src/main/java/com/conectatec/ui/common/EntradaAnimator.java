@@ -19,6 +19,7 @@ public final class EntradaAnimator {
      * Anima la aparición de las vistas con fade + slide desde abajo.
      * Establece el estado inicial (alpha=0, translationY=20dp) antes de animar.
      * Llámalo en onViewCreated después de que el binding esté listo.
+     * Precondición: todas las vistas deben tener contexto no nulo (getContext() != null).
      */
     public static void animar(View... vistas) {
         if (vistas == null || vistas.length == 0) return;
