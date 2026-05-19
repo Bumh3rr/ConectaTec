@@ -2,9 +2,9 @@ package com.conectatec.ui.docente;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +33,10 @@ public class MainDocenteActivity extends AppCompatActivity {
     private ActivityMainDocenteBinding binding;
     private NavController navController;
     private NavItem[] items;
+    private int currentActiveIndex = -1;
+
+    private static final OvershootInterpolator OVERSHOOT  = new OvershootInterpolator(1.5f);
+    private static final PathInterpolator      DECELERATE = new PathInterpolator(0.4f, 0f, 0.2f, 1f);
 
     /** Destinos del nav graph en el mismo orden que el array items. */
     private static final int[] DESTINATIONS = {
@@ -143,9 +147,8 @@ public class MainDocenteActivity extends AppCompatActivity {
     }
 
     private void selectItem(int activeIndex) {
-        AutoTransition t = new AutoTransition();
-        t.setDuration(180);
-        TransitionManager.beginDelayedTransition(binding.bottomNavDocente, t);
+        if (activeIndex == currentActiveIndex) return;
+        currentActiveIndex = activeIndex;
 
         int activeIcon   = ContextCompat.getColor(this, R.color.nav_icon_active);
         int inactiveIcon = ContextCompat.getColor(this, R.color.nav_icon_inactive);
@@ -154,20 +157,41 @@ public class MainDocenteActivity extends AppCompatActivity {
             NavItem item = items[i];
             boolean active = (i == activeIndex);
 
+            // Fondo e icono: instantáneos
             if (active) {
                 item.container.setBackgroundResource(R.drawable.bg_nav_item_active);
                 item.circle.setBackgroundResource(R.drawable.bg_icon_circle_active);
-                item.circle.setScaleX(0.8f);
-                item.circle.setScaleY(0.8f);
-                item.label.setVisibility(View.VISIBLE);
                 ImageViewCompat.setImageTintList(item.icon, ColorStateList.valueOf(activeIcon));
             } else {
                 item.container.setBackground(null);
                 item.circle.setBackgroundResource(R.drawable.bg_icon_circle_inactive);
-                item.circle.setScaleX(1f);
-                item.circle.setScaleY(1f);
-                item.label.setVisibility(View.GONE);
                 ImageViewCompat.setImageTintList(item.icon, ColorStateList.valueOf(inactiveIcon));
+            }
+
+            // Scale del círculo con animación
+            item.circle.animate()
+                    .scaleX(active ? 0.8f : 1f)
+                    .scaleY(active ? 0.8f : 1f)
+                    .setDuration(200)
+                    .setInterpolator(active ? OVERSHOOT : DECELERATE)
+                    .start();
+
+            // Label: fade in/out
+            if (active) {
+                item.label.animate().cancel();
+                item.label.setAlpha(0f);
+                item.label.setVisibility(View.VISIBLE);
+                item.label.animate()
+                        .alpha(1f)
+                        .setDuration(150)
+                        .setInterpolator(DECELERATE)
+                        .start();
+            } else {
+                item.label.animate()
+                        .alpha(0f)
+                        .setDuration(100)
+                        .withEndAction(() -> item.label.setVisibility(View.GONE))
+                        .start();
             }
         }
     }
