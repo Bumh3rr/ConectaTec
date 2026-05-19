@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Fondos (oscuro) -->
+    <color name="colorBackground">#262625</color>
+    <color name="colorSurface">#1E1E1E</color>
+    <color name="colorSurfaceVariant">#2C2C2C</color>
+
+    <!-- Texto (oscuro) -->
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorOnSurfaceVariant">#AAAAAA</color>
+
+    <!-- Divisores (oscuro) -->
+    <color name="colorDivider">#2C2C2C</color>
+    <color name="colorBorder">#333333</color>
+
+    <!-- Chat (oscuro) -->
+    <color name="colorMensajeEnviado">#2C2C2C</color>
+    <color name="colorMensajeRecibido">#1E1E1E</color>
+
+    <!-- Navegación (oscuro) -->
+    <color name="nav_screen_bg">#0A0A0A</color>
+    <color name="nav_container_bg">#1A1A1A</color>
+    <color name="nav_item_active_bg">#2A2A2A</color>
+    <color name="nav_item_border_bg">#2F2F2F</color>
+    <color name="nav_circle_inactive">#2A2A2A</color>
+    <color name="nav_circle_active">#1565C0</color>
+    <color name="nav_icon_inactive">#B0B0B0</color>
+    <color name="nav_icon_active">#FFFFFF</color>
+    <color name="nav_label">#F5F5F5</color>
+
+</resources>
