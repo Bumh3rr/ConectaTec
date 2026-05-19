@@ -252,6 +252,42 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Fila Ajustes -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardAjustesAdmin"
+            style="@style/Widget.TecConnect.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:id="@+id/rowAjustesAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:background="?attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ajustes"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_left"
+                    android:rotation="180"
+                    app:tint="@color/colorOnSurfaceVariant"
+                    android:contentDescription="Ir a Ajustes" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- Espaciador -->
         <Space
             android:layout_width="match_parent"

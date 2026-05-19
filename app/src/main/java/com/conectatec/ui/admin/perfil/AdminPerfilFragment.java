@@ -10,8 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.navigation.Navigation;
+
+import com.conectatec.R;
 import com.conectatec.databinding.FragmentAdminPerfilBinding;
 import com.conectatec.ui.auth.LoginActivity;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
@@ -34,11 +38,12 @@ public class AdminPerfilFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Los datos están hardcodeados en el XML (dummy).
         // TODO: cargar desde SessionManager cuando esté implementado.
-
+        binding.rowAjustesAdmin.setOnClickListener(v ->
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_admin_perfil_to_ajustes));
         binding.btnLogoutAdmin.setOnClickListener(v -> confirmarCerrarSesion());
+        EntradaAnimator.animar(binding.cardAjustesAdmin, binding.btnLogoutAdmin);
     }
 
     private void confirmarCerrarSesion() {
