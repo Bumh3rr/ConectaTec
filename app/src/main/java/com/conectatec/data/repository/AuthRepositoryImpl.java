@@ -27,6 +27,7 @@ public class AuthRepositoryImpl implements AuthRepository {
         // if (!response.isSuccessful()) {
         //     throw new Exception("Error " + response.code() + ": " + response.message());
         // }
+        // if (response.body() == null) throw new Exception("Respuesta vacía del servidor");
         // return response.body();
 
         // Dummy para desarrollo paralelo con el backend:

@@ -56,6 +56,15 @@ public class LoginViewModelTest {
         assertTrue(state instanceof UiState.Error);
     }
 
+    @Test
+    public void loginConGoogle_dominioValido_emiteSuccess() {
+        viewModel.loginConGoogle("token-valid", "usuario@tudominio.edu.mx");
+
+        UiState<?> state = viewModel.getState().getValue();
+        assertTrue("Debería ser UiState.Success", state instanceof UiState.Success);
+        assertEquals("El rol debe ser DOCENTE", "DOCENTE", ((UiState.Success<String>) state).data);
+    }
+
     // ── Fakes ────────────────────────────────────────────────────────────────
 
     static class FakeAuthRepository implements AuthRepository {
