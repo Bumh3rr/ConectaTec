@@ -112,6 +112,7 @@ public class DocenteBloquesFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        scrollRevealAnimator = null;
         binding = null;
     }
 }

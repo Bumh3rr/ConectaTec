@@ -119,6 +119,7 @@ public class DocenteChatFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        scrollRevealAnimator = null;
         binding = null;
     }
 }
