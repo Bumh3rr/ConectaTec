@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.conectatec.databinding.FragmentDocenteCrearGrupoBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -39,6 +40,11 @@ public class DocenteCrearGrupoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setupLivePreview();
         setupListeners();
+        EntradaAnimator.animar(
+            binding.cardPreviewGrupo,
+            binding.containerFormGrupoNuevo,
+            binding.btnCrearGrupoNuevo
+        );
     }
 
     private void setupLivePreview() {

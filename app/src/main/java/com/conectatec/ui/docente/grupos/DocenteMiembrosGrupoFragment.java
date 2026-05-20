@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.conectatec.R;
 import com.conectatec.data.model.Miembro;
 import com.conectatec.databinding.FragmentDocenteMiembrosGrupoBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.grupos.adapter.MiembroGrupoDocenteAdapter;
@@ -65,6 +66,10 @@ public class DocenteMiembrosGrupoFragment extends Fragment {
 
         binding.btnBackMiembrosDocente.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
+        EntradaAnimator.animar(
+            binding.tvSubtituloMiembrosDocente,
+            binding.rvMiembrosGrupoDocente
+        );
     }
 
     private void setupRecyclerView() {

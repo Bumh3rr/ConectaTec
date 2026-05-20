@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.conectatec.R;
 import com.conectatec.data.model.Grupo;
 import com.conectatec.databinding.FragmentDocenteGruposBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.grupos.adapter.GrupoDocenteAdapter;
@@ -53,6 +54,11 @@ public class DocenteGruposFragment extends Fragment {
         setupListeners();
         observeViewModel();
         viewModel.cargarDatos();
+        EntradaAnimator.animar(
+            binding.tvHeaderTotalGruposDocente,
+            binding.etBuscarGrupoDocente,
+            binding.rvGruposDocente
+        );
     }
 
     private void setupRecyclerView() {
