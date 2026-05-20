@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.conectatec.R;
 import com.conectatec.data.model.Tarea;
 import com.conectatec.databinding.FragmentDocenteTareasBloqueBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.tareas.adapter.TareaDocenteAdapter;
@@ -66,6 +67,12 @@ public class DocenteTareasBloqueFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DocenteTareasBloqueViewModel.class);
         observeViewModel();
         viewModel.cargarTareas(grupoId, bloqueId);
+        EntradaAnimator.animar(
+            binding.tvTituloTareasBloque,
+            binding.chipGroupTipo,
+            binding.chipGroupEstado,
+            binding.rvTareasBloque
+        );
     }
 
     private void setupRecyclerView() {

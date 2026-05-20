@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.conectatec.R;
 import com.conectatec.data.model.Entrega;
 import com.conectatec.databinding.FragmentDocenteEntregasBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.tareas.adapter.EntregaDocenteAdapter;
@@ -57,6 +58,11 @@ public class DocenteEntregasFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DocenteEntregasViewModel.class);
         observeViewModel();
         viewModel.cargarEntregas(tareaId);
+        EntradaAnimator.animar(
+            binding.progressEntregasResumen,
+            binding.chipGroupEntregas,
+            binding.rvEntregas
+        );
     }
 
     private void setupRecyclerView() {

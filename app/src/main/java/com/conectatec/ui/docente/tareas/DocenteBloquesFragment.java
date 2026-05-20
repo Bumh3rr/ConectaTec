@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.conectatec.R;
 import com.conectatec.data.model.Bloque;
 import com.conectatec.databinding.FragmentDocenteBloquesBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.tareas.adapter.BloqueDocenteAdapter;
@@ -63,6 +64,11 @@ public class DocenteBloquesFragment extends Fragment {
             Navigation.findNavController(requireView())
                     .navigate(R.id.action_bloques_to_crear_bloque, args);
         });
+        EntradaAnimator.animar(
+            binding.tvTituloBloques,
+            binding.tvSubtituloBloques,
+            binding.rvBloques
+        );
     }
 
     private void setupRecyclerView() {

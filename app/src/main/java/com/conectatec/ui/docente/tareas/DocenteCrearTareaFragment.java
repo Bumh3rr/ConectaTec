@@ -21,6 +21,7 @@ import androidx.navigation.Navigation;
 
 import com.conectatec.R;
 import com.conectatec.databinding.FragmentDocenteCrearTareaBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.databinding.ItemArchivoAdjuntoBinding;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -73,6 +74,13 @@ public class DocenteCrearTareaFragment extends Fragment {
 
         setupLivePreview();
         setupListeners();
+        EntradaAnimator.animar(
+            binding.cardPreviewTarea,
+            binding.etTituloTareaNueva,
+            binding.etDescripcionTareaNueva,
+            binding.rowFechaLimiteTarea,
+            binding.btnPublicarTarea
+        );
     }
 
     private void setupLivePreview() {

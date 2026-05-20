@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.conectatec.R;
 import com.conectatec.data.model.Entrega;
 import com.conectatec.databinding.FragmentDocenteCalificarEntregaBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.UiState;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -60,6 +61,12 @@ public class DocenteCalificarEntregaFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DocenteCalificarEntregaViewModel.class);
         observeViewModel();
         viewModel.cargarEntrega(tareaId, alumnoId);
+        EntradaAnimator.animar(
+            binding.cardAlumnoCalif,
+            binding.containerArchivoCalif,
+            binding.cardCalificacionEntrega,
+            binding.btnGuardarCalificacion
+        );
     }
 
     private void observeViewModel() {

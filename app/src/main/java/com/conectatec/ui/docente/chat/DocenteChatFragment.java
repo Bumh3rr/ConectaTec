@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.conectatec.R;
 import com.conectatec.data.model.Sala;
 import com.conectatec.databinding.FragmentDocenteChatBinding;
+import com.conectatec.ui.common.EntradaAnimator;
 import com.conectatec.ui.common.ScrollRevealAnimator;
 import com.conectatec.ui.common.UiState;
 import com.conectatec.ui.docente.chat.adapter.SalaDocenteAdapter;
@@ -52,6 +53,11 @@ public class DocenteChatFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DocenteChatViewModel.class);
         observeViewModel();
         viewModel.cargarDatos();
+        EntradaAnimator.animar(
+            binding.headerChatDocente,
+            binding.scrollChipsChat,
+            binding.rvSalasChat
+        );
     }
 
     private void setupRecyclerView() {
