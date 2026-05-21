@@ -115,7 +115,6 @@ public class AdminDashboardFragment extends Fragment {
             ContextCompat.getColor(requireContext(), R.color.colorOnSurface));
         chart.setCenterTextTypeface(android.graphics.Typeface.DEFAULT_BOLD);
         chart.getDescription().setEnabled(false);
-        chart.setDrawBorders(false);
         chart.setTouchEnabled(false);
         chart.getLegend().setEnabled(false);
         chart.setDrawEntryLabels(false);

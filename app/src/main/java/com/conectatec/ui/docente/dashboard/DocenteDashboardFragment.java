@@ -149,7 +149,6 @@ public class DocenteDashboardFragment extends Fragment {
         chart.setCenterTextTypeface(android.graphics.Typeface.DEFAULT_BOLD);
 
         chart.getDescription().setEnabled(false);
-        chart.setDrawBorders(false);
         chart.setTouchEnabled(false);
         chart.getLegend().setEnabled(false);
         chart.setDrawEntryLabels(false);
